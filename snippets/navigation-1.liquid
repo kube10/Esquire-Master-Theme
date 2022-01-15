@@ -1,0 +1,33 @@
+<nav class="navigation {% if fixed %}fixed{% endif %}">
+  <div class="container">
+    <div class="navigation-inner">
+      <a class="logo-wrap" href="{{ shop.url }}">
+        <img src="{{logo | image_url}}" alt="">
+      </a>
+      <div class="primary-menu">
+        {%- for link in primary_menu.links -%}
+        <div class="nav-link-wrap {% if link.active %}active{% endif %}">
+          <a class="nav-link" href="{{link.url}}">{{ link.title }}</a>
+          <div class="nav-link__line"></div>
+        </div>
+        {%- endfor -%}
+      </div>
+      <div class="menu-actions">
+          {%- if customer -%}
+            <a href="{{routes.account_url}}" class="button button-primary ghost">
+              <span>My account</span>
+              {%- render 'icon-user' -%}
+            </a>
+          {%- else -%}
+            <a href="{{routes.account_login_url}}" class="button button-primary ghost">
+              <span>Login</span>
+              {%- render 'icon-user' -%}
+            </a>
+          {%- endif -%}
+        <button class="button icon rounded button-primary">
+          {%- render 'icon-cart' -%}
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

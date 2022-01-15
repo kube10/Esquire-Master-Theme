@@ -1,88 +1,64 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Dawn",
-    "theme_version": "2.5.0",
-    "theme_author": "Shopify",
-    "theme_documentation_url": "https:\/\/help.shopify.com\/manual\/online-store\/themes\/os20\/themes-by-shopify\/dawn",
-    "theme_support_url": "https:\/\/support.shopify.com\/"
+    "theme_name": "Esquire Master Theme",
+    "theme_version": "1.0.0",
+    "theme_author": "Nemo Rober",
+    "theme_support_email": "http://nemo@boil.agency",
+    "theme_documentation_url": "https://github.com/kube10/Esquire-Master-Theme"
   },
   {
     "name": "t:settings_schema.colors.name",
     "settings": [
       {
         "type": "header",
-        "content": "t:settings_schema.colors.settings.header__1.content"
+        "content": "Merkkleuren"
       },
       {
         "type": "color",
-        "id": "colors_solid_button_labels",
-        "default": "#FFFFFF",
-        "label": "t:settings_schema.colors.settings.colors_solid_button_labels.label",
-        "info": "t:settings_schema.colors.settings.colors_solid_button_labels.info"
+        "id": "color_primary",
+        "default": "#006C73",
+        "label": "Primaire Kleur"
       },
       {
         "type": "color",
-        "id": "colors_accent_1",
-        "default": "#121212",
-        "label": "t:settings_schema.colors.settings.colors_accent_1.label",
-        "info": "t:settings_schema.colors.settings.colors_accent_1.info"
-      },
-      {
-        "id": "gradient_accent_1",
-        "type": "color_background",
-        "label": "t:settings_schema.colors.settings.gradient_accent_1.label"
+        "id": "color_secondary",
+        "default": "#FEFFC1",
+        "label": "Secundaire Kleur"
       },
       {
         "type": "color",
-        "id": "colors_accent_2",
-        "default": "#334FB4",
-        "label": "t:settings_schema.colors.settings.colors_accent_2.label"
-      },
-      {
-        "id": "gradient_accent_2",
-        "type": "color_background",
-        "label": "t:settings_schema.colors.settings.gradient_accent_2.label"
+        "id": "color_accent",
+        "default": "#FF531D",
+        "label": "Accent Kleur"
       },
       {
         "type": "header",
-        "content": "t:settings_schema.colors.settings.header__2.content"
+        "content": "Andere kleuren"
       },
       {
         "type": "color",
-        "id": "colors_text",
-        "default": "#121212",
-        "label": "t:settings_schema.colors.settings.colors_text.label",
-        "info": "t:settings_schema.colors.settings.colors_text.info"
+        "id": "color_text_body",
+        "default": "#808080",
+        "label": "Tekstkleur (licht)"
       },
       {
         "type": "color",
-        "id": "colors_outline_button_labels",
-        "default": "#121212",
-        "label": "t:settings_schema.colors.settings.colors_outline_button_labels.label",
-        "info": "t:settings_schema.colors.settings.colors_outline_button_labels.info"
+        "id": "color_text_heading",
+        "default": "#1E1E1E",
+        "label": "Tekstkleur (donker)"
       },
       {
         "type": "color",
-        "id": "colors_background_1",
+        "id": "color_background_light",
         "default": "#FFFFFF",
-        "label": "t:settings_schema.colors.settings.colors_background_1.label"
-      },
-      {
-        "id": "gradient_background_1",
-        "type": "color_background",
-        "label": "t:settings_schema.colors.settings.gradient_background_1.label"
+        "label": "Achtergrondkleur (licht)"
       },
       {
         "type": "color",
-        "id": "colors_background_2",
-        "default": "#F3F3F3",
-        "label": "t:settings_schema.colors.settings.colors_background_2.label"
-      },
-      {
-        "id": "gradient_background_2",
-        "type": "color_background",
-        "label": "t:settings_schema.colors.settings.gradient_background_2.label"
+        "id": "color_background_dark",
+        "default": "#1E1E1E",
+        "label": "Achtergrondkleur (donker)"
       }
     ]
   },

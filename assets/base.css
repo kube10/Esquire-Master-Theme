@@ -100,12 +100,15 @@ html {
 /* TYPOGRAPHY */
 html {
   font-size: 16px;
+  font-family: var(--body-font), sans-serif;
+  color: var(--color-text-heading);
 }
 
 p {
   font-size: 1rem;
-  line-height: 1.5rem;
+  line-height: 1.5;
   margin-bottom: 1rem;
+  color: var(--color-text-body);
 }
 
 .p-large {
@@ -116,42 +119,100 @@ p {
   font-size: 0.75rem;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading-font), sans-serif;
+}
+
 h1 {
   font-size: 3.815rem;
-  line-height: 1.2rem;
+  line-height: 1.2;
   margin-bottom: 2rem;
 }
 
 h2 {
   font-size: 3.052rem;
-  line-height: 1.2rem;
+  line-height: 1.2;
   margin-bottom: 1rem;
 }
 
 h3 {
   font-size: 2.441rem;
-  line-height: 1.2rem;
+  line-height: 1.2;
   margin-bottom: 1rem;
 }
 
 h4 {
   font-size: 1.953rem;
-  line-height: 1.2rem;
+  line-height: 1.2;
   margin-bottom: 1rem;
 }
 
 h5 {
   font-size: 1.562rem;
-  line-height: 1.2rem;
+  line-height: 1.2;
   margin-bottom: 0.5rem;
 }
 
 h6 {
   font-size: 1.25rem;
-  line-height: 1.2rem;
+  line-height: 1.2;
   margin-bottom: 0.5rem;
 }
 
 .m-0 {
   margin: 0 !important;
+}
+
+/* BUTTONS */
+.button {
+  background-color: transparent;
+  border: 0px;
+  padding: 0.75rem 1rem 0.75rem 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  font-weight: 600;
+  color: var(--button-text-color);
+  background-color: var(--button-background-color);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.button.icon {
+  padding: 0.75rem;
+}
+
+.button.rounded {
+  border-radius: 100%;
+}
+
+.button > svg {
+  --svg-color: var(--button-text-color);
+}
+
+.button > svg:last-child {
+  margin-left: 0.5rem;
+}
+
+.button > svg:first-child {
+  margin-right: 0.5rem;
+}
+
+.button > svg:only-child {
+  margin: 0;
+}
+
+.button-primary {
+  --button-text-color: var(--color-background-light);
+  --button-background-color: var(--color-accent);
+}
+
+.button-primary.ghost {
+  --button-text-color: var(--button-background-color);
+  background-color: transparent;
 }

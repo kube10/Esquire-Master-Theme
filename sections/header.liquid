@@ -1,0 +1,72 @@
+{{ "header.css" | asset_url | stylesheet_tag }}
+
+{%- assign primary_menu = section.settings.primary_menu -%}
+{%- assign secondary_menu = section.settings.secondary_menu -%}
+{%- assign fixed = section.settings.fixed_menu -%}
+{%- assign logo = section.settings.logo -%}
+
+
+{%- case section.settings.navbar -%}
+{%- when 'navigation-1' -%}
+  {% include 'navigation-1' %}
+{%- endcase -%}
+
+{%- schema -%}
+{
+  "name": "Header",
+  "tag": "header",
+  "class": "header",
+  "settings": [
+    {
+      "type": "select",
+      "id": "navbar",
+      "label": "Navigatiebalk",
+      "info": "Kies hier een navigatiebalk. Niet alle navigatiebalken zijn compatibel met twee menu's.",
+      "options": [
+        {
+          "value": "navigation-1",
+          "label": "Navigatie 1"
+        },
+        {
+          "value": "navigation-2",
+          "label": "Navigatie 2"
+        },
+        {
+          "value": "navigation-3",
+          "label": "Navigatie 3"
+        },
+        {
+          "value": "navigation-4",
+          "label": "Navigatie 4"
+        },
+        {
+          "value": "navigation-5",
+          "label": "Navigatie 5"
+        }
+      ],
+      "default": "navigation-1"
+    },
+    {
+      "type": "link_list",
+      "id": "primary_menu",
+      "label": "Primair Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "secondary_menu",
+      "label": "Secundair Menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "fixed_menu",
+      "label": "Vaststaande navigatiebalk",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    }
+  ]
+}
+{%- endschema -%}

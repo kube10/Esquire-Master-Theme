@@ -35,6 +35,21 @@
     {{ 'base.css' | asset_url | stylesheet_tag }}
   </head>
   <body>
+    {% style %}
+    :root {
+      --heading-font: {{settings.type_header_font.family}};
+      --body-font: {{settings.type_body_font.family
+      }};
+      --color-primary: {{settings.color_primary}};
+      --color-secondary: {{settings.color_secondary}};
+      --color-accent: {{settings.color_accent}};
+      --color-text-body: {{settings.color_text_body}};
+      --color-text-heading: {{settings.color_text_heading}};
+      --color-background-light: {{settings.color_background_light}};
+      --color-background-dark: {{settings.color_background_dark}};
+    }
+    {% endstyle %}
+
     {% section 'announcement-bar' %}
     {% section 'header' %}
     <main >
