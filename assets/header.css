@@ -14,8 +14,6 @@
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   justify-content: space-between;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
 }
 
 .logo-wrap {
@@ -26,8 +24,8 @@
 .primary-menu {
   display: flex;
   align-items: center;
-  padding-bottom: 0.5rem;
-  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
   justify-self: center;
 }
 
@@ -68,4 +66,39 @@
   display: flex;
   align-items: center;
   justify-self: flex-end;
+}
+
+.menu-dropdown {
+  border-width: 1px 0px 0px 0px;
+  border-color: var(--color-text-body);
+  border-style: solid;
+  padding: 2rem 0rem;
+  display: none;
+}
+
+.menu-dropdown-nav {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.submenu {
+  display: flex;
+  flex-direction: column;
+}
+
+.submenu > .nav-link {
+  margin-bottom: 1rem;
+}
+
+.nav-link-secondary {
+  color: var(--color-text-body);
+  text-decoration: none;
+  padding: 0.5rem 0rem;
+  font-size: 0.75rem;
+}
+
+.nav-link-secondary.active {
+  color: var(--color-text-heading);
+  font-weight: 800;
 }

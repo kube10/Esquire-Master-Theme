@@ -1,0 +1,19 @@
+<div id="menu-dropdown-1" class="menu-dropdown">
+  {%- assign linklistLength = primary_menu.links | size -%}
+  {%- if  linklistLength > 4 -%}
+    <div>
+  {%- else -%}
+    <div class="container-slim">
+  {%- endif -%}
+    <div class="menu-dropdown-nav">
+      {%- for link in primary_menu.links -%}
+          <div class="submenu">
+            <a class="nav-link" href="{{link.url}}">{{ link.title }}</a>
+            {%- for sublink in link.links -%}
+              <a class="nav-link-secondary {% if sublink.active %}active{% endif %}" href="{{sublink.url}}">{{sublink.title}}</a>
+            {%- endfor -%}
+          </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>

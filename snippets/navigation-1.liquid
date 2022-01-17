@@ -1,4 +1,4 @@
-<nav class="navigation {% if fixed %}fixed{% endif %}">
+<nav id="navigation-1" class="navigation {% if fixed %}fixed{% endif %}">
   <div class="container">
     <div class="navigation-inner">
       <a class="logo-wrap" href="{{ shop.url }}">
@@ -29,5 +29,23 @@
         </button>
       </div>
     </div>
+    {%- if dropdown_active -%}
+      {%- include 'menu-dropdown-1' -%}
+    {%- endif -%}
   </div>
 </nav>
+
+<script type="text/javascript">
+  const nav = document.querySelector('.primary-menu');
+  const dropdown = document.querySelector('.menu-dropdown');
+
+  nav.addEventListener('mouseenter', () => {
+    dropdown.style.display = 'block';
+  })
+
+
+  dropdown.addEventListener('mouseleave', () => {
+    dropdown.style.display = "none";
+  })
+
+</script>

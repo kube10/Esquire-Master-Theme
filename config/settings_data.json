@@ -22,7 +22,11 @@
           "primary_menu": "main-menu",
           "secondary_menu": "secundair-menu",
           "fixed_menu": true,
-          "logo": "shopify:\/\/shop_images\/LOGO_0d399b50-cdac-409f-acbc-f461edfc3dfd.png"
+          "logo": "shopify:\/\/shop_images\/LOGO_0d399b50-cdac-409f-acbc-f461edfc3dfd.png",
+          "dropdown_active": true,
+          "feature_active": true,
+          "feature_image": "shopify:\/\/shop_images\/image_1.jpg",
+          "featured_link": "shopify:\/\/collections\/artist-series"
         }
       },
       "footer": {

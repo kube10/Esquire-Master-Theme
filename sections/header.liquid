@@ -4,7 +4,11 @@
 {%- assign secondary_menu = section.settings.secondary_menu -%}
 {%- assign fixed = section.settings.fixed_menu -%}
 {%- assign logo = section.settings.logo -%}
-
+{%- assign logo_mobile = section.settings.logo_mobile -%}
+{%- assign dropdown_active = section.settings.dropdown_active -%}
+{%- assign feature_active = section.settings.feature_active -%}
+{%- assign feature_img = section.settings.feature_image -%}
+{%- assign feature_link = section.settings.feature_link -%}
 
 {%- case section.settings.navbar -%}
 {%- when 'navigation-1' -%}
@@ -66,6 +70,37 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_mobile",
+      "label": "Logo Mobiel (optioneel)"
+    },
+    {
+      "type": "checkbox",
+      "id": "dropdown_active",
+      "label": "Dropdown menu actief",
+      "info": "Vink dit aan om automatisch een secundair menu aan te maken met de sublinks in het menu.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_active",
+      "label": "Featured Element",
+      "info": "Vink dit aan om een featured link toe te voegen aan het dropdown menu. Let erop dat er genoeg ruimte is en vul de gegevens hierna in.",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_image",
+      "label": "Featured Afbeelding",
+      "info": "Deze afbeelding wordt gebruikt als achtergrond bij het featured link element."
+    },
+    {
+      "type": "url",
+      "id": "featured_link",
+      "label": "Featured link",
+      "info": "Deze link wordt gebruikt als link bij het featured link element."
     }
   ]
 }
