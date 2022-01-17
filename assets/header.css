@@ -38,6 +38,10 @@
   color: var(--color-text-heading);
 }
 
+.nav-link:hover {
+  opacity: 0.7;
+}
+
 .nav-link-wrap {
   padding: 0.5rem;
   margin-left: 0.5rem;
@@ -101,4 +105,35 @@
 .nav-link-secondary.active {
   color: var(--color-text-heading);
   font-weight: 800;
+}
+
+.dropdown-feature {
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: flex-end;
+  text-decoration: none;
+  background-position: center;
+  background-size: cover;
+  transition: background-position 0.3s ease;
+}
+
+.dropdown-feature:hover {
+  background-position: left;
+}
+
+.dropdown-feature__link-wrap {
+  background-color: var(--color-background-dark);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-feature__link {
+  text-decoration: none;
+  color: var(--color-background-light);
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-right: 5rem;
 }

@@ -1,6 +1,6 @@
 <div id="menu-dropdown-1" class="menu-dropdown">
   {%- assign linklistLength = primary_menu.links | size -%}
-  {%- if  linklistLength > 4 -%}
+  {%- if  linklistLength > 3 and feature_active -%}
     <div>
   {%- else -%}
     <div class="container-slim">
@@ -14,6 +14,16 @@
             {%- endfor -%}
           </div>
       {%- endfor -%}
+      {%- if feature_active -%}
+        <a href="{{feature__link}}" class="dropdown-feature" style="background-image:url('{{ feature_img | image_url }}')">
+          <div class="dropdown-feature__link-wrap">
+            <span class="dropdown-feature__link">{{feature_title}}</span>
+            <svg class="dropdown-feature__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 13L17.586 13L12.293 18.293L13.707 19.707L21.414 12L13.707 4.29303L12.293 5.70703L17.586 11L3 11L3 13Z" fill="var(--color-background-light)"/>
+            </svg>
+          </div>
+        </a>
+      {%- endif -%}
     </div>
   </div>
 </div>

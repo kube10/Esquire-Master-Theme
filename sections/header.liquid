@@ -9,6 +9,8 @@
 {%- assign feature_active = section.settings.feature_active -%}
 {%- assign feature_img = section.settings.feature_image -%}
 {%- assign feature_link = section.settings.feature_link -%}
+{%- assign feature_title = section.settings.feature_title -%}
+
 
 {%- case section.settings.navbar -%}
 {%- when 'navigation-1' -%}
@@ -77,6 +79,10 @@
       "label": "Logo Mobiel (optioneel)"
     },
     {
+      "type": "header",
+      "content": "Dropdown Menu"
+    },
+    {
       "type": "checkbox",
       "id": "dropdown_active",
       "label": "Dropdown menu actief",
@@ -98,9 +104,14 @@
     },
     {
       "type": "url",
-      "id": "featured_link",
+      "id": "feature_link",
       "label": "Featured link",
       "info": "Deze link wordt gebruikt als link bij het featured link element."
+    },
+    {
+      "type": "text",
+      "id": "feature_title",
+      "label": "Feature Titel"
     }
   ]
 }
