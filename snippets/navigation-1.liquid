@@ -16,7 +16,7 @@
       </a>
       <div class="primary-menu hide-mobile-flex">
         {%- for link in primary_menu.links -%}
-        <div class="nav-link-wrap {% if link.active %}active{% endif %}">
+        <div data-title-submenu="{%- if link.levels > 0 -%}{{link.title}}{%- endif -%}" class="nav-link-wrap {% if link.active %}active{% endif %}">
           <a class="nav-link" href="{{link.url}}">{{ link.title }}</a>
           <div class="nav-link__line"></div>
         </div>
@@ -39,17 +39,18 @@
         </button>
       </div>
     </div>
-    {%- if dropdown_active -%}
-      {%- include 'menu-dropdown-1' -%}
-    {%- endif -%}
+    {%- case dropdown -%}
+      {%- when 'dropdown-1' -%}
+        {% include 'menu-dropdown-1' %}
+      {%- when 'dropdown-2' -%}
+        {% include 'menu-dropdown-2' %}
+    {%- endcase -%}
   </div>
 </nav>
 
 {%- include 'mobile-menu' -%}
 
 <script type="text/javascript">
-  const nav = document.querySelector('.primary-menu');
-  const dropdown = document.querySelector('.menu-dropdown');
   const mobileMenuBtn = document.querySelector('.menu-btn-mobile');
   const mobileMenu = document.querySelector('.mobile-menu')
 
@@ -63,15 +64,6 @@
       mobileMenuBtn.classList.add('open');
       document.querySelector('html').style.overflow = 'hidden';
     }
-  })
-
-  nav.addEventListener('mouseenter', () => {
-    dropdown.style.display = 'block';
-  })
-
-
-  dropdown.addEventListener('mouseleave', () => {
-    dropdown.style.display = "none";
   })
 
 </script>

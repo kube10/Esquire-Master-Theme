@@ -218,6 +218,10 @@ h6 {
 }
 
 /* UTILTIY */
+.hidden {
+  display: none !important;
+}
+
 .hide-mobile {
   display: none !important;
 }

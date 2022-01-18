@@ -5,12 +5,11 @@
 {%- assign fixed = section.settings.fixed_menu -%}
 {%- assign logo = section.settings.logo -%}
 {%- assign logo_mobile = section.settings.logo_mobile -%}
-{%- assign dropdown_active = section.settings.dropdown_active -%}
+{%- assign dropdown = section.settings.dropdown -%}
 {%- assign feature_active = section.settings.feature_active -%}
 {%- assign feature_img = section.settings.feature_image -%}
 {%- assign feature_link = section.settings.feature_link -%}
 {%- assign feature_title = section.settings.feature_title -%}
-
 
 {%- case section.settings.navbar -%}
 {%- when 'navigation-1' -%}
@@ -83,11 +82,25 @@
       "content": "Dropdown Menu"
     },
     {
-      "type": "checkbox",
-      "id": "dropdown_active",
-      "label": "Dropdown menu actief",
-      "info": "Vink dit aan om automatisch een secundair menu aan te maken met de sublinks in het menu.",
-      "default": true
+          "type": "select",
+          "id": "dropdown",
+          "label": "Dropdown menu",
+          "info": "Kies een dropdown menu (optioneel)",
+          "options": [
+            {
+              "value": "none",
+              "label": "Geen"
+            },
+            {
+              "value": "dropdown-1",
+              "label": "Dropdown 1"
+            },
+            {
+              "value": "dropdown-2",
+              "label": "Dropdown 2"
+            }
+          ],
+          "default": "dropdown-1"
     },
     {
       "type": "checkbox",

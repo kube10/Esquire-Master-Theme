@@ -118,6 +118,10 @@
   display: none;
 }
 
+#menu-dropdown-2 {
+  padding: 1rem 0rem;
+}
+
 @media screen and (max-width: 1023px) {
   .menu-dropdown {
     display: none !important;
@@ -133,6 +137,13 @@
 .submenu {
   display: flex;
   flex-direction: column;
+}
+
+.submenu.inline {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .submenu > .nav-link {

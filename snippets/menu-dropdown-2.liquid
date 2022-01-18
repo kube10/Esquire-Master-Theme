@@ -1,0 +1,50 @@
+<div id="menu-dropdown-2" class="menu-dropdown">
+  <div class="container">
+    <div class="menu-dropdown-nav">
+      {%- for link in primary_menu.links -%}
+        <div id="submenu-{{link.title}}" class="submenu inline hidden">
+          {%- for sublink in link.links -%}
+            <a class="nav-link-secondary" href="{{sublink.url}}">
+              {{ sublink.title }}
+            </a>
+          {%- endfor -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  const primaryMenu = document.querySelector('.primary-menu');
+  const primaryLinks = primaryMenu.querySelectorAll('.nav-link-wrap');
+  const dropDown = document.querySelector('.menu-dropdown');
+
+  const allSubMenus = document.querySelectorAll('.menu-dropdown-nav > .submenu');
+
+  primaryLinks.forEach((link, i) => {
+
+      link.addEventListener('mouseenter', () => {
+        if (link.getAttribute('data-title-submenu') != "") {
+          dropDown.style.display = "block";
+          const title = link.getAttribute('data-title-submenu');
+          console.log(title);
+          allSubMenus.forEach((menu, i) => {
+            menu.classList.add('hidden');
+          });
+          const menuToShow = document.querySelector('#submenu-' + title);
+          menuToShow.classList.remove('hidden');
+        } else {
+          dropDown.style.display = "none";
+          allSubMenus.forEach((menu, i) => {
+            menu.classList.add('hidden');
+          });
+        }
+      })
+
+  });
+
+  dropDown.addEventListener('mouseleave', () => {
+    dropDown.style.display = "none";
+  })
+
+</script>
