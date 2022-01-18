@@ -218,9 +218,30 @@ h6 {
   font-weight: 600;
   color: var(--button-text-color);
   background-color: var(--button-background-color);
+  border: 1px solid var(--button-background-color);
   display: flex;
   align-items: center;
   text-decoration: none;
+}
+
+.button.small {
+  font-size: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.button.small > svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.button.border {
+  background-color: transparent !important;
+  border: 1px solid var(--button-text-color);
+}
+
+.button.inverted {
+  background-color: var(--button-text-color);
+  color: var(--button-background-color);
 }
 
 .button.icon {
@@ -255,6 +276,33 @@ h6 {
 .button-primary.ghost {
   --button-text-color: var(--button-background-color);
   background-color: transparent;
+  border: 0px;
+}
+
+.button-secondary {
+  --button-text-color: var(--color-text-heading);
+  --button-background-color: var(--color-background-light);
+}
+
+/* BADGES */
+.option-badge {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  border: 1px solid var(--color-text-heading);
+  color: var(--color-text-heading);
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+}
+
+.option-badge.selected {
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+.option-badge.disabled {
+  border: 1px solid var(--color-text-body);
+  color: var(--color-text-body);
+  cursor: not-allowed;
 }
 
 /* UTILTIY */

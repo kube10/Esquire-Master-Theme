@@ -12,6 +12,7 @@
 .product-card-minimal__image-wrap {
   height: calc(100vw - 2rem);
   position: relative;
+  cursor: crosshair;
 }
 
 .product-card-minimal__image {
@@ -28,18 +29,71 @@
   left: 0;
   z-index: 2;
   background-color: rgba(255, 255, 255, 0.85);
-  padding: 3rem;
+  padding: 1rem;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-direction: column;
   text-align: center;
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.product-card-minimal__overlay.regular {
+  padding: 2rem;
+}
+
+.product-card-minimal__overlay.large {
+  padding: 4rem;
+  justify-content: center;
+}
+
+.product-card-minimal__overlay.small
+  .product-card-minimal__overlay-title-description {
+  display: none;
+}
+
+.product-card-minimal__overlay.small
+  .product-card-minimal__overlay-actions-price {
+  display: none;
 }
 
 .product-card-minimal__overlay-title {
   font-size: 1rem;
   font-weight: 800;
   text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.product-card-minimal__overlay-options {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 0.5rem;
+}
+
+.product-card-minimal__overlay-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.product-card-minimal__overlay.small .product-card-minimal__overlay-actions {
+  margin-top: 0;
+}
+
+.product-card-minimal__overlay-actions.vertical {
+  flex-direction: column;
+  grid-row-gap: 1rem;
+}
+
+.product-card-minimal__overlay.small .product-card-minimal__overlay-actions {
+  flex-direction: column;
+  grid-row-gap: 0.5rem;
 }
 
 .product-card-minimal__content {
@@ -92,6 +146,19 @@
 
   .product-card-minimal.small > .product-card-minimal__image-wrap {
     height: calc((1024px - (var(--grid-gap) * 3)) / 4);
+  }
+
+  .product-card-minimal__overlay {
+    display: flex;
+  }
+
+  .product-card-minimal__overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .product-card-minimal__image {
+    pointer-events: none;
   }
 }
 

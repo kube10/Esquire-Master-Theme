@@ -2,6 +2,8 @@
 
 {%- assign product_card_size = section.settings.product_card_size -%}
 
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
 <div class="container">
   <h2>{{section.settings.headline}}</h2>
   <div class="product-grid {{product_card_size}}">
