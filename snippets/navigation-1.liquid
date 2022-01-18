@@ -1,10 +1,20 @@
 <nav id="navigation-1" class="navigation {% if fixed %}fixed{% endif %}">
   <div class="container">
     <div class="navigation-inner">
+      <div class="menu-btn-mobile hide-desktop-flex">
+        <div class="hamburger-icon">
+          <div class="hamburger-icon__line"></div>
+          <div class="hamburger-icon__line"></div>
+          <div class="hamburger-icon__line"></div>
+        </div>
+      </div>
       <a class="logo-wrap" href="{{ shop.url }}">
-        <img src="{{logo | image_url}}" alt="">
+        <img class="{% if logo_mobile %}hide-mobile{% endif %}" src="{{logo | image_url}}" alt="">
+        {% if logo_mobile %}
+          <img class="hide-desktop" src="{{logo_mobile | image_url}}" alt="">
+        {% endif %}
       </a>
-      <div class="primary-menu">
+      <div class="primary-menu hide-mobile-flex">
         {%- for link in primary_menu.links -%}
         <div class="nav-link-wrap {% if link.active %}active{% endif %}">
           <a class="nav-link" href="{{link.url}}">{{ link.title }}</a>
@@ -19,7 +29,7 @@
               {%- render 'icon-user' -%}
             </a>
           {%- else -%}
-            <a href="{{routes.account_login_url}}" class="button button-primary ghost">
+            <a href="{{routes.account_login_url}}" class="button button-primary ghost hide-mobile-flex">
               <span>Login</span>
               {%- render 'icon-user' -%}
             </a>
@@ -35,9 +45,25 @@
   </div>
 </nav>
 
+{%- include 'mobile-menu' -%}
+
 <script type="text/javascript">
   const nav = document.querySelector('.primary-menu');
   const dropdown = document.querySelector('.menu-dropdown');
+  const mobileMenuBtn = document.querySelector('.menu-btn-mobile');
+  const mobileMenu = document.querySelector('.mobile-menu')
+
+  mobileMenuBtn.addEventListener('click', () => {
+    if (mobileMenuBtn.classList.contains('open')) {
+        mobileMenu.classList.remove('open');
+        mobileMenuBtn.classList.remove('open');
+        document.querySelector('html').style.overflow = 'auto';
+    } else {
+      mobileMenu.classList.add('open');
+      mobileMenuBtn.classList.add('open');
+      document.querySelector('html').style.overflow = 'hidden';
+    }
+  })
 
   nav.addEventListener('mouseenter', () => {
     dropdown.style.display = 'block';

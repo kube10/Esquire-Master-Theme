@@ -1,0 +1,79 @@
+<div class="mobile-menu">
+  <div class="mobile-menu__primary-menu-wrap">
+      <div class="container">
+        <div class="mobile-menu__primary-menu">
+            {%- for link in primary_menu.links -%}
+              {%- assign id = forloop.index -%}
+              <a id="mobile-menu__link-wrap-{{id}}" class="mobile-menu__link-wrap" {%- unless dropdown_active -%} href="{{link.url}}" {%- endunless -%}
+              {%- if link.levels == 0 -%}
+                href="{{link.url}}"
+              {%- else -%}
+                onclick="openSubmenu({{id}})"
+              {%- endif -%}>
+                <span class="nav-link" >{{link.title}}</span>
+              {%- if link.levels > 0 -%}
+                <svg width="7" height="11" viewBox="0 0 7 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="6.9978" y="5.50397" width="7.71011" height="1.40769" rx="0.25" transform="rotate(135 6.9978 5.50397)" fill="#1E1E1E"/>
+                  <rect x="1.5459" y="0.0441589" width="7.7132" height="1.40769" rx="0.25" transform="rotate(45 1.5459 0.0441589)" fill="var(--color-text-heading)"/>
+                </svg>
+              {%- endif -%}
+              </a>
+              {%- if link.levels > 0 -%}
+                <div id="mobile-menu__submenu-{{id}}" class="mobile-menu__submenu">
+                    {%- for sublink in link.links -%}
+                      <a class="mobile-menu__link-wrap secondary" href="{{sublink.url}}">
+                        <span class="nav-link-secondary">{{sublink.title}}</span>
+                      </a>
+                    {%- endfor -%}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+      </div>
+  </div>
+  {%- if secondary_menu -%}
+    <div class="mobile-menu__secondary-menu-wrap">
+      <div class="container">
+        <div class="mobile-menu__secondary-menu">
+          {%- for link in secondary_menu.links -%}
+            <a class="mobile-menu__link-wrap secondary" href="{{link.url}}">
+              <span class="nav-link-secondary">{{link.title}}</span>
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<script type="text/javascript">
+  function openSubmenu(id) {
+    const allMenus = document.querySelectorAll('.mobile-menu__submenu');
+    const allLinkWraps = document.querySelectorAll('.mobile-menu__link-wrap')
+
+    const subMenu = document.querySelector('#mobile-menu__submenu-'+id);
+
+    const linkWrap = document.querySelector('#mobile-menu__link-wrap-' + id);
+
+    if (linkWrap.classList.contains('open')) {
+      allMenus.forEach((menu, i) => {
+        menu.classList.remove('open');
+      });
+
+      allLinkWraps.forEach((linkWrap, i) => {
+        linkWrap.classList.remove('open')
+      });
+    } else {
+      allMenus.forEach((menu, i) => {
+        menu.classList.remove('open');
+      });
+
+      allLinkWraps.forEach((linkWrap, i) => {
+        linkWrap.classList.remove('open')
+      });
+
+      subMenu.classList.add('open')
+      linkWrap.classList.add('open');
+    }
+  }
+</script>

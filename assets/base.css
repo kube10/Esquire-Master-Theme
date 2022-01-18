@@ -216,3 +216,54 @@ h6 {
   --button-text-color: var(--button-background-color);
   background-color: transparent;
 }
+
+/* UTILTIY */
+.hide-mobile {
+  display: none !important;
+}
+
+.hide-desktop {
+  display: block !important;
+}
+
+.hide-mobile-flex {
+  display: none !important;
+}
+
+.hide-desktop-flex {
+  display: flex !important;
+}
+
+.hide-mobile-grid {
+  display: none !important;
+}
+
+.hide-desktop-grid {
+  display: grid !important;
+}
+
+@media screen and (min-width: 1024px) {
+  .hide-mobile {
+    display: block !important;
+  }
+
+  .hide-desktop {
+    display: none !important;
+  }
+
+  .hide-mobile-flex {
+    display: flex !important;
+  }
+
+  .hide-desktop-flex {
+    display: none !important;
+  }
+
+  .hide-mobile-grid {
+    display: grid !important;
+  }
+
+  .hide-desktop-grid {
+    display: none !important;
+  }
+}

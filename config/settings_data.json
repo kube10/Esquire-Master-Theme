@@ -12,7 +12,8 @@
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
-        "settings": {}
+        "settings": {
+        }
       },
       "header": {
         "type": "header",
@@ -21,11 +22,13 @@
           "primary_menu": "main-menu",
           "secondary_menu": "secundair-menu",
           "fixed_menu": true,
-          "logo": "shopify://shop_images/LOGO_0d399b50-cdac-409f-acbc-f461edfc3dfd.png",
+          "logo": "shopify:\/\/shop_images\/LOGO_0d399b50-cdac-409f-acbc-f461edfc3dfd.png",
+          "logo_mobile": "shopify:\/\/shop_images\/LOGO_08c9c08d-9acf-4d12-828a-051c2f4c6503.png",
           "dropdown_active": true,
           "feature_active": true,
-          "feature_image": "shopify://shop_images/image_1.jpg",
-          "feature_link": "shopify://collections/artist-series"
+          "feature_image": "shopify:\/\/shop_images\/image_1.jpg",
+          "feature_link": "shopify:\/\/collections\/artist-series",
+          "feature_title": "Artist Series"
         }
       },
       "footer": {
@@ -41,7 +44,9 @@
         }
       }
     },
-    "content_for_index": []
+    "content_for_index": [
+
+    ]
   },
   "presets": {
     "Default": {
@@ -65,8 +70,11 @@
               }
             }
           },
-          "block_order": ["announcement-bar-0"],
-          "settings": {}
+          "block_order": [
+            "announcement-bar-0"
+          ],
+          "settings": {
+          }
         }
       }
     },
@@ -86,14 +94,19 @@
           "blocks": {
             "menu": {
               "type": "link_list",
-              "settings": {}
+              "settings": {
+              }
             },
             "text": {
               "type": "text",
-              "settings": {}
+              "settings": {
+              }
             }
           },
-          "block_order": ["menu", "text"],
+          "block_order": [
+            "menu",
+            "text"
+          ],
           "settings": {
             "color_scheme": "accent-1"
           }
