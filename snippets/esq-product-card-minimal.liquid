@@ -11,25 +11,25 @@
         {% include 'esq-price', orientation: "vertical", size:"regular" %}
       </div>
       {%- assign amountOfVariants = product.variants.size -%}
+    {%- form 'product', product, id: product_form_id, class:"product-card-minimal__overlay-form", novalidate: 'novalidate', data-type:"add-to-cart-form" -%}
       {%- if amountOfVariants > 1 -%}
         <div class="product-card-minimal__overlay-options">
           {%- for variant in product.variants -%}
-            <span class="option-badge {% unless variant.available %}disabled{% endunless %}">{{ variant.title }}</span>
+            <span onclick="setSelectedVariant(this, '{{variant.id}}', '{{product_form_id}}')" class="option-badge {% unless variant.available %}disabled{% endunless %} {% if variant.id == product.selected_or_first_available_variant.id %} selected {% endif %}">{{ variant.title }}</span>
           {%- endfor -%}
         </div>
       {%- endif -%}
       <div class="product-card-minimal__overlay-actions {% if amountOfVariants == 1 %}vertical{% endif %}">
-          {%- form 'product', product, id: product_form_id, class:"form", novalidate: 'novalidate', data-type:"add-to-cart-form" -%}
-          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <input id="product-form-input-{{product_form_id}}" type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
           <button type="submit" class="button small button-secondary border">
             <span>ADD TO CART</span>
             {%- render 'icon-cart' -%}
           </button>
-          {%- endform -%}
           <button type="submit" class="button small button-primary">
             BUY NOW
           </button>
       </div>
+    {%- endform -%}
     </div>
   </div>
   <div class="product-card-minimal__content">
@@ -39,6 +39,18 @@
 </div>
 
 <script type="text/javascript">
+  function setSelectedVariant(badge, variant_id, product_form_id) {
+    const input = document.querySelector('#product-form-input-' + product_form_id);
+    const allBadges = document.querySelectorAll('.option-badge')
+    input.setAttribute('value', variant_id);
+
+    allBadges.forEach((badge, i) => {
+      badge.classList.remove('selected');
+    });
+
+    badge.classList.add('selected');
+  }
+
   function showOverlay(target) {
       const overlay = target.querySelector('.product-card-minimal__overlay');
       overlay.classList.add('open');

@@ -60,6 +60,10 @@
   display: none;
 }
 
+.product-card-minimal__overlay-form {
+  width: 100%;
+}
+
 .product-card-minimal__overlay-title {
   font-size: 1rem;
   font-weight: 800;
@@ -69,9 +73,10 @@
 
 .product-card-minimal__overlay-options {
   margin-top: 2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  justify-content: center;
   grid-column-gap: 0.5rem;
+  padding: 0.5rem 0;
 }
 
 .product-card-minimal__overlay.small .product-card-minimal__overlay-options {
