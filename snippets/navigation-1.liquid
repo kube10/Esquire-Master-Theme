@@ -9,10 +9,23 @@
         </div>
       </div>
       <a class="logo-wrap" href="{{ shop.url }}">
-        <img class="{% if logo_mobile %}hide-mobile{% endif %}" src="{{logo | image_url}}" alt="">
-        {% if logo_mobile %}
+
+        <div class="{% if logo_mobile or logo_svg_mobile %}hide-mobile{% endif %}">
+          {%- if logo_svg != "" -%}
+              {{logo_svg}}
+          {%- else -%}
+              <img src="{{logo | image_url}}" alt="">
+          {%- endif -%}
+        </div>
+
+
+        {%- if logo_svg_mobile != "" -%}
+          <div class="hide-desktop">
+            {{logo_svg_mobile}}
+          </div>
+        {%- elsif logo_mobile -%}
           <img class="hide-desktop" src="{{logo_mobile | image_url}}" alt="">
-        {% endif %}
+        {%- endif -%}
       </a>
       <div class="primary-menu hide-mobile-flex">
         {%- for link in primary_menu.links -%}

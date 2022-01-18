@@ -1,0 +1,20 @@
+<div class="product-card-minimal {{size}}">
+  <div class="product-card-minimal__image-wrap">
+    <img class="product-card-minimal__image" src="{{product.featured_media | image_url}}" alt="">
+    <div class="product-card-minimal__overlay">
+      <div class="product-card-minimal__overlay-text-content">
+        <h6 class="product-card-minimal__overlay-title">{{product.title}}</h6>
+        <p class="p-small color-heading">{{product.description}}</p>
+      </div>
+      <div class="product-card-minimal__overlay-options">
+        {%- for product_option in product.options -%}
+          {{ product_option.name }}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+  <div class="product-card-minimal__content">
+    <h6 class="product-card-minimal__title m-0">{{product.title}}</h6>
+    <span class="price {{size}}">{{product.price | money}}</span>
+  </div>
+</div>

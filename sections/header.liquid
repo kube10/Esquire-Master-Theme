@@ -4,12 +4,15 @@
 {%- assign secondary_menu = section.settings.secondary_menu -%}
 {%- assign fixed = section.settings.fixed_menu -%}
 {%- assign logo = section.settings.logo -%}
+{%- assign logo_svg = section.settings.logo_svg -%}
 {%- assign logo_mobile = section.settings.logo_mobile -%}
+{%- assign logo_svg_mobile = section.settings.logo_svg_mobile -%}
 {%- assign dropdown = section.settings.dropdown -%}
 {%- assign feature_active = section.settings.feature_active -%}
 {%- assign feature_img = section.settings.feature_image -%}
 {%- assign feature_link = section.settings.feature_link -%}
 {%- assign feature_title = section.settings.feature_title -%}
+
 
 {%- case section.settings.navbar -%}
 {%- when 'navigation-1' -%}
@@ -73,9 +76,21 @@
       "label": "Logo"
     },
     {
+      "type": "textarea",
+      "id": "logo_svg",
+      "label": "Logo SVG Code",
+      "info": "Optioneel. Gebruik SVG code voor uw logo. Als deze optie is ingevuld wordt de afbeelding hierboven niet gebruikt."
+    },
+    {
       "type": "image_picker",
       "id": "logo_mobile",
       "label": "Logo Mobiel (optioneel)"
+    },
+    {
+      "type": "textarea",
+      "id": "logo_svg_mobile",
+      "label": "Logo SVG Code Mobiel",
+      "info": "Optioneel. Gebruik SVG code voor uw logo. Als deze optie is ingevuld wordt de afbeelding hierboven niet gebruikt."
     },
     {
       "type": "header",

@@ -2,12 +2,26 @@ body,
 html {
   margin: 0;
 }
+/* COLORS */
+.color-heading {
+  color: var(--color-text-heading) !important;
+}
+
+.color-body {
+  color: var(--color-text-body) !important;
+}
 
 /* LAYOUT - Sections */
 
 .section-p {
   padding-top: 3rem;
   padding-bottom: 3rem;
+}
+
+.section-p:first-child,
+.section-pb:first-child,
+.section-pt:first-child {
+  margin-top: 4rem;
 }
 
 .section-pb {
@@ -33,6 +47,14 @@ html {
   }
 }
 
+@media screen and (min-width: 1024px) {
+  .section-p:first-child,
+  .section-pb:first-child,
+  .section-pt:first-child {
+    margin-top: 4.2rem;
+  }
+}
+
 @media screen and (min-width: 1366px) {
   .section-p {
     padding-top: 7.5rem;
@@ -49,8 +71,14 @@ html {
 }
 
 /* LAYOUT - Containers */
+:root {
+  --container-desktop-max-width: 1140px;
+  --container-desktop-lg-max-width: 1366px;
+  --container-slim-max-width: 920px;
+  --container-narrow-max-width: 560px;
+}
 .container {
-  max-width: 1140px;
+  max-width: var(--container-desktop-max-width);
   margin: 0 auto;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -65,12 +93,12 @@ html {
 
 @media screen and (min-width: 1536px) {
   .container {
-    max-width: 1366px;
+    max-width: var(--container-desktop-lg-max-width);
   }
 }
 
 .container-slim {
-  max-width: 920px;
+  max-width: var(--container-slim-max-width);
   margin: 0 auto;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -91,7 +119,7 @@ html {
 }
 
 .container-narrow {
-  max-width: 560px;
+  max-width: var(--container-narrow-max-width);
   margin: 0 auto;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -108,7 +136,6 @@ p {
   font-size: 1rem;
   line-height: 1.5;
   margin-bottom: 1rem;
-  color: var(--color-text-body);
 }
 
 .p-large {
@@ -125,6 +152,7 @@ h3,
 h4,
 h5,
 h6 {
+  margin-top: 0;
   font-family: var(--heading-font), sans-serif;
 }
 
@@ -166,6 +194,18 @@ h6 {
 
 .m-0 {
   margin: 0 !important;
+}
+
+.price {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-text-heading);
+}
+
+.price.large {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-text-heading);
 }
 
 /* BUTTONS */

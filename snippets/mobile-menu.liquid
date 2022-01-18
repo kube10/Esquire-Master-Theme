@@ -4,7 +4,7 @@
         <div class="mobile-menu__primary-menu">
             {%- for link in primary_menu.links -%}
               {%- assign id = forloop.index -%}
-              <a id="mobile-menu__link-wrap-{{id}}" class="mobile-menu__link-wrap" {%- unless dropdown_active -%} href="{{link.url}}" {%- endunless -%}
+              <a id="mobile-menu__link-wrap-{{id}}" class="mobile-menu__link-wrap" {%- if dropdown == "none"  -%} href="{{link.url}}" {%- endif -%}
               {%- if link.levels == 0 -%}
                 href="{{link.url}}"
               {%- else -%}
