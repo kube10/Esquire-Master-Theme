@@ -8,7 +8,7 @@
       <div class="product-card-minimal__overlay-text-content">
         <h6 class="product-card-minimal__overlay-title">{{product.title}}</h6>
         <p class="p-small color-heading product-card-minimal__overlay-title-description">{{product.description}}</p>
-        <div class="product-card-minimal__overlay-price price">{{ product.price | money }}</div>
+        {% include 'esq-price', orientation: "vertical", size:"regular" %}
       </div>
       {%- assign amountOfVariants = product.variants.size -%}
       {%- if amountOfVariants > 1 -%}
@@ -34,7 +34,7 @@
   </div>
   <div class="product-card-minimal__content">
     <h6 class="product-card-minimal__title m-0">{{product.title}}</h6>
-    <span class="price {{size}}">{{product.price | money}}</span>
+    {% include 'esq-price' %}
   </div>
 </div>
 

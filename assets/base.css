@@ -196,18 +196,6 @@ h6 {
   margin: 0 !important;
 }
 
-.price {
-  font-size: 1rem;
-  font-weight: 800;
-  color: var(--color-text-heading);
-}
-
-.price.large {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: var(--color-text-heading);
-}
-
 /* BUTTONS */
 .button {
   background-color: transparent;
@@ -230,8 +218,8 @@ h6 {
 }
 
 .button.small > svg {
-  width: 1rem;
-  height: 1rem;
+  width: 14px;
+  height: 14px;
 }
 
 .button.border {
@@ -303,6 +291,42 @@ h6 {
   border: 1px solid var(--color-text-body);
   color: var(--color-text-body);
   cursor: not-allowed;
+}
+/* PRICE */
+.price {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-text-heading);
+}
+
+@media screen and (min-width: 1366px) {
+  .price {
+    font-size: 1.25rem;
+  }
+}
+
+.price.vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-old {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--color-text-body);
+  text-decoration: line-through;
+}
+
+.price-new {
+  color: var(--color-accent);
+}
+
+.price.small {
+  font-size: 1rem;
+}
+
+.price.small > .price-old {
+  font-size: 0.75rem;
 }
 
 /* UTILTIY */
