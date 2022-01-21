@@ -29,7 +29,6 @@
         {%- for link in primary_menu.links -%}
         <div data-title-submenu="{%- if link.levels > 0 -%}{{link.title}}{%- endif -%}" class="nav-link-wrap {% if link.active %}active{% endif %}">
           <a class="nav-link" href="{{link.url}}">{{ link.title }}</a>
-          <div class="nav-link__line"></div>
         </div>
         {%- endfor -%}
       </div>

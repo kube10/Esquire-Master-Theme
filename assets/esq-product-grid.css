@@ -117,8 +117,15 @@
 }
 
 .product-card-minimal__title {
-  font-weight: 400;
+  font-weight: 500;
   text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-text-heading);
+}
+
+.product-card-minimal__title:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
 }
 
 .product-card-minimal.small .product-card-minimal__title,

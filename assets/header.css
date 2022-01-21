@@ -91,17 +91,9 @@
   flex-direction: column;
 }
 
-.nav-link__line {
-  height: 1.5px;
-  width: calc(100% - 2rem);
-  background-color: var(--color-text-heading);
-  display: none;
-  position: absolute;
-  bottom: 1px;
-}
-
-.nav-link-wrap.active > .nav-link__line {
-  display: block;
+.nav-link-wrap.active > .nav-link {
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
 }
 
 .menu-actions {
