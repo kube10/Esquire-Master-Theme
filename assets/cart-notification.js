@@ -28,6 +28,11 @@ class CartNotification extends HTMLElement {
     );
 
     document.body.addEventListener("click", this.onBodyClick);
+
+    const thisNotification = this;
+    setTimeout(function () {
+      thisNotification.close();
+    }, 5000);
   }
 
   close() {
@@ -57,22 +62,21 @@ class CartNotification extends HTMLElement {
         id: "cart-notification-product",
         selector: `#cart-notification-product-${this.productId}`,
       },
+      // {
+      //   id: "cart-notification-button",
+      // },
+      // {
+      //   id: "cart-icon-bubble",
+      // },
       {
-        id: "cart-notification-button",
-      },
-      {
-        id: "cart-icon-bubble",
-      },
-
-      {
-        id: "main-cart-items",
+        id: "esq-cart-items",
         section: "esq-cart-items",
         selector: ".js-contents",
       },
       {
-        id: "main-cart-footer",
+        id: "esq-cart-footer",
         section: "esq-cart-footer",
-        selector: "#main-cart-footer",
+        selector: ".js-contents",
       },
     ];
   }

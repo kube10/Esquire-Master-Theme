@@ -44,9 +44,9 @@
               {%- render 'icon-user' -%}
             </a>
           {%- endif -%}
-        <a href="/cart" class="button icon-only button-primary">
+        <div onclick="openEsqMiniCart()" class="button icon-only button-primary">
           {%- render 'icon-cart' -%}
-        </a>
+        </div>
       </div>
     </div>
     {%- case dropdown -%}

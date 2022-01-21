@@ -1,4 +1,4 @@
-<cart-items id="main-cart-items" class="cart__items">
+<cart-items id="esq-cart-items" class="cart__items">
       <div class="js-contents">
         {%- if cart != empty -%}
           {%- for item in cart.items -%}
@@ -10,16 +10,18 @@
               {%- endif -%}
                 <div class="cart__item-content">
                     <h5 class="cart__item-title">{{ item.product.title }}</h5>
-                    <div class="cart__item-grid">
+                    <div class="cart__item-grid {% unless item.product.variants.size > 1 %}single-option{% endunless %}">
                       <div class="cart__item-column ">
+                        {%- if item.product.variants.size > 1 -%}
                         <div class="cart__item-options">
-                          {%- for option in item.options_with_values -%}
-                            <span class="p-small">{{ option.name }}</span>
-                            <div class="option-badge">
-                            {{ option.value }}
-                          </div>
-                          {%- endfor -%}
+                            {%- for option in item.options_with_values -%}
+                              <span class="p-small">{{ option.name }}</span>
+                              <div class="option-badge">
+                              {{ option.value }}
+                            </div>
+                            {%- endfor -%}
                         </div>
+                        {%- endif -%}
                         <cart-remove-button id="Remove-{{ item.index | plus: 1 }}" data-index="{{ item.index | plus: 1 }}">
                           <a href="{{ item.url_to_remove }}" class="cart__item-remove-btn">
                             {%- render 'icon-remove' -%}

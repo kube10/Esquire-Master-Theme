@@ -43,9 +43,9 @@ class CartItems extends HTMLElement {
   getSectionsToRender() {
     return [
       {
-        id: "main-cart-items",
+        id: "esq-cart-items",
         section:
-          document.getElementById("main-cart-items").dataset.id ||
+          document.getElementById("esq-cart-items").dataset.id ||
           "esq-cart-items",
         selector: ".js-contents",
       },
@@ -60,9 +60,9 @@ class CartItems extends HTMLElement {
         selector: ".shopify-section",
       },
       {
-        id: "main-cart-footer",
+        id: "esq-cart-footer",
         section:
-          document.getElementById("main-cart-footer").dataset.id ||
+          document.getElementById("esq-cart-footer").dataset.id ||
           "esq-cart-footer",
         selector: ".js-contents",
       },
@@ -86,7 +86,7 @@ class CartItems extends HTMLElement {
       .then((state) => {
         const parsedState = JSON.parse(state);
         this.classList.toggle("is-empty", parsedState.item_count === 0);
-        const cartFooter = document.getElementById("main-cart-footer");
+        const cartFooter = document.getElementById("esq-cart-footer");
 
         if (cartFooter)
           cartFooter.classList.toggle("is-empty", parsedState.item_count === 0);
@@ -152,7 +152,7 @@ class CartItems extends HTMLElement {
 
   enableLoading(line) {
     document
-      .getElementById("main-cart-items")
+      .getElementById("esq-cart-items")
       .classList.add("cart__items--disabled");
     this.querySelectorAll(
       `#CartItem-${line} .loading-overlay`
@@ -163,7 +163,7 @@ class CartItems extends HTMLElement {
 
   disableLoading() {
     document
-      .getElementById("main-cart-items")
+      .getElementById("esq-cart-items")
       .classList.remove("cart__items--disabled");
   }
 }

@@ -1,5 +1,8 @@
 {{ "header.css" | asset_url | stylesheet_tag }}
 
+<link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
+
 {%- assign primary_menu = section.settings.primary_menu -%}
 {%- assign secondary_menu = section.settings.secondary_menu -%}
 {%- assign fixed = section.settings.fixed_menu -%}
@@ -12,6 +15,12 @@
 {%- assign feature_img = section.settings.feature_image -%}
 {%- assign feature_link = section.settings.feature_link -%}
 {%- assign feature_title = section.settings.feature_title -%}
+
+<script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
+
+{%- render 'cart-notification' %}
 
 {%- case section.settings.navbar -%}
 {%- when 'navigation-1' -%}

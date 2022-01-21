@@ -39,17 +39,17 @@ if (!customElements.get("product-form")) {
 
         // ADDED FOR ESQ MINI CART
 
-        document
-          .querySelector("cart-items")
-          ?.classList.toggle("is-empty", parsedState.item_count === 0);
-
-        document
-          .getElementById("main-cart-items")
-          ?.classList.toggle("is-empty", parsedState.item_count === 0);
-
-        document
-          .getElementById("main-cart-footer")
-          ?.classList.toggle("is-empty", parsedState.item_count === 0);
+        // document
+        //   .querySelector("cart__items")
+        //   ?.classList.toggle("is-empty", parsedState.item_count === 0);
+        //
+        // document
+        //   .getElementById("esq-cart-items")
+        //   ?.classList.toggle("is-empty", parsedState.item_count === 0);
+        //
+        // document
+        //   .getElementById("esq-cart-footer")
+        //   ?.classList.toggle("is-empty", parsedState.item_count === 0);
 
         //END OF ADDITION
 
@@ -63,7 +63,7 @@ if (!customElements.get("product-form")) {
               this.handleErrorMessage(response.description);
               return;
             }
-
+            console.log(response);
             this.cartNotification.renderContents(response);
           })
           .catch((e) => {
@@ -75,6 +75,7 @@ if (!customElements.get("product-form")) {
             this.querySelector(".loading-overlay__spinner").classList.add(
               "hidden"
             );
+            openEsqMiniCart();
           });
       }
 

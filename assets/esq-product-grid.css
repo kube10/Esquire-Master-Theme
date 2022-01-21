@@ -9,6 +9,10 @@
   --grid-gap: 1rem;
 }
 
+.product-card-minimal .product-form {
+  width: 100%;
+}
+
 .product-card-minimal__image-wrap {
   height: calc(100vw - 2rem);
   position: relative;

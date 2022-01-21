@@ -2,6 +2,31 @@ body,
 html {
   margin: 0;
 }
+
+#overlay {
+  position: fixed;
+  z-index: 998;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-background-dark);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+html.esq-mini-cart-open {
+  overflow: hidden;
+  pointer-events: none;
+}
+
+@media screen and (min-width: 1024px) {
+  html.esq-mini-cart-open #overlay {
+    opacity: 0.65;
+  }
+}
+
 /* COLORS */
 .color-heading {
   color: var(--color-text-heading) !important;
@@ -197,6 +222,7 @@ h4,
   font-size: 1.953rem;
   line-height: 1.2;
   margin-bottom: 1rem;
+  font-weight: 400;
 }
 
 h5,

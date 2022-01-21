@@ -55,6 +55,29 @@
   align-items: flex-start;
 }
 
+.single-option .cart__item-column:nth-child(1) {
+  justify-content: flex-end;
+}
+
+.single-option .cart__item-column:nth-child(2) {
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+
+.single-option .cart__item-column:nth-child(1) {
+  grid-column-start: 2;
+  justify-self: flex-end;
+}
+
+.cart__item-column:nth-child(1) {
+  justify-content: space-between;
+}
+
+.cart__item-column:nth-child(2) {
+  grid-row-gap: 0.5rem;
+  justify-content: space-between;
+}
+
 .cart__item-column:nth-child(3) {
   grid-column-start: 1;
   grid-column-end: 3;
@@ -62,10 +85,6 @@
   width: 100%;
   flex-direction: row;
   margin-top: 0.5rem;
-  justify-content: space-between;
-}
-
-.cart__item-column:nth-child(2) {
   justify-content: space-between;
 }
 
@@ -214,9 +233,14 @@
     grid-template-columns: 0.75fr 1fr 1fr;
   }
 
+  .single-option .cart__item-column:nth-child(1) {
+    justify-self: flex-start;
+  }
+
   .cart__item-column:nth-child(2) {
     justify-content: space-between;
     justify-self: start;
+    grid-row-gap: 1rem;
   }
 
   .cart__item-column:nth-child(3) {
@@ -239,8 +263,145 @@
   .cart__item-line-price {
     font-size: 1.2rem;
   }
+}
 
-  .cart__item-options {
-    margin-bottom: 1rem;
+/* ESQ MINI CART */
+.esq-mini-cart {
+  position: fixed;
+  right: -100vw;
+  pointer-events: none;
+  bottom: 0;
+  top: 0;
+  width: calc(100vw - 2rem);
+  background-color: var(--color-background-light);
+  z-index: 998;
+  padding: 4rem 1rem 2rem 1rem;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  transition: right 0.5s ease, opacity 0.5s ease;
+}
+
+.esq-mini-cart.open {
+  right: 0%;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.esq-mini-cart * {
+  opacity: 0;
+  transition: opacity 0.5s ease 0.2s;
+}
+
+.esq-mini-cart.open * {
+  opacity: 1;
+}
+
+.esq-mini-cart__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.esq-mini-cart > .cart__totals {
+  margin-top: 1rem;
+}
+
+.esq-mini-cart__items {
+  overflow: auto;
+}
+
+.esq-mini-cart__items {
+  /* Foreground, Background */
+  scrollbar-color: var(--color-background-dark) var(--color-background-light);
+}
+
+.esq-mini-cart__items::-webkit-scrollbar {
+  width: 5px; /* Mostly for vertical scrollbars */
+  height: 10px; /* Mostly for horizontal scrollbars */
+}
+.esq-mini-cart__items::-webkit-scrollbar-thumb {
+  /* Foreground */
+  background: var(--color-background-dark);
+  border-radius: 1rem;
+}
+.esq-mini-cart__items::-webkit-scrollbar-track {
+  /* Background */
+  background: var(--color-background-light);
+}
+
+.esq-mini-cart__items > .cart__items {
+  display: flex;
+  flex-direction: column;
+  grid-row-gap: 1rem;
+  margin-right: 0.5rem;
+}
+
+.esq-mini-cart .cart__item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  grid-column-gap: 1rem;
+  align-items: center;
+}
+
+.esq-mini-cart .cart__item-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.esq-mini-cart .cart__item-title {
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.esq-mini-cart .cart__item-line-price {
+  font-size: 1rem;
+}
+
+.esq-mini-cart .cart__item-img-wrap {
+  width: 80px;
+  height: 100%;
+}
+
+.esq-mini-cart .cart__item-options {
+  margin-bottom: 0;
+}
+
+.esq-mini-cart .single-option .cart__item-column:nth-child(1) {
+  justify-self: flex-end;
+}
+
+.esq-mini-cart .cart__item-column:nth-child(3) {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  width: 100%;
+  flex-direction: row;
+  margin-top: 0.5rem;
+  justify-content: space-between;
+}
+
+.esq-mini-cart .cart__item-column:nth-child(2) {
+  justify-content: space-between;
+}
+
+.esq-mini-cart .cart__item-column:nth-child(2),
+.esq-mini-cart .cart__item-column:nth-child(3) {
+  justify-self: self-end;
+}
+
+@media screen and (min-width: 1024px) {
+  .esq-mini-cart {
+    width: 40vw;
+    right: calc(-40vw - 2rem);
+    z-index: 999;
+  }
+}
+
+@media screen and (min-width: 1366px) {
+  .esq-mini-cart {
+    width: 30vw;
+    right: calc(-30vw - 2rem);
   }
 }
