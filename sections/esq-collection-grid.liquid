@@ -1,13 +1,18 @@
 {{ 'esq-product-grid.css' | asset_url | stylesheet_tag }}
 
 {%- assign product_card_size = section.settings.product_card_size -%}
+{%- assign activeCollection = section.settings.collection -%}
+
+{%- if collection -%}
+  {%- assign  activeCollection = collection -%}
+{%- endif -%}
 
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
 <div class="container">
   <h2>{{section.settings.headline}}</h2>
   <div class="product-grid {{product_card_size}}">
-      {%- for product in section.settings.collection.products -%}
+      {%- for product in activeCollection.products -%}
         {%- case section.settings.product_card_type -%}
           {%- when 'minimal' -%}
             {%- include 'esq-product-card-minimal', size: product_card_size -%}

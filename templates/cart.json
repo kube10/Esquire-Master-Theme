@@ -1,34 +1,43 @@
 {
   "sections": {
-    "cart-items": {
-      "type": "main-cart-items"
-    },
-    "cart-footer": {
-      "type": "main-cart-footer",
+    "1642544443fcc67956": {
+      "type": "esq-cart",
       "blocks": {
-        "subtotal": {
-          "type": "subtotal"
+        "7804e085-087f-480e-bd8c-c56f9edd3668": {
+          "type": "shipping-rate",
+          "settings": {
+            "title": "STANDARD",
+            "price": "€5.00",
+            "content": "Estimated: 3 days"
+          }
         },
-        "buttons": {
-          "type": "buttons"
+        "5318e9c9-6926-42f8-9338-c0a38e4c650a": {
+          "type": "shipping-rate",
+          "settings": {
+            "title": "CLICK & COLLECT",
+            "price": "FREE",
+            "content": "Collect within 3 days"
+          }
+        },
+        "b582e583-5790-400c-9a15-67b0bfc72b80": {
+          "type": "shipping-rate",
+          "settings": {
+            "title": "EXPRESS",
+            "price": "€10.00",
+            "content": ""
+          }
         }
       },
       "block_order": [
-        "subtotal",
-        "buttons"
-      ]
-    },
-    "featured-products": {
-      "type": "featured-collection",
+        "7804e085-087f-480e-bd8c-c56f9edd3668",
+        "5318e9c9-6926-42f8-9338-c0a38e4c650a",
+        "b582e583-5790-400c-9a15-67b0bfc72b80"
+      ],
       "settings": {
-        "collection": "all",
-        "image_ratio": "square"
       }
     }
   },
   "order": [
-    "cart-items",
-    "cart-footer",
-    "featured-products"
+    "1642544443fcc67956"
   ]
 }

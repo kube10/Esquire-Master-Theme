@@ -1,0 +1,60 @@
+<div class="container">
+  <div id="main-cart-footer" data-id="{{section.id}}" class="cart__totals">
+      <div class="js-contents">
+        <div class="cart__totals-content">
+          <h6>Checkout</h6>
+          <div class="cart__totals-info">
+            <p>VAT included.<br>Delivery costs will be calculated during checkout.</p>
+          </div>
+          <div class="cart__totals-price">
+            <span class="p-large">TOTAL:</span>
+            <span class="p-large cart__subtotal">
+              {{cart.total_price | money }}
+            </span>
+          </div>
+          <div class="cart__totals-actions">
+            <a class="button button-secondary inverted ghost">Coupon?</a>
+            <button class="button button-primary full-width">
+              <span>TO CHECKOUT</span>
+              {%- render 'icon-cart' -%}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div id="cart-errors"></div>
+  <p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
+  <p class="visually-hidden" id="shopping-cart-line-item-status" aria-live="polite" aria-hidden="true" role="status">{{ 'accessibility.loading' | t }}</p>
+</div>
+{%- schema -%}
+{
+  "name": "ESQ Cart Footer",
+  "tag": "section",
+  "class": "section-p",
+  "default": {
+    "blocks": [
+      {
+        "type": "subtotal"
+      },
+      {
+        "type": "buttons"
+      }
+    ]
+  },
+  "blocks": [
+    {
+      "type": "subtotal",
+      "name": "t:sections.main-cart-footer.blocks.subtotal.name",
+      "limit": 1
+    },
+    {
+      "type": "buttons",
+      "name": "t:sections.main-cart-footer.blocks.buttons.name",
+      "limit": 1
+    },
+    {
+      "type": "@app"
+    }
+  ]
+}
+{%- endschema -%}

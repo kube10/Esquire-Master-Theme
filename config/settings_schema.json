@@ -34,6 +34,58 @@
       },
       {
         "type": "header",
+        "content": "Knoppen"
+      },
+      {
+        "type": "color",
+        "id": "color_btn_primary",
+        "default": "#FF531D",
+        "label": "Primaire Knop (achtergrond)"
+      },
+      {
+        "type": "color",
+        "id": "color_btn_primary_text",
+        "default": "#FFFFFF",
+        "label": "Primaire Knop (tekst)"
+      },
+      {
+        "type": "color",
+        "id": "color_btn_secondary",
+        "default": "#FFFFFF",
+        "label": "Secundaire Knop (achtergrond)"
+      },
+      {
+        "type": "color",
+        "id": "color_btn_secondary_text",
+        "default": "#1E1E1E",
+        "label": "Secundaire Knop (tekst)"
+      },
+      {
+        "type": "color",
+        "id": "color_btn_primary_hover",
+        "default": "#D83400",
+        "label": "Primaire Knop:Hover (achtergrond)"
+      },
+      {
+        "type": "color",
+        "id": "color_btn_primary_text_hover",
+        "default": "#FFFFFF",
+        "label": "Primaire Knop:Hover (tekst)"
+      },
+      {
+        "type": "color",
+        "id": "color_btn_secondary_hover",
+        "default": "#FEFFC1",
+        "label": "Secundaire Knop:Hover (achtergrond)"
+      },
+      {
+        "type": "color",
+        "id": "color_btn_secondary_text_hover",
+        "default": "#006C73",
+        "label": "Secundaire Knop:Hover (tekst)"
+      },
+      {
+        "type": "header",
         "content": "Andere kleuren"
       },
       {
@@ -59,6 +111,18 @@
         "id": "color_background_dark",
         "default": "#1E1E1E",
         "label": "Achtergrondkleur (donker)"
+      },
+      {
+        "type": "color",
+        "id": "color_success",
+        "default": "#17A600",
+        "label": "Kleur voor succes"
+      },
+      {
+        "type": "color",
+        "id": "color_danger",
+        "default": "#D94949",
+        "label": "Kleur voor waarschuwingen"
       }
     ]
   },

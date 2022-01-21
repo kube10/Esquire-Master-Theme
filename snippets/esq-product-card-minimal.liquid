@@ -1,6 +1,5 @@
 {%- assign product_form_id = 'product-form-' | append: section.id | append: "-" | append: product.id -%}
 
-
  <div class="product-card-minimal {{size}}">
   <div class="product-card-minimal__image-wrap" onmouseenter="showOverlay(this)">
     <img class="product-card-minimal__image" src="{{product.featured_media | image_url}}" alt="">
@@ -21,7 +20,7 @@
       {%- endif -%}
       <div class="product-card-minimal__overlay-actions {% if amountOfVariants == 1 %}vertical{% endif %}">
           <input id="product-form-input-{{product_form_id}}" type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-          <button type="submit" class="button small button-secondary border">
+          <button type="submit" class="button small button-secondary inverted border">
             <span>ADD TO CART</span>
             {%- render 'icon-cart' -%}
           </button>

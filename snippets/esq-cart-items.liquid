@@ -1,0 +1,58 @@
+<cart-items id="main-cart-items" class="cart__items">
+      <div class="js-contents">
+        {%- if cart != empty -%}
+          {%- for item in cart.items -%}
+            <div class="cart__item">
+              {%- if item.image -%}
+                <div class="cart__item-img-wrap">
+                    <img class="cart__item-img" src="{{item.image | image_url}}" alt="">
+                </div>
+              {%- endif -%}
+                <div class="cart__item-content">
+                    <h5 class="cart__item-title">{{ item.product.title }}</h5>
+                    <div class="cart__item-grid">
+                      <div class="cart__item-column ">
+                        <div class="cart__item-options">
+                          {%- for option in item.options_with_values -%}
+                            <span class="p-small">{{ option.name }}</span>
+                            <div class="option-badge">
+                            {{ option.value }}
+                          </div>
+                          {%- endfor -%}
+                        </div>
+                        <cart-remove-button id="Remove-{{ item.index | plus: 1 }}" data-index="{{ item.index | plus: 1 }}">
+                          <a href="{{ item.url_to_remove }}" class="cart__item-remove-btn">
+                            {%- render 'icon-remove' -%}
+                            <span class="p-small">Remove item</span>
+                          </a>
+                        </cart-remove-button>
+                      </div>
+                      <div class="cart__item-column">
+                          <div class="cart__item-quantity">
+                            <span class="p-small">Quantity:</span>
+                              <quantity-input class="cart__item-quantity-input">
+                                <button name="minus" class="cart__item-quantity-input-btn">-1</button>
+                                <input type="number"
+                                name="updates[]" class="cart__item-quantity-input-btn quantity-badge" value="{{item.quantity}}" aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
+                                id="Quantity-{{ item.index | plus: 1 }}"
+                                data-index="{{ item.index | plus: 1 }}"></input>
+                                <button name="plus" class="cart__item-quantity-input-btn">+1</button>
+                              </quantity-input>
+                          </div>
+                          <span class="p-small">Price: {{item.final_price | money }}</span>
+                      </div>
+                      <div class="cart__item-column">
+                          {%- if item.variant.inventory_quantity > 0 -%}
+                            <span class="p-small cart__item-in-stock">In stock</span>
+                            {%- else -%}
+                            <span class="p-small cart__item-out-stock">Out of stock</span>
+                          {%- endif -%}
+                          <span class="cart__item-line-price">{{ item.final_line_price | money }}</span>
+                      </div>
+                    </div>
+                </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+  </cart-items>

@@ -45,19 +45,32 @@
       --color-accent: {{settings.color_accent}};
       --color-text-body: {{settings.color_text_body}};
       --color-text-heading: {{settings.color_text_heading}};
+      --color-btn-primary: {{settings.color_btn_primary}};
+      --color-btn-primary-text: {{settings.color_btn_primary_text}};
+      --color-btn-secondary: {{settings.color_btn_secondary}};
+      --color-btn-secondary-text: {{settings.color_btn_secondary_text}};
+      --color-btn-primary-hover: {{settings.color_btn_primary_hover}};
+      --color-btn-primary-text-hover: {{settings.color_btn_primary_text_hover}};
+      --color-btn-secondary-hover: {{settings.color_btn_secondary_hover}};
+      --color-btn-secondary-text-hover: {{settings.color_btn_secondary_text_hover}};
       --color-background-light: {{settings.color_background_light}};
       --color-background-dark: {{settings.color_background_dark}};
+      --color-success: {{settings.color_success}};
+      --color-danger: {{settings.color_danger}};
     }
     {% endstyle %}
 
     {% section 'announcement-bar' %}
     {% section 'header' %}
-    <main >
+    <main>
       {{ content_for_layout }}
     </main>
 
     {% section 'footer' %}
 
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
+    </ul>
 
     <script>
       window.shopUrl = '{{ shop.url }}';

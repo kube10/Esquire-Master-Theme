@@ -17,8 +17,6 @@
               <img src="{{logo | image_url}}" alt="">
           {%- endif -%}
         </div>
-
-
         {%- if logo_svg_mobile != "" -%}
           <div class="hide-desktop">
             {{logo_svg_mobile}}
@@ -42,14 +40,14 @@
               {%- render 'icon-user' -%}
             </a>
           {%- else -%}
-            <a href="{{routes.account_login_url}}" class="button button-primary ghost hide-mobile-flex">
+            <a href="{{routes.account_login_url}}" class="button button-primary ghost hide-mobile-inline-flex">
               <span>Login</span>
               {%- render 'icon-user' -%}
             </a>
           {%- endif -%}
-        <button class="button icon rounded button-primary">
+        <a href="/cart" class="button icon-only button-primary">
           {%- render 'icon-cart' -%}
-        </button>
+        </a>
       </div>
     </div>
     {%- case dropdown -%}

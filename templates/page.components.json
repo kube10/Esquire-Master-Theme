@@ -1,0 +1,8 @@
+{
+  "sections": {
+    "components": {
+      "type": "components"
+    }
+  },
+  "order": ["components"]
+}
