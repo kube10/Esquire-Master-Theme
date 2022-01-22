@@ -24,6 +24,7 @@ html.esq-mini-cart-open {
 @media screen and (min-width: 1024px) {
   html.esq-mini-cart-open #overlay {
     opacity: 0.65;
+    pointer-events: auto;
   }
 }
 

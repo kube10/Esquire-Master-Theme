@@ -41,7 +41,17 @@
                                 <button name="plus" class="cart__item-quantity-input-btn">+1</button>
                               </quantity-input>
                           </div>
-                          <span class="p-small">Price: {{item.final_price | money }}</span>
+                          <div class="cart__item-single-price">
+                            {%- if item.product.compare_at_price > item.final_price -%}
+                              <span class="p-small">Price:</span>
+                              <span class="p-small price-old">{{ item.product.compare_at_price | money }}</span>
+                              <span class="p-small price-new">{{ item.final_price | money }}</span>
+                            {%- else -%}
+                              <span class="p-small">Price:</span>
+                              <span class="p-small color-heading">{{item.final_price | money }}</span>
+                            {%- endif -%}
+                          </div>
+
                       </div>
                       <div class="cart__item-column">
                           {%- if item.variant.inventory_quantity > 0 -%}

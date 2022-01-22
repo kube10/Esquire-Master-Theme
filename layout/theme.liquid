@@ -62,7 +62,7 @@
 
     {% section 'announcement-bar' %}
     {% section 'header' %}
-    <div id="overlay"></div>
+    <div id="overlay" onclick="closeEsqMiniCart()"></div>
     {%- render 'esq-mini-cart' -%}
     <main>
       {{ content_for_layout }}
