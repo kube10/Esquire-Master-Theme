@@ -1,3 +1,5 @@
+{{ "component-esq-navigation-1.css" | asset_url | stylesheet_tag }}
+
 <nav id="navigation-1" class="navigation {% if fixed %}fixed{% endif %}">
   <div class="container">
     <div class="navigation-inner">
@@ -51,9 +53,9 @@
     </div>
     {%- case dropdown -%}
       {%- when 'dropdown-1' -%}
-        {% include 'menu-dropdown-1' %}
+        {% include 'esq-menu-dropdown-1' %}
       {%- when 'dropdown-2' -%}
-        {% include 'menu-dropdown-2' %}
+        {% include 'esq-menu-dropdown-2' %}
     {%- endcase -%}
   </div>
 </nav>

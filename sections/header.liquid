@@ -5,7 +5,7 @@
 
 {%- assign primary_menu = section.settings.primary_menu -%}
 {%- assign secondary_menu = section.settings.secondary_menu -%}
-{%- assign fixed = section.settings.fixed_menu -%}
+{%- assign fixed = settings.fixed-navigation -%}
 {%- assign logo = section.settings.logo -%}
 {%- assign logo_svg = section.settings.logo_svg -%}
 {%- assign logo_mobile = section.settings.logo_mobile -%}
@@ -24,7 +24,7 @@
 
 {%- case section.settings.navbar -%}
 {%- when 'navigation-1' -%}
-  {% include 'navigation-1' %}
+  {% include 'esq-navigation-1' %}
 {%- endcase -%}
 
 {%- schema -%}
@@ -71,12 +71,6 @@
       "type": "link_list",
       "id": "secondary_menu",
       "label": "Secundair Menu"
-    },
-    {
-      "type": "checkbox",
-      "id": "fixed_menu",
-      "label": "Vaststaande navigatiebalk",
-      "default": true
     },
     {
       "type": "image_picker",

@@ -40,75 +40,65 @@ html.esq-mini-cart-open {
 /* LAYOUT - Sections */
 
 .section-p {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-top: var(--padding-amount-mobile);
+  padding-bottom: var(--padding-amount-mobile);
 }
 
-.section-np {
+.section {
   padding-top: 0rem;
   padding-bottom: 0rem;
 }
 
-.section-p:first-child,
-.section-pb:first-child,
-.section-pt:first-child,
-.section-np:first-child {
+.first-section {
   margin-top: 4rem;
 }
 
 .section-pb {
-  padding-bottom: 3rem;
+  padding-bottom: var(--padding-amount-mobile);
 }
 
 .section-pt {
-  padding-top: 3rem;
+  padding-top: var(--padding-amount-mobile);
 }
 
 @media screen and (min-width: 768px) {
   .section-p {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-top: var(--padding-amount-tablet);
+    padding-bottom: var(--padding-amount-tablet);
   }
 
   .section-pb {
-    padding-bottom: 5rem;
+    padding-bottom: var(--padding-amount-tablet);
   }
 
   .section-pt {
-    padding-top: 5rem;
+    padding-top: var(--padding-amount-tablet);
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .section-p:first-child,
-  .section-pb:first-child,
-  .section-pt:first-child {
+  .first-section {
     margin-top: 4.2rem;
   }
 }
 
 @media screen and (min-width: 1366px) {
   .section-p {
-    padding-top: 7.5rem;
-    padding-bottom: 7.5rem;
+    padding-top: var(--padding-amount-desktop);
+    padding-bottom: var(--padding-amount-desktop);
   }
 
   .section-pb {
-    padding-bottom: 7.5rem;
+    padding-bottom: var(--padding-amount-desktop);
   }
 
   .section-pt {
-    padding-top: 7.5rem;
+    padding-top: var(--padding-amount-desktop);
   }
 }
 
 /* LAYOUT - Containers */
-:root {
-  --container-desktop-max-width: 1140px;
-  --container-desktop-lg-max-width: 1366px;
-  --container-slim-max-width: 920px;
-  --container-narrow-max-width: 560px;
-}
+
 .container {
   max-width: var(--container-desktop-max-width);
   margin: 0 auto;
@@ -125,7 +115,7 @@ html.esq-mini-cart-open {
 
 @media screen and (min-width: 1536px) {
   .container {
-    max-width: var(--container-desktop-lg-max-width);
+    max-width: var(--container-desktop-max-width);
   }
 }
 

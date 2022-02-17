@@ -9,23 +9,28 @@
 
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
-<div class="container">
-  <h2>{{section.settings.headline}}</h2>
-  <div class="product-grid {{product_card_size}}">
-      {%- for product in activeCollection.products -%}
-        {%- case section.settings.product_card_type -%}
-          {%- when 'minimal' -%}
-            {%- include 'esq-product-card-minimal', size: product_card_size -%}
-          {%- endcase -%}
-      {%- endfor -%}
+<div class="{{section.settings.padding}} {% if section.settings.first-section and settings.fixed_navigation%}
+  first-section
+{% endif %}">
+  <div class="container">
+    <h2>{{section.settings.headline}}</h2>
+    <div class="product-grid {{product_card_size}}">
+        {%- for product in activeCollection.products -%}
+          {%- case section.settings.product_card_type -%}
+            {%- when 'minimal' -%}
+              {%- include 'esq-product-card-minimal', size: product_card_size -%}
+            {%- endcase -%}
+        {%- endfor -%}
+    </div>
   </div>
 </div>
+
 
 {%- schema -%}
 {
   "name": "ESQ Collection Grid",
   "tag": "section",
-  "class": "section-p",
+  "class": "esq-collection-grid",
   "presets": [
     {
       "name": "ESQ Collection Grid"
@@ -77,6 +82,36 @@
           "label": "Groot"
         }
       ]
+    },
+    {
+      "type": "select",
+      "id": "padding",
+      "default": "section-p",
+      "label": "Padding",
+      "options": [
+        {
+          "label": "None",
+          "value": "section"
+        },
+        {
+          "label": "Top & Bottom",
+          "value": "section-p"
+        },
+        {
+          "label": "Top",
+          "value": "section-pt"
+        },
+        {
+          "label": "Bottom",
+          "value": "section-pb"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "first-section",
+      "label": "First section on page?",
+      "default": false
     }
   ]
 }

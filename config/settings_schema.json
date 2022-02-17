@@ -174,6 +174,71 @@
     ]
   },
   {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Navigation"
+      },
+      {
+        "type": "checkbox",
+        "label": "Fixed navigation?",
+        "id": "fixed_navigation",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Page width"
+      },
+      {
+            "type": "select",
+            "id": "page_width",
+            "options": [
+              {
+                "value": "1366px",
+                "label": "1366px"
+              },
+              {
+                "value": "1440px",
+                "label": "1440px"
+              },
+              {
+                "value": "1536px",
+                "label": "1536px"
+              },
+              {
+                "value": "100vw",
+                "label": "Full width"
+              }
+            ],
+            "default": "1366px",
+            "label": "Max width"
+      },
+      {
+        "type": "header",
+        "content": "Section Padding"
+      },
+      {
+        "type": "text",
+        "id": "padding_amount_mobile",
+        "default": "3",
+        "label": "Padding amount mobile (REM)"
+      },
+      {
+        "type": "text",
+        "id": "padding_amount_tablet",
+        "default": "5",
+        "label": "Padding amount tablet (REM)"
+      },
+      {
+        "type": "text",
+        "id": "padding_amount_desktop",
+        "default": "7.5",
+        "label": "Padding amount desktop (REM)"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.styles.name",
     "settings": [
       {
@@ -243,27 +308,6 @@
         ],
         "default": "text",
         "label": "t:settings_schema.styles.settings.accent_icons.label"
-      }
-    ]
-  },
-  {
-    "name": "t:settings_schema.layout.name",
-    "settings": [
-      {
-        "type": "select",
-        "id": "page_width",
-        "options": [
-          {
-            "value": "1200",
-            "label": "t:settings_schema.layout.settings.page_width.options__1.label"
-          },
-          {
-            "value": "1600",
-            "label": "t:settings_schema.layout.settings.page_width.options__2.label"
-          }
-        ],
-        "default": "1600",
-        "label": "t:settings_schema.layout.settings.page_width.label"
       }
     ]
   },
