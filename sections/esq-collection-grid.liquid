@@ -25,6 +25,11 @@
   </div>
 </div>
 
+<script type="text/javascript">
+var cartContents = fetch('/cart.js')
+.then(response => response.json())
+.then(data => { console.log(data); });
+</script> 
 
 {%- schema -%}
 {
