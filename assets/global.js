@@ -1,15 +1,3 @@
-const esqMiniCart = document.querySelector(".esq-mini-cart");
-
-function closeEsqMiniCart() {
-  esqMiniCart.classList.remove("open");
-  document.querySelector("html").classList.remove("esq-mini-cart-open");
-}
-
-function openEsqMiniCart() {
-  esqMiniCart.classList.add("open");
-  document.querySelector("html").classList.add("esq-mini-cart-open");
-}
-
 function getFocusableElements(container) {
   return Array.from(
     container.querySelectorAll(

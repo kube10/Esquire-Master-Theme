@@ -138,6 +138,19 @@
   font-size: 1rem;
 }
 
+.esq-product-form {
+  display: flex;
+  flex-direction: column;
+  grid-row-gap: 1.5rem;
+  padding: 2rem;
+}
+
+.esq-variant-selector {
+  display: flex;
+  flex-direction: row;
+  grid-column-gap: 0.5rem;
+}
+
 @media screen and (min-width: 768px) {
   .product-grid.regular,
   .product-grid.small {

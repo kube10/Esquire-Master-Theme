@@ -1,43 +1,47 @@
+
 {{ "esq-cart.css" | asset_url | stylesheet_tag }}
 {%- assign templateBase = template | slice: 0, 4 -%}
-{%- if templateBase != 'cart' -%}
-  <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
-{%- endif -%}
 
-<div class="esq-mini-cart">
-  <div class="esq-mini-cart__header">
-        <h4 class="m-0">My cart</h4>
-        <div onclick="closeEsqMiniCart()" class="button button-secondary inverted ghost">
-          {%- render 'icon-arrow-back' -%}
-          <span>Close</span>
+  <div class="esq-mini-cart">
+    <div class="esq-mini-cart__header">
+          <h4 class="m-0">My cart</h4>
+          <div onclick="closeEsqMiniCart()" class="button button-secondary inverted ghost">
+            {%- render 'icon-arrow-back' -%}
+            <span>Close</span>
+          </div>
         </div>
+    <div class="esq-mini-cart__empty-state hidden cartEmptyState">
+      <img src="{{ settings.cart_empty_state_img | image_url }}" alt="">
+      <div class="esq-mini-cart__empty-state-text">
+        <h4>Your cart is empty</h4>
+        <p>Return to the store to start shopping!</p>
+        <a href="{{routes.all_products_collection_url}}" class="button button-primary">To the shop</a>
       </div>
-  <div class="esq-mini-cart__items">
-      {%- render 'esq-cart-items' -%}
-  </div>
-  <div id="esq-cart-footer" class="cart__totals">
-      <div id="cart-errors"></div>
-      <p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
-      <p class="visually-hidden" id="shopping-cart-line-item-status" aria-live="polite" aria-hidden="true" role="status">{{ 'accessibility.loading' | t }}</p>
-      <div class="js-contents">
-            <div class="cart__totals-content">
-              <div class="cart__totals-info">
-                <p>VAT included.<br>Delivery costs will be calculated during checkout.</p>
-              </div>
-              <div class="cart__totals-price">
-                <span class="p-large">TOTAL:</span>
-                <span class="p-large cart__subtotal">
-                  {{cart.total_price | money }}
-                </span>
-              </div>
-              <div class="cart__totals-actions">
-                <button class="button button-secondary">Clear cart</button>
-                <button class="button button-primary full-width">
-                  <span>TO CHECKOUT</span>
-                  {%- render 'icon-cart' -%}
-                </button>
+    </div>
+    <div class="esq-mini-cart__items cartItemsContainer">
+        {%- render 'esq-cart-item-template' -%}
+    </div>
+    <div id="esq-cart-footer" class="cart__totals cartDefault">
+        <div id="cart-errors"></div>
+        <p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
+        <p class="visually-hidden" id="shopping-cart-line-item-status" aria-live="polite" aria-hidden="true" role="status">{{ 'accessibility.loading' | t }}</p>
+        <div class="js-contents">
+              <div class="cart__totals-content">
+                <div class="cart__totals-info">
+                  <p>VAT included.<br>Delivery costs will be calculated during checkout.</p>
+                </div>
+                <div class="cart__totals-price">
+                  <span class="p-large">TOTAL:</span>
+                  <span class="p-large cart__subtotal"></span>
+                </div>
+                <div class="cart__totals-actions">
+                  <button onclick="clearCart()" class="button button-secondary">Clear cart</button>
+                  <button class="button button-primary full-width">
+                    <span>TO CHECKOUT</span>
+                    {%- render 'icon-cart' -%}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-    </div>
-</div>
+      </div>
+  </div>

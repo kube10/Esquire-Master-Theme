@@ -1,0 +1,35 @@
+<esq-cart-item data-id="Dummy" class="cart__item hidden">
+    <div class="cart__item-img-wrap">
+      <img class="cart__item-img" src="" alt="">
+    </div>
+    <div class="cart__item-content">
+        <h5 class="cart__item-title"></h5>
+        <div class="cart__item-grid">
+          <div class="cart__item-column ">
+            <div class="cart__item-options">
+            </div>
+            <cart-remove-button>
+              <div href="" class="cart__item-remove-btn">
+                {%- render 'icon-remove' -%}
+                <span class="p-small">Remove item</span>
+              </div>
+            </cart-remove-button>
+          </div>
+          <div class="cart__item-column">
+              <div class="cart__item-quantity">
+                <span class="p-small">Quantity:</span>
+                  <div class="cart__item-quantity-input">
+                    <button name="minus" class="cart__item-quantity-input-btn changeQuantityButton">-1</button>
+                    <input type="number" class="cart__item-quantity-input-btn quantity-badge quantityInput" value="" aria-label=""></input>
+                    <button name="plus" class="cart__item-quantity-input-btn changeQuantityButton">+1</button>
+                  </div>
+              </div>
+              <div class="cart__item-single-price"></div>
+          </div>
+          <div class="cart__item-column">
+              <span class="p-small cart__item-stock"></span>
+              <span class="cart__item-line-price"></span>
+          </div>
+        </div>
+    </div>
+</esq-cart-item>

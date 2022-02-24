@@ -1,64 +1,77 @@
 {{ "esq-cart.css" | asset_url | stylesheet_tag }}
-<script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+<!-- <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script> -->
 <div class="{{section.settings.padding}}  {% if section.settings.first-section and settings.fixed_navigation %}
   first-section
 {% endif %}">
   <div class="container">
-    {%- if cart != empty -%}
-      <h1 class="h2 section-title">My cart</h1>
-      <div class="cart__grid">
-        {%- render 'esq-cart-items' -%}
-        <div id="esq-cart-footer" class="cart__totals">
-              <div class="js-contents">
-                <div class="cart__totals-content">
-                  <h6>Checkout</h6>
-                  <div class="cart__totals-info">
-                    <p>VAT included.<br>Delivery costs will be calculated during checkout.</p>
-                  </div>
-                  <div class="cart__totals-price">
-                    <span class="p-large">TOTAL:</span>
-                    <span class="p-large cart__subtotal">
-                      {{cart.total_price | money }}
-                    </span>
-                  </div>
-                  <div class="cart__totals-actions">
-                    <a class="button button-secondary inverted ghost">Coupon?</a>
-                    <button class="button button-primary full-width">
-                      <span>TO CHECKOUT</span>
-                      {%- render 'icon-cart' -%}
-                    </button>
-                  </div>
-                </div>
-              </div>
-              {%- if section.blocks.size > 0 -%}
-                <div class="cart__footer-delivery-rates">
-                  <h6>Delivery</h6>
-                  {%- for block in section.blocks -%}
-                    <div class="cart__delivery-rate">
-                      <div class="cart__delivery-rate-heading">
-                        <span>{{block.settings.title}}</span>
-                        <span>
-                        {{block.settings.price}}</span>
+      <div class="cartDefault">
+          <h1 class="h2 section-title">My cart</h1>
+          <div class="cart__grid">
+            <div class="cart__items cartItemsContainer">
+              {%- render 'esq-cart-item-template' -%}
+            </div>
+            <div id="esq-cart-footer" class="cart__totals">
+                  <div class="js-contents">
+                    <div class="cart__totals-content">
+                      <h6>Checkout</h6>
+                      <div class="cart__totals-info">
+                        <p>VAT included.<br>Delivery costs will be calculated during checkout.</p>
                       </div>
-                      <p class="p-small">{{block.settings.content}}</p>
+                      <div class="cart__totals-price">
+                        <span class="p-large">TOTAL:</span>
+                        <span class="p-large cart__subtotal">
+                          {{cart.total_price | money }}
+                        </span>
+                      </div>
+                      <div class="cart__totals-actions">
+                        <a class="button button-secondary inverted ghost">Coupon?</a>
+                        <button class="button button-primary full-width">
+                          <span>TO CHECKOUT</span>
+                          {%- render 'icon-cart' -%}
+                        </button>
+                      </div>
                     </div>
-                  {%- endfor -%}
-                </div>
-              {%- endif -%}
+                  </div>
+                  {%- if section.blocks.size > 0 -%}
+                    <div class="cart__footer-delivery-rates">
+                      <h6>Delivery</h6>
+                      {%- for block in section.blocks -%}
+                        <div class="cart__delivery-rate">
+                          <div class="cart__delivery-rate-heading">
+                            <span>{{block.settings.title}}</span>
+                            <span>
+                            {{block.settings.price}}</span>
+                          </div>
+                          <p class="p-small">{{block.settings.content}}</p>
+                        </div>
+                      {%- endfor -%}
+                    </div>
+                  {%- endif -%}
 
-              <div id="cart-errors"></div>
-              <p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
-              <p class="visually-hidden" id="shopping-cart-line-item-status" aria-live="polite" aria-hidden="true" role="status">{{ 'accessibility.loading' | t }}</p>
+                  <div id="cart-errors"></div>
+                  <p class="visually-hidden" id="cart-live-region-text" aria-live="polite" role="status"></p>
+                  <p class="visually-hidden" id="shopping-cart-line-item-status" aria-live="polite" aria-hidden="true" role="status">{{ 'accessibility.loading' | t }}</p>
+              </div>
           </div>
       </div>
-    {%- else -%}
-      <div class="cart__empty">
-        <h1 class="h2 section-title">Your cart is empty</h1>
-        <a href="{{routes.all_products_collection_url}}" class="button button-primary">Return to store</a>
+      <div class="cart__empty hidden cartEmptyState">
+        <img src="{{ settings.cart_empty_state_img | image_url }}" alt="">
+        <h2>Your cart is empty</h2>
+        <p>Return to the store to start shopping!</p>
+        <a href="{{routes.all_products_collection_url}}" class="button button-primary">To the shop</a>
       </div>
-    {%- endif -%}
   </div>
 </div>
+
+<script type="text/javascript">
+  const cartItems = fetch("/cart.js")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      renderCartItems(data);
+    });
+
+</script>
 
 {%- schema -%}
 {

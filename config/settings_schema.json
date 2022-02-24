@@ -191,28 +191,28 @@
         "content": "Page width"
       },
       {
-            "type": "select",
-            "id": "page_width",
-            "options": [
-              {
-                "value": "1366px",
-                "label": "1366px"
-              },
-              {
-                "value": "1440px",
-                "label": "1440px"
-              },
-              {
-                "value": "1536px",
-                "label": "1536px"
-              },
-              {
-                "value": "100vw",
-                "label": "Full width"
-              }
-            ],
-            "default": "1366px",
-            "label": "Max width"
+        "type": "select",
+        "id": "page_width",
+        "options": [
+          {
+            "value": "1366px",
+            "label": "1366px"
+          },
+          {
+            "value": "1440px",
+            "label": "1440px"
+          },
+          {
+            "value": "1536px",
+            "label": "1536px"
+          },
+          {
+            "value": "100vw",
+            "label": "Full width"
+          }
+        ],
+        "default": "1366px",
+        "label": "Max width"
       },
       {
         "type": "header",
@@ -235,6 +235,16 @@
         "id": "padding_amount_desktop",
         "default": "7.5",
         "label": "Padding amount desktop (REM)"
+      }
+    ]
+  },
+  {
+    "name": "Shop",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "cart_empty_state_img",
+        "label": "Empty Cart Image"
       }
     ]
   },
