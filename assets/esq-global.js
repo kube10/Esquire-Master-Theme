@@ -20,7 +20,28 @@ function openEsqMiniCart() {
 }
 
 function renderCartItems(cartData) {
+  if (cartData.items.length === 0) {
+    cartDefault.forEach((cartTotal, i) => {
+      cartTotal.classList.add("hidden");
+    });
+    cartEmptyStates.forEach((cartEmptyState, i) => {
+      cartEmptyState.classList.remove("hidden");
+    });
+  } else {
+    cartEmptyStates.forEach((cartEmptyState, i) => {
+      if (!cartEmptyState.classList.contains("hidden")) {
+        cartEmptyState.classList.add("hidden");
+      }
+    });
+
+    cartDefault.forEach((cartTotal, i) => {
+      cartTotal.classList.remove("hidden");
+    });
+  }
+
   cartItemsContainers.forEach((cartItemsContainer, i) => {
+    cartItemsContainer.classList.add("loading");
+
     cartItemsContainer.innerHTML = "";
 
     const itemsArray = cartData.items;
@@ -39,8 +60,8 @@ function renderCartItems(cartData) {
         options.forEach((option, i) => {
           if (option.name != "Title") {
             const optionHtml = `
-                <span class="p-small">${option.name}</span>
-                <div class="option-badge">${option.value}</div>`;
+                  <span class="p-small">${option.name}</span>
+                  <div class="option-badge">${option.value}</div>`;
             cartItem.querySelector(
               ".cart__item-options"
             ).innerHTML += optionHtml;
@@ -58,24 +79,24 @@ function renderCartItems(cartData) {
 
       if (item.original_price > item.discounted_price) {
         const discountedPriceHtml = `<span class="p-small">Price:</span>
-      <span class="p-small price-old">${shopifyPriceToCurrency(
-        item.original_price,
-        "de-DE",
-        cartData.currency
-      )}</span>
-      <span class="p-small price-new">${shopifyPriceToCurrency(
-        item.discounted_price,
-        "de-DE",
-        cartData.currency
-      )}</span>`;
+        <span class="p-small price-old">${shopifyPriceToCurrency(
+          item.original_price,
+          "de-DE",
+          cartData.currency
+        )}</span>
+        <span class="p-small price-new">${shopifyPriceToCurrency(
+          item.discounted_price,
+          "de-DE",
+          cartData.currency
+        )}</span>`;
         singlePriceWrap.innerHTML = discountedPriceHtml;
       } else {
         const regularPriceHtml = `<span class="p-small">Price:</span>
-      <span class="p-small color-heading">${shopifyPriceToCurrency(
-        item.price,
-        "de-DE",
-        cartData.currency
-      )}</span>`;
+        <span class="p-small color-heading">${shopifyPriceToCurrency(
+          item.price,
+          "de-DE",
+          cartData.currency
+        )}</span>`;
         singlePriceWrap.innerHTML = regularPriceHtml;
       }
 
@@ -109,26 +130,9 @@ function renderCartItems(cartData) {
         cartData.currency
       );
     });
+
+    cartItemsContainer.classList.remove("loading");
   });
-
-  if (cartData.items.length === 0) {
-    cartDefault.forEach((cartTotal, i) => {
-      cartTotal.classList.add("hidden");
-    });
-    cartEmptyStates.forEach((cartEmptyState, i) => {
-      cartEmptyState.classList.remove("hidden");
-    });
-  } else {
-    cartEmptyStates.forEach((cartEmptyState, i) => {
-      if (!cartEmptyState.classList.contains("hidden")) {
-        cartEmptyState.classList.add("hidden");
-      }
-    });
-
-    cartDefault.forEach((cartTotal, i) => {
-      cartTotal.classList.remove("hidden");
-    });
-  }
 }
 
 function clearCart() {

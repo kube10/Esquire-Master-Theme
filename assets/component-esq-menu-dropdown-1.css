@@ -7,7 +7,7 @@
   position: absolute;
   width: 100%;
   max-width: var(--container-desktop-max-width);
-  z-index: 999;
+  z-index: 998;
   background-color: white;
 }
 

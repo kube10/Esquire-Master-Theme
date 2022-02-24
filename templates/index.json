@@ -5,7 +5,10 @@
       "settings": {
         "headline": "Artist Series",
         "collection": "artist-series",
-        "product_card_type": "minimal"
+        "product_card_type": "minimal",
+        "product_card_size": "regular",
+        "padding": "section-p",
+        "first-section": true
       }
     }
   },
