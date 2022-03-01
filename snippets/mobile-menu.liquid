@@ -4,13 +4,13 @@
         <div class="mobile-menu__primary-menu">
             {%- for link in primary_menu.links -%}
               {%- assign id = forloop.index -%}
-              <a id="mobile-menu__link-wrap-{{id}}" class="mobile-menu__link-wrap" {%- if dropdown == "none"  -%} href="{{link.url}}" {%- endif -%}
+              <a id="mobile-menu__link-wrap-{{id}}" class="mobile-menu__link-wrap" {%- if dropdown == "none" -%} href="{{ link.url }}" {%- endif -%}
               {%- if link.levels == 0 -%}
-                href="{{link.url}}"
+                href="{{ link.url }}"
               {%- else -%}
-                onclick="openSubmenu({{id}})"
+                onclick="openSubmenu({{ id }})"
               {%- endif -%}>
-                <span class="nav-link" >{{link.title}}</span>
+                <span class="nav-link" >{{ link.title }}</span>
               {%- if link.levels > 0 -%}
                 <svg width="7" height="11" viewBox="0 0 7 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <rect x="6.9978" y="5.50397" width="7.71011" height="1.40769" rx="0.25" transform="rotate(135 6.9978 5.50397)" fill="#1E1E1E"/>
@@ -21,8 +21,8 @@
               {%- if link.levels > 0 -%}
                 <div id="mobile-menu__submenu-{{id}}" class="mobile-menu__submenu">
                     {%- for sublink in link.links -%}
-                      <a class="mobile-menu__link-wrap secondary" href="{{sublink.url}}">
-                        <span class="nav-link-secondary">{{sublink.title}}</span>
+                      <a class="mobile-menu__link-wrap secondary" href="{{ sublink.url }}">
+                        <span class="nav-link-secondary">{{ sublink.title }}</span>
                       </a>
                     {%- endfor -%}
                 </div>
@@ -36,8 +36,8 @@
       <div class="container">
         <div class="mobile-menu__secondary-menu">
           {%- for link in secondary_menu.links -%}
-            <a class="mobile-menu__link-wrap secondary" href="{{link.url}}">
-              <span class="nav-link-secondary">{{link.title}}</span>
+            <a class="mobile-menu__link-wrap secondary" href="{{ link.url }}">
+              <span class="nav-link-secondary">{{ link.title }}</span>
             </a>
           {%- endfor -%}
         </div>

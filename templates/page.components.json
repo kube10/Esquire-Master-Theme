@@ -4,5 +4,7 @@
       "type": "components"
     }
   },
-  "order": ["components"]
+  "order": [
+    "components"
+  ]
 }

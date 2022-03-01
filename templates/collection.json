@@ -4,5 +4,7 @@
       "type": "esq-collection-grid"
     }
   },
-  "order": ["product-grid"]
+  "order": [
+    "product-grid"
+  ]
 }

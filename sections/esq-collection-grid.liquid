@@ -9,12 +9,12 @@
 
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
-<div class="{{section.settings.padding}} {% if section.settings.first-section and settings.fixed_navigation%}
+<div class="{{ section.settings.padding }} {% if section.settings.first-section and settings.fixed_navigation %}
   first-section
 {% endif %}">
   <div class="container">
-    <h2>{{section.settings.headline}}</h2>
-    <div class="product-grid {{product_card_size}}">
+    <h2>{{ section.settings.headline }}</h2>
+    <div class="product-grid {{ product_card_size }}">
         {%- for product in activeCollection.products -%}
           {%- case section.settings.product_card_type -%}
             {%- when 'minimal' -%}
@@ -25,13 +25,10 @@
   </div>
 </div>
 
-<!-- <script type="text/javascript">
-var cartContents = fetch('/cart.js')
-.then(response => response.json())
-.then(data => { console.log(data); });
-</script>  -->
+<script src="
+{{ 'section-esq-collection-grid.js' | asset_url }}" defer="defer"></script>
 
-{%- schema -%}
+{% schema %}
 {
   "name": "ESQ Collection Grid",
   "tag": "section",
@@ -120,4 +117,4 @@ var cartContents = fetch('/cart.js')
     }
   ]
 }
-{%- endschema -%}
+{% endschema %}

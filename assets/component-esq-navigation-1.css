@@ -63,6 +63,16 @@
   justify-self: center;
 }
 
+.logo-mobile {
+  width: 75px;
+  height: auto;
+}
+
+.logo-desktop {
+  width: 85px;
+  height: auto;
+}
+
 .primary-menu {
   display: flex;
   align-items: center;

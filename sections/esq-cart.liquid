@@ -1,6 +1,6 @@
 {{ "esq-cart.css" | asset_url | stylesheet_tag }}
 <!-- <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script> -->
-<div class="{{section.settings.padding}}  {% if section.settings.first-section and settings.fixed_navigation %}
+<div class="{{ section.settings.padding }}  {% if section.settings.first-section and settings.fixed_navigation %}
   first-section
 {% endif %}">
   <div class="container">
@@ -20,7 +20,7 @@
                       <div class="cart__totals-price">
                         <span class="p-large">TOTAL:</span>
                         <span class="p-large cart__subtotal">
-                          {{cart.total_price | money }}
+                          {{ cart.total_price | money }}
                         </span>
                       </div>
                       <div class="cart__totals-actions">
@@ -38,11 +38,11 @@
                       {%- for block in section.blocks -%}
                         <div class="cart__delivery-rate">
                           <div class="cart__delivery-rate-heading">
-                            <span>{{block.settings.title}}</span>
+                            <span>{{ block.settings.title }}</span>
                             <span>
-                            {{block.settings.price}}</span>
+                            {{ block.settings.price }}</span>
                           </div>
-                          <p class="p-small">{{block.settings.content}}</p>
+                          <p class="p-small">{{ block.settings.content }}</p>
                         </div>
                       {%- endfor -%}
                     </div>
@@ -55,10 +55,10 @@
           </div>
       </div>
       <div class="cart__empty hidden cartEmptyState">
-        <img class="lazyload" data-src="{{ settings.cart_empty_state_img | image_url }}" alt="Empty Cart">
+        <img loading="lazy" src="{{ settings.cart_empty_state_img | image_url }}" alt="Empty Cart" width="300" height="300">
         <h2>Your cart is empty</h2>
         <p>Return to the store to start shopping!</p>
-        <a href="{{routes.all_products_collection_url}}" class="button button-primary">To the shop</a>
+        <a href="{{ routes.all_products_collection_url }}" class="button button-primary">To the shop</a>
       </div>
   </div>
 </div>
@@ -73,42 +73,42 @@
 
 </script>
 
-{%- schema -%}
+{% schema %}
 {
   "name": "ESQ Cart",
   "tag": "section",
   "class": "esq-cart",
   "settings": [
-      {
-    "type": "select",
-    "id": "padding",
-    "default": "section-p",
-    "label": "Padding",
-    "options": [
-          {
-            "label": "None",
-            "value": "section"
-          },
-          {
-            "label": "Top & Bottom",
-            "value": "section-p"
-          },
-          {
-            "label": "Top",
-            "value": "section-pt"
-          },
-          {
-            "label": "Bottom",
-            "value": "section-pb"
-          }
-        ]
-      },
-      {
-        "type": "checkbox",
-        "id": "first-section",
-        "label": "First section on page?",
-        "default": false
-      }
+    {
+      "type": "select",
+      "id": "padding",
+      "default": "section-p",
+      "label": "Padding",
+      "options": [
+        {
+          "label": "None",
+          "value": "section"
+        },
+        {
+          "label": "Top & Bottom",
+          "value": "section-p"
+        },
+        {
+          "label": "Top",
+          "value": "section-pt"
+        },
+        {
+          "label": "Bottom",
+          "value": "section-pb"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "first-section",
+      "label": "First section on page?",
+      "default": false
+    }
   ],
   "blocks": [
     {
@@ -140,4 +140,4 @@
     }
   ]
 }
-{%- endschema -%}
+{% endschema %}

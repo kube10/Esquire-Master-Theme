@@ -1,62 +1,23 @@
-{%- assign product_form_id = 'product-form-' | append: section.id | append: "-" | append: product.id -%}
-
- <div class="product-card-minimal {{size}}">
-  <div class="product-card-minimal__image-wrap" onmouseenter="showOverlay(this)">
-    <img class="product-card-minimal__image lazyload" data-src="{{product.featured_media | image_url}}" alt="{{product.title}}">
-    <div class="product-card-minimal__overlay {{size}}" onmouseleave="hideOverlay(this)">
-      <div class="product-card-minimal__overlay-text-content">
-        <h6 class="product-card-minimal__overlay-title">{{product.title}}</h6>
-        <p class="p-small color-heading product-card-minimal__overlay-title-description">{{product.description}}</p>
-        {% render 'esq-price', orientation: "vertical", size:"regular", product: product %}
-      </div>
-      {%- assign amountOfVariants = product.variants.size -%}
-      {%- render "esq-product-form", product: product -%}
-      <!-- <product-form class="product-form">
-        {%- form 'product', product, id: product_form_id, class:"product-card-minimal__overlay-form", novalidate: 'novalidate', data-type:"add-to-cart-form" -%}
-          {%- if amountOfVariants > 1 -%}
-            <div class="product-card-minimal__overlay-options">
-              {%- for variant in product.variants -%}
-                <span onclick="setSelectedVariant(this, '{{variant.id}}', '{{product_form_id}}')" class="option-badge {% unless variant.available %}disabled{% endunless %} {% if variant.id == product.selected_or_first_available_variant.id %} selected {% endif %}">{{ variant.title }}</span>
-              {%- endfor -%}
-            </div>
-          {%- endif -%}
-          <div class="product-card-minimal__overlay-actions {% if amountOfVariants == 1 %}vertical{% endif %}">
-              <input id="product-form-input-{{product_form_id}}" type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-              <button type="submit" class="button small button-secondary inverted border">
-                <span>ADD TO CART</span>
-                {%- render 'icon-cart' -%}
-              </button>
-              <button type="submit" class="button small button-primary">
-                BUY NOW
-              </button>
-          </div>
-        {%- endform -%}
-        <div class="loading-overlay__spinner"></div>
-        <div class="product-form__error-message-wrapper">
-          <div class="product-form__error-message"></div>
+  <div data-url="{{ product.url }}" class="product-card-minimal {{ size }}">
+    <div class="product-card-minimal__image-wrap" onmouseenter="showOverlay(this)">
+      <img class="product-card-minimal__image" loading="lazy" src="{{ product.featured_media | image_url }}" alt="{{ product.title }}" width="300" height="300">
+      <div class="product-card-minimal__overlay {{ size }}" onmouseleave="hideOverlay(this)">
+        <div class="product-card-minimal__overlay-text-content">
+          <h6 class="product-card-minimal__overlay-title">{{ product.title }}</h6>
+          <p class="p-small color-heading product-card-minimal__overlay-title-description">{{ product.description }}</p>
+          {% render 'esq-price', orientation: "vertical", size: "regular", product: product %}
         </div>
-      </product-form> -->
+
+        {%- render "esq-product-form", product: product -%}
+      </div>
+    </div>
+    <div class="product-card-minimal__content">
+      <a href="{{ product.url }}" class="h6 product-card-minimal__title m-0">{{ product.title }}</a>
+      {% render 'esq-price', product: product %}
     </div>
   </div>
-  <div class="product-card-minimal__content">
-    <a href="{{product.url}}" class="h6 product-card-minimal__title m-0">{{product.title}}</a>
-    {% render 'esq-price', product: product %}
-  </div>
-</div>
 
 <script type="text/javascript">
-  function setSelectedVariant(badge, variant_id, product_form_id) {
-    const input = document.querySelector('#product-form-input-' + product_form_id);
-    const allBadges = document.querySelectorAll('.option-badge')
-    input.setAttribute('value', variant_id);
-
-    allBadges.forEach((badge, i) => {
-      badge.classList.remove('selected');
-    });
-
-    badge.classList.add('selected');
-  }
-
   function showOverlay(target) {
       const overlay = target.querySelector('.product-card-minimal__overlay');
       overlay.classList.add('open');

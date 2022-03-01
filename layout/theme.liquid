@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 
     {%- if settings.favicon != blank -%}
-      <link rel="icon" type="image/png" href="{{ settings.favicon | img_url: '32x32' }}">
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: '32x32' }}">
     {%- endif -%}
 
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
@@ -36,32 +36,31 @@
   <body>
     {% style %}
     :root {
-      --heading-font: {{settings.type_header_font.family}};
-      --body-font: {{settings.type_body_font.family
-      }};
-      --color-primary: {{settings.color_primary}};
-      --color-secondary: {{settings.color_secondary}};
-      --color-accent: {{settings.color_accent}};
-      --color-text-body: {{settings.color_text_body}};
-      --color-text-heading: {{settings.color_text_heading}};
-      --color-btn-primary: {{settings.color_btn_primary}};
-      --color-btn-primary-text: {{settings.color_btn_primary_text}};
-      --color-btn-secondary: {{settings.color_btn_secondary}};
-      --color-btn-secondary-text: {{settings.color_btn_secondary_text}};
-      --color-btn-primary-hover: {{settings.color_btn_primary_hover}};
-      --color-btn-primary-text-hover: {{settings.color_btn_primary_text_hover}};
-      --color-btn-secondary-hover: {{settings.color_btn_secondary_hover}};
-      --color-btn-secondary-text-hover: {{settings.color_btn_secondary_text_hover}};
-      --color-background-light: {{settings.color_background_light}};
-      --color-background-dark: {{settings.color_background_dark}};
-      --color-success: {{settings.color_success}};
-      --color-danger: {{settings.color_danger}};
-      --container-desktop-max-width: {{settings.page_width}};
-      --container-slim-max-width: calc({{settings.page_width}} * 0.67);
-      --container-narrow-max-width: calc({{settings.page_width}} * 0.41);
-      --padding-amount-mobile: {{settings.padding_amount_mobile}}rem;
-      --padding-amount-tablet: {{settings.padding_amount_tablet}}rem;
-      --padding-amount-desktop: {{settings.padding_amount_desktop}}rem;
+      --heading-font: {{ settings.type_header_font.family }};
+      --body-font: {{ settings.type_body_font.family }};
+      --color-primary: {{ settings.color_primary }};
+      --color-secondary: {{ settings.color_secondary }};
+      --color-accent: {{ settings.color_accent }};
+      --color-text-body: {{ settings.color_text_body }};
+      --color-text-heading: {{ settings.color_text_heading }};
+      --color-btn-primary: {{ settings.color_btn_primary }};
+      --color-btn-primary-text: {{ settings.color_btn_primary_text }};
+      --color-btn-secondary: {{ settings.color_btn_secondary }};
+      --color-btn-secondary-text: {{ settings.color_btn_secondary_text }};
+      --color-btn-primary-hover: {{ settings.color_btn_primary_hover }};
+      --color-btn-primary-text-hover: {{ settings.color_btn_primary_text_hover }};
+      --color-btn-secondary-hover: {{ settings.color_btn_secondary_hover }};
+      --color-btn-secondary-text-hover: {{ settings.color_btn_secondary_text_hover }};
+      --color-background-light: {{ settings.color_background_light }};
+      --color-background-dark: {{ settings.color_background_dark }};
+      --color-success: {{ settings.color_success }};
+      --color-danger: {{ settings.color_danger }};
+      --container-desktop-max-width: {{ settings.page_width }};
+      --container-slim-max-width: calc({{ settings.page_width }} * 0.67);
+      --container-narrow-max-width: calc({{ settings.page_width }} * 0.41);
+      --padding-amount-mobile: {{ settings.padding_amount_mobile }}rem;
+      --padding-amount-tablet: {{ settings.padding_amount_tablet }}rem;
+      --padding-amount-desktop: {{ settings.padding_amount_desktop }}rem;
     }
     {% endstyle %}
 
@@ -115,6 +114,5 @@
     <!-- <script src="{{ 'global.js' | asset_url }}" defer="defer"></script> -->
     <script src="{{ 'esq-global.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'esq-custom-elements.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'lazysizes.min.js' | asset_url }}" charset="utf-8"></script>
   </body>
 </html>

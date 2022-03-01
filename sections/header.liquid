@@ -3,19 +3,6 @@
 <link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
-{%- assign primary_menu = section.settings.primary_menu -%}
-{%- assign secondary_menu = section.settings.secondary_menu -%}
-{%- assign fixed = settings.fixed-navigation -%}
-{%- assign logo = section.settings.logo -%}
-{%- assign logo_svg = section.settings.logo_svg -%}
-{%- assign logo_mobile = section.settings.logo_mobile -%}
-{%- assign logo_svg_mobile = section.settings.logo_svg_mobile -%}
-{%- assign dropdown = section.settings.dropdown -%}
-{%- assign feature_active = section.settings.feature_active -%}
-{%- assign feature_img = section.settings.feature_image -%}
-{%- assign feature_link = section.settings.feature_link -%}
-{%- assign feature_title = section.settings.feature_title -%}
-
 <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
@@ -27,7 +14,7 @@
   {% render 'esq-navigation-1', config: section.settings %}
 {%- endcase -%}
 
-{%- schema -%}
+{% schema %}
 {
   "name": "Header",
   "tag": "header",
@@ -99,25 +86,25 @@
       "content": "Dropdown Menu"
     },
     {
-          "type": "select",
-          "id": "dropdown",
-          "label": "Dropdown menu",
-          "info": "Kies een dropdown menu (optioneel)",
-          "options": [
-            {
-              "value": "none",
-              "label": "Geen"
-            },
-            {
-              "value": "dropdown-1",
-              "label": "Dropdown 1"
-            },
-            {
-              "value": "dropdown-2",
-              "label": "Dropdown 2"
-            }
-          ],
-          "default": "dropdown-1"
+      "type": "select",
+      "id": "dropdown",
+      "label": "Dropdown menu",
+      "info": "Kies een dropdown menu (optioneel)",
+      "options": [
+        {
+          "value": "none",
+          "label": "Geen"
+        },
+        {
+          "value": "dropdown-1",
+          "label": "Dropdown 1"
+        },
+        {
+          "value": "dropdown-2",
+          "label": "Dropdown 2"
+        }
+      ],
+      "default": "dropdown-1"
     },
     {
       "type": "checkbox",
@@ -145,4 +132,4 @@
     }
   ]
 }
-{%- endschema -%}
+{% endschema %}

@@ -1,17 +1,16 @@
 {{ "component-esq-navigation-1.css" | asset_url | stylesheet_tag }}
 
-{%- assign primary_menu = config.primary_menu -%}
-{%- assign secondary_menu = config.secondary_menu -%}
-{%- assign fixed = settings.fixed-navigation -%}
-{%- assign logo = config.logo -%}
-{%- assign logo_svg = config.logo_svg -%}
-{%- assign logo_mobile = config.logo_mobile -%}
-{%- assign logo_svg_mobile = config.logo_svg_mobile -%}
-{%- assign dropdown = config.dropdown -%}
-{%- assign feature_active = config.feature_active -%}
-{%- assign feature_img = config.feature_image -%}
-{%- assign feature_link = config.feature_link -%}
-{%- assign feature_title = config.feature_title -%}
+{%- liquid
+  assign primary_menu = config.primary_menu
+  assign fixed = settings.fixed-navigation
+  assign logo = config.logo
+  assign logo_svg = config.logo_svg
+  assign logo_mobile = config.logo_mobile
+  assign logo_svg_mobile = config.logo_svg_mobile
+  assign dropdown = config.dropdown
+  -%}
+
+
 
 <nav id="navigation-1" class="navigation {% if fixed %}fixed{% endif %}">
   <div class="container">
@@ -27,34 +26,34 @@
 
         <div class="{% if logo_mobile or logo_svg_mobile %}hide-mobile{% endif %}">
           {%- if logo_svg != "" -%}
-              {{logo_svg}}
+              {{ logo_svg }}
           {%- else -%}
-              <img src="{{logo | image_url}}" alt="">
+              <img loading="lazy" class="logo-desktop" src="{{ logo | image_url }}" alt="" width="85" height="45">
           {%- endif -%}
         </div>
         {%- if logo_svg_mobile != "" -%}
           <div class="hide-desktop">
-            {{logo_svg_mobile}}
+            {{ logo_svg_mobile }}
           </div>
         {%- elsif logo_mobile -%}
-          <img class="hide-desktop" src="{{logo_mobile | image_url}}" alt="">
+          <img loading="lazy" class="hide-desktop logo-mobile" src="{{ logo_mobile | image_url }}" alt="" width="75" height="45">
         {%- endif -%}
       </a>
       <div class="primary-menu hide-mobile-flex">
         {%- for link in primary_menu.links -%}
-        <div data-title-submenu="{%- if link.levels > 0 -%}{{link.title}}{%- endif -%}" class="nav-link-wrap {% if link.active %}active{% endif %}">
-          <a class="nav-link" href="{{link.url}}">{{ link.title }}</a>
+        <div data-title-submenu="{%- if link.levels > 0 -%}{{ link.title }}{%- endif -%}" class="nav-link-wrap {% if link.active %}active{% endif %}">
+          <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
         </div>
         {%- endfor -%}
       </div>
       <div class="menu-actions">
           {%- if customer -%}
-            <a href="{{routes.account_url}}" class="button button-primary ghost">
+            <a href="{{ routes.account_url }}" class="button button-primary ghost">
               <span>My account</span>
               {%- render 'icon-user' -%}
             </a>
           {%- else -%}
-            <a href="{{routes.account_login_url}}" class="button button-primary ghost hide-mobile-inline-flex">
+            <a href="{{ routes.account_login_url }}" class="button button-primary ghost hide-mobile-inline-flex">
               <span>Login</span>
               {%- render 'icon-user' -%}
             </a>

@@ -1,23 +1,12 @@
 {%- assign primary_menu = config.primary_menu -%}
-{%- assign secondary_menu = config.secondary_menu -%}
-{%- assign fixed = settings.fixed-navigation -%}
-{%- assign logo = config.logo -%}
-{%- assign logo_svg = config.logo_svg -%}
-{%- assign logo_mobile = config.logo_mobile -%}
-{%- assign logo_svg_mobile = config.logo_svg_mobile -%}
-{%- assign dropdown = config.dropdown -%}
-{%- assign feature_active = config.feature_active -%}
-{%- assign feature_img = config.feature_image -%}
-{%- assign feature_link = config.feature_link -%}
-{%- assign feature_title = config.feature_title -%}
 
 <div id="menu-dropdown-2" class="menu-dropdown">
   <div class="container">
     <div class="menu-dropdown-nav">
       {%- for link in primary_menu.links -%}
-        <div id="submenu-{{link.title}}" class="submenu inline hidden">
+        <div id="submenu-{{ link.title }}" class="submenu inline hidden">
           {%- for sublink in link.links -%}
-            <a class="nav-link-secondary" href="{{sublink.url}}">
+            <a class="nav-link-secondary" href="{{ sublink.url }}">
               {{ sublink.title }}
             </a>
           {%- endfor -%}

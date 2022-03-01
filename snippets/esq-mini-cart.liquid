@@ -1,6 +1,4 @@
-
 {{ "esq-cart.css" | asset_url | stylesheet_tag }}
-{%- assign templateBase = template | slice: 0, 4 -%}
 
   <div class="esq-mini-cart">
 
@@ -12,11 +10,11 @@
           </div>
         </div>
     <div class="esq-mini-cart__empty-state hidden cartEmptyState">
-      <img data-src="{{ settings.cart_empty_state_img | image_url }}" class="lazyload" alt="Empty Cart">
+      <img loading="lazy" src="{{ settings.cart_empty_state_img | image_url }}" alt="Empty Cart" width="300" height="300">
       <div class="esq-mini-cart__empty-state-text">
         <h4>Your cart is empty</h4>
         <p>Return to the store to start shopping!</p>
-        <a href="{{routes.all_products_collection_url}}" class="button button-primary">To the shop</a>
+        <a href="{{ routes.all_products_collection_url }}" class="button button-primary">To the shop</a>
       </div>
     </div>
     <div class="esq-mini-cart__items cartItemsContainer">

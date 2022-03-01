@@ -20,7 +20,7 @@ class EsqProductForm extends HTMLElement {
         body: JSON.stringify(body),
       })
         .then((response) => {
-          openEsqMiniCart();
+          openEsqMiniCart(esqMiniCartBtn);
         })
         .catch((error) => {
           console.log(error);

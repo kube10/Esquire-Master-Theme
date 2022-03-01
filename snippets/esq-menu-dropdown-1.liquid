@@ -1,17 +1,12 @@
 {{ "component-esq-menu-dropdown-1.css" | asset_url | stylesheet_tag }}
 
-{%- assign primary_menu = config.primary_menu -%}
-{%- assign secondary_menu = config.secondary_menu -%}
-{%- assign fixed = settings.fixed-navigation -%}
-{%- assign logo = config.logo -%}
-{%- assign logo_svg = config.logo_svg -%}
-{%- assign logo_mobile = config.logo_mobile -%}
-{%- assign logo_svg_mobile = config.logo_svg_mobile -%}
-{%- assign dropdown = config.dropdown -%}
-{%- assign feature_active = config.feature_active -%}
-{%- assign feature_img = config.feature_image -%}
-{%- assign feature_link = config.feature_link -%}
-{%- assign feature_title = config.feature_title -%}
+{%- liquid
+  assign primary_menu = config.primary_menu
+  assign feature_active = config.feature_active
+  assign feature_img = config.feature_image
+  assign feature_title = config.feature_title
+   -%}
+
 
 <div id="menu-dropdown-1" class="menu-dropdown">
   {%- assign linklistLength = primary_menu.links | size -%}
@@ -23,16 +18,16 @@
     <div class="menu-dropdown-nav">
       {%- for link in primary_menu.links -%}
           <div class="submenu">
-            <a class="nav-link" href="{{link.url}}">{{ link.title }}</a>
+            <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
             {%- for sublink in link.links -%}
-              <a class="nav-link-secondary {% if sublink.active %}active{% endif %}" href="{{sublink.url}}">{{sublink.title}}</a>
+              <a class="nav-link-secondary {% if sublink.active %}active{% endif %}" href="{{ sublink.url }}">{{ sublink.title }}</a>
             {%- endfor -%}
           </div>
       {%- endfor -%}
       {%- if feature_active -%}
-        <a href="{{feature__link}}" class="dropdown-feature" style="background-image:url('{{ feature_img | image_url }}')">
+        <a href="{{ feature__link }}" class="dropdown-feature" style="background-image:url('{{ feature_img | image_url }}')">
           <div class="dropdown-feature__link-wrap">
-            <span class="dropdown-feature__link">{{feature_title}}</span>
+            <span class="dropdown-feature__link">{{ feature_title }}</span>
             <svg class="dropdown-feature__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M3 13L17.586 13L12.293 18.293L13.707 19.707L21.414 12L13.707 4.29303L12.293 5.70703L17.586 11L3 11L3 13Z" fill="var(--color-background-light)"/>
             </svg>
