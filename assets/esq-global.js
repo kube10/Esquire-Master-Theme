@@ -1,15 +1,43 @@
+const esqMiniCartBtn = document.querySelector(".esq-mini-cart-btn");
 const esqMiniCart = document.querySelector(".esq-mini-cart");
 const cartItemsContainers = document.querySelectorAll(".cartItemsContainer");
 const cardItemTemplate = document.querySelector(".cart__item.hidden");
 const cartEmptyStates = document.querySelectorAll(".cartEmptyState");
 const cartDefault = document.querySelectorAll(".cartDefault");
+const mobileMenu = document.querySelector(".mobile-menu");
+const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
 
-function closeEsqMiniCart() {
-  esqMiniCart.classList.remove("open");
-  document.querySelector("html").classList.remove("esq-mini-cart-open");
+function handleMobileMenuBtnClick() {
+  if (!mobileMenuBtn.classList.contains("open")) {
+    openMobileMenu(mobileMenuBtn);
+  } else {
+    closeMobileMenu(mobileMenuBtn);
+  }
 }
 
-function openEsqMiniCart() {
+function handleCartButtonClick() {
+  if (!esqMiniCartBtn.classList.contains("open")) {
+    openEsqMiniCart(esqMiniCartBtn);
+  } else {
+    closeEsqMiniCart(esqMiniCartBtn);
+  }
+}
+
+function openMobileMenu(mobileMenuBtn) {
+  mobileMenu.classList.add("open");
+  mobileMenuBtn.classList.add("open");
+  document.querySelector("html").classList.add("esq-mobile-menu-open");
+  closeEsqMiniCart(esqMiniCartBtn);
+}
+
+function closeMobileMenu(mobileMenuBtn) {
+  mobileMenu.classList.remove("open");
+  mobileMenuBtn.classList.remove("open");
+  document.querySelector("html").classList.remove("esq-mobile-menu-open");
+}
+
+//also fetches & renders line items using renderCartItems()
+function openEsqMiniCart(esqMiniCartBtn) {
   esqMiniCart.classList.add("open");
   const cartItems = fetch("/cart.js")
     .then((response) => response.json())
@@ -17,9 +45,20 @@ function openEsqMiniCart() {
       renderCartItems(data);
     });
   document.querySelector("html").classList.add("esq-mini-cart-open");
+  closeMobileMenu(mobileMenuBtn);
+  esqMiniCartBtn.classList.add("open");
 }
 
+function closeEsqMiniCart(esqMiniCartBtn) {
+  esqMiniCartBtn.classList.remove("open");
+  esqMiniCart.classList.remove("open");
+  document.querySelector("html").classList.remove("esq-mini-cart-open");
+}
+
+//cartData should be the full data response when running fetch /cart.js
 function renderCartItems(cartData) {
+  //Show empty state
+  //Looks for both the cart panel & elements on the cart page
   if (cartData.items.length === 0) {
     cartDefault.forEach((cartTotal, i) => {
       cartTotal.classList.add("hidden");
@@ -27,18 +66,23 @@ function renderCartItems(cartData) {
     cartEmptyStates.forEach((cartEmptyState, i) => {
       cartEmptyState.classList.remove("hidden");
     });
-  } else {
+  }
+  //Cart is not empty
+  else {
+    //hide empty states if previously visibile
     cartEmptyStates.forEach((cartEmptyState, i) => {
       if (!cartEmptyState.classList.contains("hidden")) {
         cartEmptyState.classList.add("hidden");
       }
     });
 
+    //shows default states
     cartDefault.forEach((cartTotal, i) => {
       cartTotal.classList.remove("hidden");
     });
   }
 
+  //looks for itemcontainers on panel cart & cart page
   cartItemsContainers.forEach((cartItemsContainer, i) => {
     cartItemsContainer.classList.add("loading");
 
@@ -46,10 +90,15 @@ function renderCartItems(cartData) {
 
     const itemsArray = cartData.items;
 
+    /*
+      Cart items are rendered by cloning the template DOMnode
+      and removing the hidden class. Then data from the JSON array is used to fill in the template item.
+    */
     itemsArray.forEach((item, i) => {
       const cartItem = cardItemTemplate.cloneNode(true);
       cartItem.querySelector(".cart__item-title").innerHTML =
         item.product_title;
+      //data-id is used for updating the line item
       cartItem.dataset.id = item.variant_id;
       cartItem.classList.remove("hidden");
       cartItem
@@ -121,6 +170,7 @@ function renderCartItems(cartData) {
       cartItemsContainer.appendChild(cartItem);
     });
 
+    //set the subtotal after rendering the line items;
     const subTotalWrappers = document.querySelectorAll(".cart__subtotal");
 
     subTotalWrappers.forEach((subTotal, i) => {
@@ -145,6 +195,7 @@ function clearCart() {
     });
 }
 
+//helper function: price should be in cents e.g. 4000
 function shopifyPriceToCurrency(price, localeCode, currency) {
   return new Intl.NumberFormat(localeCode, {
     style: "currency",

@@ -16,7 +16,8 @@ html {
   transition: opacity 0.3s ease;
 }
 
-html.esq-mini-cart-open {
+html.esq-mini-cart-open,
+html.esq-mobile-menu-open {
   overflow: hidden;
   /* pointer-events: none; */
 }
@@ -25,6 +26,10 @@ html.esq-mini-cart-open {
   html.esq-mini-cart-open #overlay {
     opacity: 0.65;
     pointer-events: auto;
+  }
+
+  html.esq-mobile-menu-open {
+    overflow: auto;
   }
 }
 

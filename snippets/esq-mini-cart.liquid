@@ -3,16 +3,16 @@
 {%- assign templateBase = template | slice: 0, 4 -%}
 
   <div class="esq-mini-cart">
-    
+
     <div class="esq-mini-cart__header">
           <h4 class="m-0">My cart</h4>
-          <div onclick="closeEsqMiniCart()" class="button button-secondary inverted ghost">
+          <div onclick="handleCartButtonClick()" class="button button-secondary inverted ghost">
             {%- render 'icon-arrow-back' -%}
             <span>Close</span>
           </div>
         </div>
     <div class="esq-mini-cart__empty-state hidden cartEmptyState">
-      <img src="{{ settings.cart_empty_state_img | image_url }}" alt="">
+      <img data-src="{{ settings.cart_empty_state_img | image_url }}" class="lazyload" alt="Empty Cart">
       <div class="esq-mini-cart__empty-state-text">
         <h4>Your cart is empty</h4>
         <p>Return to the store to start shopping!</p>

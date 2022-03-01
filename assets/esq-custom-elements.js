@@ -54,10 +54,12 @@ customElements.define("esq-variant-selector", EsqVariantSelector);
 class EsqCartItem extends HTMLElement {
   constructor() {
     super();
+
     this.removeButton = this.querySelector(".cart__item-remove-btn");
     this.removeButton.addEventListener("click", () => {
       this.removeItem(this.dataset.id);
     });
+
     this.changeQuantityButtons = this.querySelectorAll(".changeQuantityButton");
     this.quantityInput = this.querySelector(".quantityInput");
     this.changeQuantityButtons.forEach((button, i) => {
@@ -65,12 +67,14 @@ class EsqCartItem extends HTMLElement {
         this.setQuantity(this.dataset.id, e, this.quantityInput);
       });
     });
+
     const $this = this;
     this.quantityInput.onchange = function () {
       $this.updateQuantity($this.dataset.id, this);
     };
   }
 
+  //Sets the quantity of the input field in the cart line item when one of the buttons is used and triggers the onChange event on the input, updating the quantity in the cart.
   setQuantity(variant_id, evt, input) {
     if (evt.target.getAttribute("name") === "minus") {
       if (input.value > 0) {

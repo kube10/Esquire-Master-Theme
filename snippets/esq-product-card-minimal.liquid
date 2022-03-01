@@ -2,7 +2,7 @@
 
  <div class="product-card-minimal {{size}}">
   <div class="product-card-minimal__image-wrap" onmouseenter="showOverlay(this)">
-    <img class="product-card-minimal__image" src="{{product.featured_media | image_url}}" alt="">
+    <img class="product-card-minimal__image lazyload" data-src="{{product.featured_media | image_url}}" alt="{{product.title}}">
     <div class="product-card-minimal__overlay {{size}}" onmouseleave="hideOverlay(this)">
       <div class="product-card-minimal__overlay-text-content">
         <h6 class="product-card-minimal__overlay-title">{{product.title}}</h6>

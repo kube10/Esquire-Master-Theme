@@ -55,7 +55,7 @@
           </div>
       </div>
       <div class="cart__empty hidden cartEmptyState">
-        <img src="{{ settings.cart_empty_state_img | image_url }}" alt="">
+        <img class="lazyload" data-src="{{ settings.cart_empty_state_img | image_url }}" alt="Empty Cart">
         <h2>Your cart is empty</h2>
         <p>Return to the store to start shopping!</p>
         <a href="{{routes.all_products_collection_url}}" class="button button-primary">To the shop</a>
