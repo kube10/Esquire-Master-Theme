@@ -24,7 +24,7 @@
 
 {%- case section.settings.navbar -%}
 {%- when 'navigation-1' -%}
-  {% include 'esq-navigation-1' %}
+  {% render 'esq-navigation-1', config: section.settings %}
 {%- endcase -%}
 
 {%- schema -%}

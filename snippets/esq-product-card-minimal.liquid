@@ -7,10 +7,10 @@
       <div class="product-card-minimal__overlay-text-content">
         <h6 class="product-card-minimal__overlay-title">{{product.title}}</h6>
         <p class="p-small color-heading product-card-minimal__overlay-title-description">{{product.description}}</p>
-        {% include 'esq-price', orientation: "vertical", size:"regular" %}
+        {% render 'esq-price', orientation: "vertical", size:"regular", product: product %}
       </div>
       {%- assign amountOfVariants = product.variants.size -%}
-      {%- include "esq-product-form" -%}
+      {%- render "esq-product-form", product: product -%}
       <!-- <product-form class="product-form">
         {%- form 'product', product, id: product_form_id, class:"product-card-minimal__overlay-form", novalidate: 'novalidate', data-type:"add-to-cart-form" -%}
           {%- if amountOfVariants > 1 -%}
@@ -40,7 +40,7 @@
   </div>
   <div class="product-card-minimal__content">
     <a href="{{product.url}}" class="h6 product-card-minimal__title m-0">{{product.title}}</a>
-    {% include 'esq-price' %}
+    {% render 'esq-price', product: product %}
   </div>
 </div>
 

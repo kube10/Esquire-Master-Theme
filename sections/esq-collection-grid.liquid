@@ -18,7 +18,7 @@
         {%- for product in activeCollection.products -%}
           {%- case section.settings.product_card_type -%}
             {%- when 'minimal' -%}
-              {%- include 'esq-product-card-minimal', size: product_card_size -%}
+              {%- render 'esq-product-card-minimal', size: product_card_size, product: product -%}
             {%- endcase -%}
         {%- endfor -%}
     </div>

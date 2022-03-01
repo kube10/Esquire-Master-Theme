@@ -1,5 +1,18 @@
 {{ "component-esq-navigation-1.css" | asset_url | stylesheet_tag }}
 
+{%- assign primary_menu = config.primary_menu -%}
+{%- assign secondary_menu = config.secondary_menu -%}
+{%- assign fixed = settings.fixed-navigation -%}
+{%- assign logo = config.logo -%}
+{%- assign logo_svg = config.logo_svg -%}
+{%- assign logo_mobile = config.logo_mobile -%}
+{%- assign logo_svg_mobile = config.logo_svg_mobile -%}
+{%- assign dropdown = config.dropdown -%}
+{%- assign feature_active = config.feature_active -%}
+{%- assign feature_img = config.feature_image -%}
+{%- assign feature_link = config.feature_link -%}
+{%- assign feature_title = config.feature_title -%}
+
 <nav id="navigation-1" class="navigation {% if fixed %}fixed{% endif %}">
   <div class="container">
     <div class="navigation-inner">
@@ -53,11 +66,11 @@
     </div>
     {%- case dropdown -%}
       {%- when 'dropdown-1' -%}
-        {% include 'esq-menu-dropdown-1' %}
+        {% render 'esq-menu-dropdown-1', config: config %}
       {%- when 'dropdown-2' -%}
-        {% include 'esq-menu-dropdown-2' %}
+        {% render 'esq-menu-dropdown-2', config: config %}
     {%- endcase -%}
   </div>
 </nav>
 
-{%- include 'mobile-menu' -%}
+{%- render 'mobile-menu' -%}
