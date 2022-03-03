@@ -8,12 +8,15 @@ class EsqProductForm extends HTMLElement {
         openEsqMiniCart(esqMiniCartBtn);
       });
     });
-    this.directCheckoutButton = this.querySelector(".directCheckoutButton");
-    this.directCheckoutButton.addEventListener("click", () => {
-      this.addToCart(this, function () {
-        window.location.href = "/checkout";
+
+    if (this.querySelector(".directCheckoutButton")) {
+      this.directCheckoutButton = this.querySelector(".directCheckoutButton");
+      this.directCheckoutButton.addEventListener("click", () => {
+        this.addToCart(this, function () {
+          window.location.href = "/checkout";
+        });
       });
-    });
+    }
   }
 
   addToCart(form, callback) {

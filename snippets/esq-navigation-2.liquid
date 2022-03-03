@@ -1,0 +1,92 @@
+{{ "component-esq-navigation-2.css" | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign primary_menu = config.primary_menu
+  assign logo = config.logo
+  assign logo_svg = config.logo_svg
+  assign logo_mobile = config.logo_mobile
+  assign logo_svg_mobile = config.logo_svg_mobile
+  assign dropdown = config.dropdown
+  assign fixed = settings.fixed_navigation
+  -%}
+
+  <nav id="navigation-2" class="navigation {% if fixed %}fixed{% endif %}">
+    <div class="container">
+      <div class="navigation-inner">
+        <div onclick="handleMobileMenuBtnClick()" class="mobile-menu-btn hide-desktop-flex">
+          <div class="hamburger-icon">
+            <div class="hamburger-icon__line"></div>
+            <div class="hamburger-icon__line"></div>
+            <div class="hamburger-icon__line"></div>
+          </div>
+        </div>
+        <a class="logo-wrap" href="{{ shop.url }}">
+
+          <div class="{% if logo_mobile or logo_svg_mobile %}hide-mobile{% endif %}">
+            {%- if logo_svg != "" -%}
+                {{ logo_svg }}
+            {%- else -%}
+                <img loading="lazy" class="logo-desktop" src="{{ logo | image_url }}" alt="" width="85" height="45">
+            {%- endif -%}
+          </div>
+          {%- if logo_svg_mobile != "" -%}
+            <div class="hide-desktop">
+              {{ logo_svg_mobile }}
+            </div>
+          {%- elsif logo_mobile -%}
+            <img loading="lazy" class="hide-desktop logo-mobile" src="{{ logo_mobile | image_url }}" alt="" width="75" height="45">
+          {%- endif -%}
+        </a>
+        <div class="primary-menu hide-mobile-flex">
+          {%- for link in primary_menu.links -%}
+          <div data-title-submenu="{%- if link.levels > 0 -%}{{ link.title }}{%- endif -%}" class="nav-link-wrap {% if link.active %}active{% endif %}">
+            <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
+          </div>
+          {%- endfor -%}
+        </div>
+        <div class="navigation-right">
+          <div class="navigation-search hide-mobile">
+              <form action="{{ routes.search_url }}">
+                <div class="form-group__input-button">
+                  <input type="text"
+                    placeholder="Search..."
+                    name="q"
+                    value="{{ search.terms | escape }}"
+                    class="form__field"
+                 >
+                  <button type="submit" class="button form-button">
+                    {%- render 'icon-search' -%}
+                  </button>
+                </div>
+              </form>
+          </div>
+          <div class="menu-actions">
+              {%- if customer -%}
+                <a href="{{ routes.account_url }}" class="button button-primary ghost">
+                  <span>My account</span>
+                  {%- render 'icon-user' -%}
+                </a>
+              {%- else -%}
+                <a href="{{ routes.account_login_url }}" class="button button-primary ghost hide-mobile-inline-flex">
+                  {%- render 'icon-user' -%}
+                </a>
+              {%- endif -%}
+            <div onclick="handleCartButtonClick()" class="button icon-only esq-mini-cart-btn">
+                <div class="esq-cart-bubble {% if cart.item_count == 0 %}hidden{% endif %}">
+                  {{cart.item_count}}
+                </div>
+              {%- render 'icon-cart' -%}
+            </div>
+          </div>
+        </div>
+      </div>
+      {%- case dropdown -%}
+        {%- when 'dropdown-1' -%}
+          {% render 'esq-menu-dropdown-1', config: config %}
+        {%- when 'dropdown-2' -%}
+          {% render 'esq-menu-dropdown-2', config: config %}
+      {%- endcase -%}
+    </div>
+  </nav>
+
+  {%- render 'esq-mobile-menu', config: config -%}

@@ -1,0 +1,147 @@
+{{ "section-esq-search.css" | asset_url | stylesheet_tag }}
+
+{%- assign search_query = "?q=" | append: search.terms | append: '&options%5Bprefix%5D=last&sort_by=' -%}
+
+<div id="search-section" data-query="{{search_query}}" data-sort="{{ search.sort_by }}" class="{{section.settings.padding}} {% if section.settings.first-section and settings.fixed-navigation %}
+first-section
+{% endif %}">
+  <div class="container">
+    {%- if search.performed -%}
+      <div class="search__results-header">
+        <h6>You searched for "{{ search.terms }}"</h6>
+        <p>Results found: <span id="results_count">{{search.results_count}}</span></p>
+      </div>
+      {%- if search.results_count > 0 -%}
+      <div class="search__results-filters-wrap">
+        <h1 class="h2">Products</h1>
+        <div class="search__results-filters">
+          <div class="option-badge filter-badge">
+            <div class="filter-badge__heading">
+              <span>SORT RESULTS BY</span>
+              {%- render 'icon-caret' -%}
+            </div>
+            <div class="filter-badge__content">
+              <a href="{{ routes.search_url | append: search_query | append: 'relevance'}}" class="filter-term">Relevance</a>
+              <a href="{{ routes.search_url | append: search_query | append: 'best-selling'}}" class="filter-term">Popularity</a>
+              <a href="{{ routes.search_url | append: search_query | append: 'price-descending'}}" class="filter-term">Price Descending</a>
+              <a href="{{ routes.search_url | append: search_query | append: 'price-ascending'}}" class="filter-term">Price Ascending</a>
+            </div>
+          </div>
+          {%- for result in search.results -%}
+            {%- for collection in result.collections -%}
+              {{ forloop.index }}
+              {{ collection.title }}
+              {%- if forloop.last == false -%}
+                ::
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endfor -%}
+          <div class="option-badge filter-badge">
+            <div class="filter-badge__heading">
+              <span>FILTER ON COLLECTION</span>
+              {%- render 'icon-caret' -%}
+            </div>
+            <div class="filter-badge__content">
+              {% capture collection_list %}
+                {%- for result in search.results -%}
+                  {%- for collection in result.collections -%}
+                    {{ collection.title }}::
+                  {%- endfor -%}
+                {%- endfor -%}
+              {%- endcapture -%}
+
+              {% assign collections_array = collection_list | split: '::' | uniq %}
+
+              {%- for item in collections_array -%}
+                <div class="filter-checkbox-wrap">
+                    <input class="filter-checkbox" type="checkbox" value="{{ item }}">
+                    <span>{{ item }}</span>
+                </div>
+              {%- endfor -%}
+
+                {%- for result in search.results -%}
+                  {%- for collection in result.collections -%}
+
+                  {%- endfor -%}
+                {%- endfor -%}
+            </div>
+          </div>
+          <div class="option-badge filter-badge">
+            <span>FILTER ON SIZE</span>
+            {%- render 'icon-caret' -%}
+          </div>
+          <div class="option-badge filter-badge">
+            <span>FILTER ON PRICE</span>
+            {%- render 'icon-caret' -%}
+          </div>
+        </div>
+      </div>
+        {{ 'section-esq-collection-grid.css' | asset_url | stylesheet_tag }}
+        {{ "component-esq-product-card-minimal.css" | asset_url | stylesheet_tag }}
+        <div class="product-grid small">
+          {%- for result in search.results -%}
+            {%- if result.object_type == "product" -%}
+              <div class="result__wrapper">
+                {%- for collection in result.collections -%}
+                  <span class="result__collection hidden">{{ collection.title }}</span>
+                {%- endfor -%}
+                {%- render "esq-product-card-minimal", product: result, size: "small" -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
+  </div>
+</div>
+
+<script src="{{ 'section-esq-search.js' | asset_url }}" defer="defer"></script>
+
+{%- schema -%}
+{
+  "name": "ESQ Search Section",
+  "tag": "section",
+  "class": "esq-search-section",
+  "presets": [
+    {
+      "name": "ESQ Search Section"
+    }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "first-section",
+      "label": "First section on page?",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "padding",
+      "default": "section-p",
+      "label": "Padding",
+      "options": [
+        {
+          "label": "None",
+          "value": "section"
+        },
+        {
+          "label": "Top & Bottom",
+          "value": "section-p"
+        },
+        {
+          "label": "Top",
+          "value": "section-pt"
+        },
+        {
+          "label": "Bottom",
+          "value": "section-pb"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+
+  ]
+}
+{%- endschema -%}

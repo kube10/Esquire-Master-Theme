@@ -30,12 +30,33 @@
                 </div>
               {%- endif -%}
             {%- endfor -%}
+
           </div>
       </div>
   </div>
   {%- if config.secondary_menu -%}
     <div class="mobile-menu__secondary-menu-wrap">
       <div class="container">
+        {%- if config.navbar == "navigation-2" -%}
+          <span class="nav-link-secondary">
+            Search
+          </span>
+        <div class="mobile-menu__link-wrap">
+            <form class="nav__search-form" action="{{ routes.search_url }}">
+              <div class="form-group__input-button">
+                <input type="text"
+                  placeholder="Search..."
+                  name="q"
+                  value="{{ search.terms | escape }}"
+                  class="form__field"
+               >
+                <button type="submit" class="button form-button">
+                  {%- render 'icon-search' -%}
+                </button>
+              </div>
+            </form>
+        </div>
+        {%- endif -%}
         <div class="mobile-menu__secondary-menu">
           {%- for link in config.secondary_menu.links -%}
             <a class="mobile-menu__link-wrap secondary" href="{{ link.url }}">

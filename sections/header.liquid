@@ -10,8 +10,10 @@
 {%- render 'cart-notification' %}
 
 {%- case section.settings.navbar -%}
-{%- when 'navigation-1' -%}
-  {% render 'esq-navigation-1', config: section.settings %}
+  {%- when 'navigation-1' -%}
+    {% render 'esq-navigation-1', config: section.settings %}
+  {%- when 'navigation-2' -%}
+    {% render 'esq-navigation-2', config: section.settings %}    
 {%- endcase -%}
 
 {% schema %}

@@ -325,6 +325,10 @@
   margin-bottom: 1rem;
 }
 
+.esq-mini-cart__header > .button {
+  padding-right: 0;
+}
+
 .esq-mini-cart > .cart__totals {
   margin-top: 1rem;
 }
