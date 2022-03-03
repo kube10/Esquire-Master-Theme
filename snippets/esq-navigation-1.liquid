@@ -2,15 +2,13 @@
 
 {%- liquid
   assign primary_menu = config.primary_menu
-  assign fixed = settings.fixed-navigation
   assign logo = config.logo
   assign logo_svg = config.logo_svg
   assign logo_mobile = config.logo_mobile
   assign logo_svg_mobile = config.logo_svg_mobile
   assign dropdown = config.dropdown
+  assign fixed = settings.fixed_navigation
   -%}
-
-
 
 <nav id="navigation-1" class="navigation {% if fixed %}fixed{% endif %}">
   <div class="container">
@@ -59,6 +57,10 @@
             </a>
           {%- endif -%}
         <div onclick="handleCartButtonClick()" class="button icon-only button-primary esq-mini-cart-btn">
+
+            <div class="esq-cart-bubble {% if cart.item_count == 0 %}hidden{% endif %}">
+              {{cart.item_count}}
+            </div>
           {%- render 'icon-cart' -%}
         </div>
       </div>
@@ -72,4 +74,4 @@
   </div>
 </nav>
 
-{%- render 'mobile-menu' -%}
+{%- render 'esq-mobile-menu', config: config -%}

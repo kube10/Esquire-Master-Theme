@@ -1,0 +1,10 @@
+<div class="product-card product-card-detailed {{ size }}">
+  <a class="product-card__image-wrap product-card-detailed__image-wrap" href="{{ product.url }}">
+    <img class="product-card-detailed__image" loading="lazy" src="{{ product.featured_media | image_url }}" alt="{{ product.title }}" width="300" height="300">
+  </a>
+  <div class="product-card-detailed__content">
+      <a href="{{ product.url }}" class="p-large product-card-detailed__title m-0">{{ product.title }}</a>
+      {% render 'esq-price', product: product %}
+      {%- render "esq-product-form", product: product, direct_checkout: direct_checkout -%}
+  </div>
+</div>

@@ -1,5 +1,5 @@
-  <div data-url="{{ product.url }}" class="product-card-minimal {{ size }}">
-    <div class="product-card-minimal__image-wrap" onmouseenter="showOverlay(this)">
+  <div data-url="{{ product.url }}" class="product-card product-card-minimal {{ size }}">
+    <div class="product-card__image-wrap product-card-minimal__image-wrap" onmouseenter="showOverlay(this)">
       <img class="product-card-minimal__image" loading="lazy" src="{{ product.featured_media | image_url }}" alt="{{ product.title }}" width="300" height="300">
       <div class="product-card-minimal__overlay {{ size }}" onmouseleave="hideOverlay(this)">
         <div class="product-card-minimal__overlay-text-content">
@@ -8,7 +8,7 @@
           {% render 'esq-price', orientation: "vertical", size: "regular", product: product %}
         </div>
 
-        {%- render "esq-product-form", product: product -%}
+        {%- render "esq-product-form", product: product, direct_checkout: direct_checkout -%}
       </div>
     </div>
     <div class="product-card-minimal__content">

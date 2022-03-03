@@ -6,6 +6,7 @@ const cartEmptyStates = document.querySelectorAll(".cartEmptyState");
 const cartDefault = document.querySelectorAll(".cartDefault");
 const mobileMenu = document.querySelector(".mobile-menu");
 const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+const cartBubble = document.querySelector(".esq-cart-bubble");
 
 function handleMobileMenuBtnClick() {
   if (!mobileMenuBtn.classList.contains("open")) {
@@ -66,6 +67,7 @@ function renderCartItems(cartData) {
     cartEmptyStates.forEach((cartEmptyState, i) => {
       cartEmptyState.classList.remove("hidden");
     });
+    cartBubble.classList.add("hidden");
   }
   //Cart is not empty
   else {
@@ -80,6 +82,8 @@ function renderCartItems(cartData) {
     cartDefault.forEach((cartTotal, i) => {
       cartTotal.classList.remove("hidden");
     });
+
+    cartBubble.classList.remove("hidden");
   }
 
   //looks for itemcontainers on panel cart & cart page
@@ -181,6 +185,7 @@ function renderCartItems(cartData) {
       );
     });
 
+    cartBubble.innerHTML = cartData.item_count;
     cartItemsContainer.classList.remove("loading");
   });
 }

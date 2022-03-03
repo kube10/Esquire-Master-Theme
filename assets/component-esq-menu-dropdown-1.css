@@ -1,14 +1,17 @@
 .menu-dropdown {
-  border-width: 1px 0px 0px 0px;
-  border-color: var(--color-text-body);
-  border-style: solid;
-  padding: 2rem 0rem;
   display: none;
   position: absolute;
   width: 100%;
-  max-width: var(--container-desktop-max-width);
+  left: 0;
   z-index: 998;
   background-color: white;
+  padding-bottom: 2rem;
+}
+
+.menu-dropdown__line {
+  height: 1px;
+  background-color: var(--color-text-body);
+  margin-bottom: 2rem;
 }
 
 @media screen and (max-width: 1023px) {

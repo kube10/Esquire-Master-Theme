@@ -4,28 +4,40 @@ class EsqProductForm extends HTMLElement {
     this.productId = this.dataset.productid;
     this.submitButton = this.querySelector(".addToCartButton");
     this.submitButton.addEventListener("click", () => {
-      const body = {
-        items: [
-          {
-            id: parseInt(this.querySelector("#variantField").value),
-            quantity: 1,
-          },
-        ],
-      };
-      fetch("/cart/add.js", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      })
-        .then((response) => {
-          openEsqMiniCart(esqMiniCartBtn);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      this.addToCart(this, function () {
+        openEsqMiniCart(esqMiniCartBtn);
+      });
     });
+    this.directCheckoutButton = this.querySelector(".directCheckoutButton");
+    this.directCheckoutButton.addEventListener("click", () => {
+      this.addToCart(this, function () {
+        window.location.href = "/checkout";
+      });
+    });
+  }
+
+  addToCart(form, callback) {
+    const body = {
+      items: [
+        {
+          id: parseInt(form.querySelector("#variantField").value),
+          quantity: 1,
+        },
+      ],
+    };
+    fetch("/cart/add.js", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => {
+        callback();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }
 

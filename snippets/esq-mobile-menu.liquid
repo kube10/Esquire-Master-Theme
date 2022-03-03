@@ -1,8 +1,10 @@
+{{ "component-esq-mobile-menu.css" | asset_url | stylesheet_tag }}
+
 <div class="mobile-menu">
   <div class="mobile-menu__primary-menu-wrap">
       <div class="container">
         <div class="mobile-menu__primary-menu">
-            {%- for link in primary_menu.links -%}
+            {%- for link in config.primary_menu.links -%}
               {%- assign id = forloop.index -%}
               <a id="mobile-menu__link-wrap-{{id}}" class="mobile-menu__link-wrap" {%- if dropdown == "none" -%} href="{{ link.url }}" {%- endif -%}
               {%- if link.levels == 0 -%}
@@ -31,11 +33,11 @@
           </div>
       </div>
   </div>
-  {%- if secondary_menu -%}
+  {%- if config.secondary_menu -%}
     <div class="mobile-menu__secondary-menu-wrap">
       <div class="container">
         <div class="mobile-menu__secondary-menu">
-          {%- for link in secondary_menu.links -%}
+          {%- for link in config.secondary_menu.links -%}
             <a class="mobile-menu__link-wrap secondary" href="{{ link.url }}">
               <span class="nav-link-secondary">{{ link.title }}</span>
             </a>

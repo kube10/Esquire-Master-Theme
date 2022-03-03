@@ -1,3 +1,5 @@
+{{ 'component-esq-menu-dropdown-2.css' | asset_url | stylesheet_tag }}
+
 {%- assign primary_menu = config.primary_menu -%}
 
 <div id="menu-dropdown-2" class="menu-dropdown">
@@ -6,7 +8,7 @@
       {%- for link in primary_menu.links -%}
         <div id="submenu-{{ link.title }}" class="submenu inline hidden">
           {%- for sublink in link.links -%}
-            <a class="nav-link-secondary" href="{{ sublink.url }}">
+            <a class="nav-link" href="{{ sublink.url }}">
               {{ sublink.title }}
             </a>
           {%- endfor -%}

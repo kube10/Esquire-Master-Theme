@@ -167,6 +167,11 @@ p {
   color: var(--color-text-body);
 }
 
+a {
+  color: var(--color-text-heading);
+  text-decoration: none;
+}
+
 .p-large {
   font-size: 1.25rem;
 }

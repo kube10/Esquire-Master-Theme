@@ -7,7 +7,15 @@
     {%- endfor -%}
     <input id="variantField" type="hidden" name="" value="{{ product.selected_or_first_available_variant.id }}">
   </esq-variant-selector>
-  <button type="button" name="button" class="addToCartButton button button-primary">
-    ADD TO CART
-  </button>
+  <div class="esq-product-form__actions {% unless direct_checkout %}
+    justify-center
+  {% endunless %}">
+    <button type="button" name="button" class="addToCartButton button button-secondary border inverted">
+      <span>ADD TO CART</span>
+      {%- render 'icon-cart' -%}
+    </button>
+    {%- if direct_checkout -%}
+      <button type="button" name="button" class="directCheckoutButton button button-primary">BUY NOW</button>
+    {%- endif -%}
+  </div>
 </esq-product-form>

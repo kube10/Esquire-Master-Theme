@@ -11,10 +11,11 @@
 <div id="menu-dropdown-1" class="menu-dropdown">
   {%- assign linklistLength = primary_menu.links | size -%}
   {%- if  linklistLength > 3 and feature_active -%}
-    <div>
+    <div class="container">
   {%- else -%}
     <div class="container-slim">
   {%- endif -%}
+    <div class="menu-dropdown__line"></div>
     <div class="menu-dropdown-nav">
       {%- for link in primary_menu.links -%}
           <div class="submenu">
@@ -41,13 +42,14 @@
 <script type="text/javascript">
   const nav = document.querySelector('.primary-menu');
   const dropdown = document.querySelector('.menu-dropdown');
+  const dropdownNav = document.querySelector('.menu-dropdown-nav');
 
   nav.addEventListener('mouseenter', () => {
     dropdown.style.display = 'block';
   })
 
 
-  dropdown.addEventListener('mouseleave', () => {
+  dropdownNav.addEventListener('mouseleave', () => {
     dropdown.style.display = "none";
   })
 
