@@ -3,6 +3,7 @@
   display: grid;
   grid-column-gap: var(--grid-gap);
   grid-row-gap: var(--grid-gap);
+  transition: opacity 0.3s ease;
 }
 
 .product-grid.small {
@@ -11,6 +12,11 @@
 
 .product-grid.large {
   --grid-gap: 2.5rem;
+}
+
+.product-grid.loading {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .esq-product-form {

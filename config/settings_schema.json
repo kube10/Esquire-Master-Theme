@@ -245,6 +245,28 @@
         "type": "image_picker",
         "id": "cart_empty_state_img",
         "label": "Empty Cart Image"
+      },
+      {
+        "type": "header",
+        "content": "Filters"
+      },
+      {
+        "type": "number",
+        "id": "price_filter_amount",
+        "label": "Amount of price ranges",
+        "default": 4
+      },
+      {
+        "type": "number",
+        "id": "price_filter_min",
+        "label": "Price filter minimum (in cents e.g. 2000)",
+        "default": 1000
+      },
+      {
+        "type": "number",
+        "id": "price_filter_max",
+        "label": "Price filter maximum (in cents e.g. 10000)",
+        "default": 10000
       }
     ]
   },

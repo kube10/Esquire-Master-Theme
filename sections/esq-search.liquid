@@ -50,48 +50,86 @@ first-section
               {%- endfor -%}
             </div>
           </div>
+
+          {% capture options_list %}
+            {%- for result in search.results -%}
+              {%- for option in result.options -%}
+              {%- if option != "Title" -%}
+                {{ option }}::
+              {%- endif -%}
+              {%- endfor -%}
+            {%- endfor -%}
+          {%- endcapture -%}
+
+          {%- assign options_array = options_list | strip | split: '::' | uniq -%}
+
+          {%- for item in options_array -%}
+            <div class="option-badge filter-badge">
+              <div class="filter-badge__heading">
+                <span>FILTER ON {{ item }}</span>
+                {%- render 'icon-caret' -%}
+              </div>
+              <div class="filter-badge__content">
+                  {% capture option_values_list %}
+                    {%- for result in search.results -%}
+                      {%- for value in result.options_by_name[item].values -%}
+                        {{ value }}::
+                      {%- endfor -%}
+                    {%- endfor -%}
+                  {%- endcapture -%}
+
+                  {%- assign options_values_array = option_values_list | strip | split: '::' | uniq -%}
+
+                  {%- for item in options_values_array -%}
+                    <div class="filter-checkbox-wrap">
+                        <input class="filter-checkbox optionCheckbox" type="checkbox" value="{{ item }}">
+                        <span>{{ item }}</span>
+                    </div>
+                  {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
           <div class="option-badge filter-badge">
             <div class="filter-badge__heading">
-              <span>FILTER ON SIZE</span>
+              <span>FILTER ON PRICE RANGE</span>
               {%- render 'icon-caret' -%}
             </div>
             <div class="filter-badge__content">
-              {%- capture variants_options_list -%}
-                {%- for result in search.results -%}
-                  {%- if result.object_type == "product" -%}
-                    {%- for variant in result.variants -%}
-                      {%- if variant.available and variant.title != "Default Title" -%}-
-                        {{ variant.title }}::
-                      {%- endif -%}
-                    {%- endfor -%}
-                  {%- endif -%}
-                {%- endfor -%}
-              {%- endcapture -%}
-
-              {% assign variants_array = variants_options_list | strip | split: '::' | uniq %}
-
-              {%- for item in variants_array -%}
+              {%- for i in (1.. settings.price_filter_amount) -%}
+              {%- assign range = settings.price_filter_max | minus: settings.price_filter_min | divided_by: settings.price_filter_amount -%}
+                {%- if forloop.first -%}
+                  {%- assign min = settings.price_filter_min -%}
+                  {%- assign max = min | plus: range -%}
+                {%- else -%}
+                  {%- assign increase = forloop.index0 | times: range -%}
+                  {%- assign min = settings.price_filter_min | plus: increase -%}
+                  {%- assign max = min | plus: range -%}
+              {%- endif -%}
+              {%- if forloop.last -%}
+                  {%- assign max = settings.price_filter_max -%}
+              {%- endif -%}
                 <div class="filter-checkbox-wrap">
-                    <input class="filter-checkbox" type="checkbox" value="{{ item }}">
-                    <span>{{ item }}</span>
+                    <input class="filter-checkbox priceCheckbox" type="checkbox" value="{{ min }} - {{ max }}">
+                    <span>{{ min | money }} - {{ max | money }}</span>
                 </div>
               {%- endfor -%}
             </div>
-          </div>
-          <div class="option-badge filter-badge">
-            <span>FILTER ON PRICE</span>
-            {%- render 'icon-caret' -%}
           </div>
         </div>
       </div>
         {{ 'section-esq-collection-grid.css' | asset_url | stylesheet_tag }}
         {{ "component-esq-product-card-minimal.css" | asset_url | stylesheet_tag }}
-        <div class="product-grid small">
+        <div class="product-grid small loading">
           {%- for result in search.results -%}
             {%- if result.object_type == "product" -%}
-              <div class="result__wrapper">
+              <div class="result__wrapper" data-price="{{ result.price }}">
                 {%- for collection in result.collections -%}
                   <span class="result__collection hidden">{{ collection.title }}</span>
+                {%- endfor -%}
+                {%- for option in result.options_with_values -%}
+                  {%- for value in option.values -%}
+                    <span class="result__option hidden">{{ value }}</span>
+                  {%- endfor -%}
                 {%- endfor -%}
                 {%- render "esq-product-card-minimal", product: result, size: "small" -%}
               </div>
@@ -100,7 +138,6 @@ first-section
         </div>
       {%- endif -%}
     {%- endif -%}
-
   </div>
 </div>
 
