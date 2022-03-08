@@ -56,6 +56,10 @@
   transition: color 0.2s ease;
 }
 
+.filter-term.active {
+  color: var(--color-text-heading);
+}
+
 .filter-term:hover {
   color: var(--color-text-heading);
 }

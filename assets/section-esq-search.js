@@ -1,9 +1,8 @@
-const searchQuery = document.getElementById("search-section").dataset.query;
-const sortBy = document.getElementById("search-section").dataset.sort;
 let url = new URL(window.location.href);
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const collectionsParam = urlParams.get("collections");
+const sortParam = urlParams.get("sort_by");
 
 const filterCheckboxes = document.querySelectorAll(".filter-checkbox");
 const resultWrappers = document.querySelectorAll(".result__wrapper");
@@ -12,7 +11,7 @@ const resultsCountSpan = document.getElementById("results_count");
 (function () {
   if (collectionsParam) {
     const filterCollections = collectionsParam.split(",");
-    console.log(filterCollections);
+
     filterCollections.forEach((collection, i) => {
       filterCheckboxes.forEach((checkbox, i) => {
         if (checkbox.value === collection) {
@@ -22,6 +21,16 @@ const resultsCountSpan = document.getElementById("results_count");
     });
 
     filterResults(filterCollections);
+  }
+  if (sortParam) {
+    const sortByInputs = document.querySelectorAll(".sort-by-input");
+
+    sortByInputs.forEach((input, i) => {
+      input.classList.remove("active");
+      if (input.dataset.value === sortParam) {
+        input.classList.add("active");
+      }
+    });
   }
 })();
 
@@ -68,3 +77,11 @@ function filterResults(activeFilterValues) {
     resultsCountSpan.innerHTML = resultsCount;
   }
 }
+
+function sortResults(targetElement) {
+  const sortBy = targetElement.dataset.value;
+  url.searchParams.set("sort_by", sortBy);
+  window.location.href = url;
+}
+
+function optionsFilter() {}

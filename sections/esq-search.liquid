@@ -2,7 +2,7 @@
 
 {%- assign search_query = "?q=" | append: search.terms | append: '&options%5Bprefix%5D=last&sort_by=' -%}
 
-<div id="search-section" data-query="{{search_query}}" data-sort="{{ search.sort_by }}" class="{{section.settings.padding}} {% if section.settings.first-section and settings.fixed-navigation %}
+<div id="search-section" class="{{section.settings.padding}} {% if section.settings.first-section and settings.fixed-navigation %}
 first-section
 {% endif %}">
   <div class="container">
@@ -21,21 +21,11 @@ first-section
               {%- render 'icon-caret' -%}
             </div>
             <div class="filter-badge__content">
-              <a href="{{ routes.search_url | append: search_query | append: 'relevance'}}" class="filter-term">Relevance</a>
-              <a href="{{ routes.search_url | append: search_query | append: 'best-selling'}}" class="filter-term">Popularity</a>
-              <a href="{{ routes.search_url | append: search_query | append: 'price-descending'}}" class="filter-term">Price Descending</a>
-              <a href="{{ routes.search_url | append: search_query | append: 'price-ascending'}}" class="filter-term">Price Ascending</a>
+              <div data-value="relevance" onclick="sortResults(this)" class="filter-term sort-by-input active">Relevance</div>
+              <div data-value="price-descending" onclick="sortResults(this)" class="filter-term sort-by-input">Price Descending</div>
+              <div data-value="price-ascending" onclick="sortResults(this)" class="filter-term sort-by-input">Price Ascending</div>
             </div>
           </div>
-          {%- for result in search.results -%}
-            {%- for collection in result.collections -%}
-              {{ forloop.index }}
-              {{ collection.title }}
-              {%- if forloop.last == false -%}
-                ::
-              {%- endif -%}
-            {%- endfor -%}
-          {%- endfor -%}
           <div class="option-badge filter-badge">
             <div class="filter-badge__heading">
               <span>FILTER ON COLLECTION</span>
@@ -50,7 +40,7 @@ first-section
                 {%- endfor -%}
               {%- endcapture -%}
 
-              {% assign collections_array = collection_list | split: '::' | uniq %}
+              {% assign collections_array = collection_list | strip | split: '::' | uniq %}
 
               {%- for item in collections_array -%}
                 <div class="filter-checkbox-wrap">
@@ -58,17 +48,35 @@ first-section
                     <span>{{ item }}</span>
                 </div>
               {%- endfor -%}
-
-                {%- for result in search.results -%}
-                  {%- for collection in result.collections -%}
-
-                  {%- endfor -%}
-                {%- endfor -%}
             </div>
           </div>
           <div class="option-badge filter-badge">
-            <span>FILTER ON SIZE</span>
-            {%- render 'icon-caret' -%}
+            <div class="filter-badge__heading">
+              <span>FILTER ON SIZE</span>
+              {%- render 'icon-caret' -%}
+            </div>
+            <div class="filter-badge__content">
+              {%- capture variants_options_list -%}
+                {%- for result in search.results -%}
+                  {%- if result.object_type == "product" -%}
+                    {%- for variant in result.variants -%}
+                      {%- if variant.available and variant.title != "Default Title" -%}-
+                        {{ variant.title }}::
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endcapture -%}
+
+              {% assign variants_array = variants_options_list | strip | split: '::' | uniq %}
+
+              {%- for item in variants_array -%}
+                <div class="filter-checkbox-wrap">
+                    <input class="filter-checkbox" type="checkbox" value="{{ item }}">
+                    <span>{{ item }}</span>
+                </div>
+              {%- endfor -%}
+            </div>
           </div>
           <div class="option-badge filter-badge">
             <span>FILTER ON PRICE</span>
