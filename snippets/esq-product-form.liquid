@@ -1,8 +1,22 @@
 <esq-product-form data-productid="{{ product.id }}" class="esq-product-form">
-  <esq-variant-selector class="esq-variant-selector">
-    {%- for variant in product.variants -%}
-      {%- if variant.title != "Default Title" -%}
-        <!-- <span data-id="{{ variant.id }}" class="variantSelector option-badge {% unless variant.available %}disabled{% endunless %} {% if variant.id == product.selected_or_first_available_variant.id %} selected {% endif %}">{{ variant.title }}</span> -->
+  <esq-variant-selector class="esq-variant-selector" data-producthandle="{{ product.handle }}">
+    {%- assign firstAvailableOptions = product.selected_or_first_available_variant.options -%}
+    {%- for option in product.options_with_values -%}
+      {%- if option.name != "Title" -%}
+        <label>{{ option.name }}</label>
+        <div class="esq-variant-selector__option-row">
+          {%- assign optionIndex = forloop.index0 -%}
+          {%- for value in option.values -%}
+            {%- if firstAvailableOptions contains value -%}
+                {%- assign selected = true -%}
+              {%- else -%}
+                {%- assign selected = false -%}
+            {%- endif -%}
+            <div data-key="{{ optionIndex }}" data-value="{{ value }}" class="option-badge {% if selected == true %}
+              selected
+            {% endif %}">{{ value }}</div>
+          {%- endfor -%}
+        </div>
       {%- endif -%}
     {%- endfor -%}
     <input id="variantField" type="hidden" name="" value="{{ product.selected_or_first_available_variant.id }}">

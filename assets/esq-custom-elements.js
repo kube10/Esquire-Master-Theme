@@ -49,18 +49,95 @@ customElements.define("esq-product-form", EsqProductForm);
 class EsqVariantSelector extends HTMLElement {
   constructor() {
     super();
-    this.variantSelectors = this.querySelectorAll(".variantSelector");
     this.variantField = this.querySelector("#variantField");
-    this.variantSelectors.forEach((variantSelector, i) => {
-      variantSelector.addEventListener("click", () => {
-        const id = variantSelector.dataset.id;
-        this.variantField.value = id;
-        this.variantSelectors.forEach((variantSelector, i) => {
-          variantSelector.classList.remove("selected");
+    this.optionBadges = this.querySelectorAll(".option-badge");
+    this.productHandle = this.dataset.producthandle;
+
+    if (this.optionBadges.length > 0) {
+      this.variants = [];
+
+      fetch("/products/" + this.productHandle + ".js")
+        .then((res) => res.json())
+        .then((data) => {
+          this.variants = data.variants;
+          const firstSelected = this.querySelector(".option-badge.selected");
+          console.log(firstSelected);
+          this.variants.forEach((variant, i) => {
+            if (variant.options.includes(firstSelected.dataset.value)) {
+              if (!variant.available) {
+                variant.options.forEach((option, i) => {
+                  if (i != firstSelected.dataset.key) {
+                    const optionToDisable = this.querySelector(
+                      ".option-badge[data-value=" + option + "]"
+                    );
+                    optionToDisable.classList.add("disabled");
+                  }
+                });
+              }
+            }
+          });
+        })
+        .catch((err) => {
+          console.log(err);
         });
-        variantSelector.classList.add("selected");
+
+      this.selectedOptions = [];
+
+      this.optionBadges.forEach((optionBadge, i) => {
+        if (optionBadge.classList.contains("selected")) {
+          this.selectedOptions.push(optionBadge.dataset.value);
+          console.log(this.selectedOptions);
+          console.log(this.variants);
+          if (this.optionAvailable(this.selectedOptions, this.variants)) {
+            console.log("Selected options available");
+          }
+        }
+        optionBadge.onclick = () => {
+          const key = optionBadge.dataset.key;
+          const value = optionBadge.dataset.value;
+
+          this.selectedOptions[key] = value;
+
+          this.optionBadges.forEach((badge, i) => {
+            if (badge.dataset.key === key) {
+              badge.classList.remove("selected");
+            } else {
+              const optionToCheck = this.selectedOptions;
+              optionToCheck[badge.dataset.key] = badge.dataset.value;
+              if (this.optionAvailable(optionToCheck, this.variants)) {
+                badge.classList.remove("disabled");
+              } else {
+                badge.classList.remove("selected");
+                badge.classList.add("disabled");
+              }
+            }
+          });
+
+          optionBadge.classList.add("selected");
+
+          this.variants.forEach((variant, i) => {
+            if (
+              JSON.stringify(variant.options) ==
+              JSON.stringify(this.selectedOptions)
+            ) {
+              this.variantField.value = variant.id;
+            }
+          });
+        };
       });
+    }
+  }
+
+  optionAvailable(optionArray, variants) {
+    let available = false;
+    variants.forEach((variant, i) => {
+      if (JSON.stringify(variant.options) == JSON.stringify(optionArray)) {
+        if (variant.available === true) {
+          available = true;
+        }
+      }
     });
+    return available;
   }
 }
 
