@@ -1,0 +1,24 @@
+<esq-variant-selector class="esq-variant-selector" data-producthandle="{{ product.handle }}">
+  {%- assign firstAvailableOptions = product.selected_or_first_available_variant.options -%}
+  {%- for option in product.options_with_values -%}
+    {%- if option.name != "Title" -%}
+    <div class="esq-variant-selector__option-wrap">
+        <label class="p-small">{{ option.name }}</label>
+        <div class="esq-variant-selector__option-row">
+          {%- assign optionIndex = forloop.index0 -%}
+          {%- for value in option.values -%}
+            {%- if firstAvailableOptions contains value -%}
+                {%- assign selected = true -%}
+              {%- else -%}
+                {%- assign selected = false -%}
+            {%- endif -%}
+            <div data-key="{{ optionIndex }}" data-value="{{ value }}" class="option-badge {% if selected == true %}
+              selected
+            {% endif %}">{{ value }}</div>
+          {%- endfor -%}
+        </div>
+    </div>
+    {%- endif -%}
+  {%- endfor -%}
+  <input id="variantField" type="hidden" name="" value="{{ product.selected_or_first_available_variant.id }}">
+</esq-variant-selector>

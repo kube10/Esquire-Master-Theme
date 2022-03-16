@@ -1,6 +1,13 @@
 .product-card-detailed__image-wrap {
   display: block;
   overflow: hidden;
+  position: relative;
+}
+
+.product-card-detailed__image-wrap:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
 }
 
 .product-card-detailed__image {
@@ -8,6 +15,7 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
+  position: absolute;
 }
 
 .product-card-detailed__image-wrap:hover > .product-card-detailed__image {
@@ -29,62 +37,47 @@
   text-align: right;
 }
 
-.product-card-detailed.small .esq-product-form {
-  grid-area: form;
-  padding: 0;
-}
-
 .product-card-detailed.small .button {
   font-size: 0.75rem;
   padding: 0.5rem 0.75rem;
 }
 
-.product-card-detailed.small .product-card-detailed__content {
-  display: grid;
-  grid-template-areas: "title price" "form form";
-  padding: 1rem 0;
-  grid-row-gap: 1rem;
-}
-
-.product-card-detailed.regular .product-card-detailed__content {
-  display: grid;
-  padding: 1rem 0;
-  grid-template-areas: "title price" "form form";
-  grid-row-gap: 1rem;
-}
-
-.product-card-detailed.regular .product-card-detailed__title {
-  grid-area: title;
-}
-
-.product-card-detailed.regular .price {
-  grid-area: price;
-  justify-self: flex-end;
-  text-align: right;
-}
-
-.product-card-detailed.regular .esq-product-form {
-  grid-area: form;
-  padding: 0;
-}
-
-.product-card-detailed.large .product-card-detailed__content {
-  display: grid;
-  padding: 1rem 0;
-  grid-template-areas: "title price" "form form";
-  grid-row-gap: 1.5rem;
-}
-
-.product-card-detailed.large .price {
-  grid-area: price;
-  justify-self: flex-end;
-  text-align: right;
-}
-
-.product-card-detailed.large .esq-product-form {
-  grid-area: form;
-  padding: 0;
-  flex-direction: row;
-  align-items: flex-end;
+.product-card-detailed__content-header {
+  padding: 1rem 0 0rem 0;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
+}
+
+.product-card-detailed__form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "options price" "actions actions";
+}
+
+.product-card-detailed__form .esq-product-form__actions {
+  grid-area: actions;
+  padding-top: 1rem;
+}
+
+.product-card-detailed__form .esq-variant-selector__option-row {
+  justify-content: flex-start;
+  margin-bottom: 0;
+}
+
+.product-card-detailed__form .esq-variant-selector__option-wrap {
+  margin-top: 0.5rem;
+}
+
+.product-card-detailed__form .esq-product-form__actions {
+  justify-content: flex-end;
+}
+
+.product-card-detailed__form .esq-product-form__actions.direct-checkout {
+  justify-content: space-between;
+}
+
+.product-card-detailed__form .price {
+  align-self: flex-end;
+  justify-self: flex-end;
 }

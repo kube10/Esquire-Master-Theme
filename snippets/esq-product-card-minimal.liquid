@@ -1,10 +1,10 @@
   <div data-url="{{ product.url }}" class="product-card product-card-minimal {{ size }}">
-    <div class="product-card__image-wrap product-card-minimal__image-wrap" onmouseenter="showOverlay(this)">
+    <div class="product-card__image-wrap product-card-minimal__image-wrap">
       <img class="product-card-minimal__image" loading="lazy" src="{{ product.featured_media | image_url }}" alt="{{ product.title }}" width="300" height="300">
-      <div class="product-card-minimal__overlay {{ size }}" onmouseleave="hideOverlay(this)">
+      <div class="product-card-minimal__overlay {{ size }}">
         <div class="product-card-minimal__overlay-text-content">
           <h6 class="product-card-minimal__overlay-title">{{ product.title }}</h6>
-          <p class="p-small color-heading product-card-minimal__overlay-title-description">{{ product.description }}</p>
+          <p class="p-small color-heading product-card-minimal__overlay-description">{{ product.description }}</p>
           {% render 'esq-price', orientation: "vertical", size: "regular", product: product %}
         </div>
 
@@ -16,14 +16,3 @@
       {% render 'esq-price', product: product %}
     </div>
   </div>
-
-<script type="text/javascript">
-  function showOverlay(target) {
-      const overlay = target.querySelector('.product-card-minimal__overlay');
-      overlay.classList.add('open');
-  }
-
-  function hideOverlay(target) {
-    target.classList.remove('open');
-  }
-</script>

@@ -16,23 +16,43 @@
 
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
+
 <div class="{{ section.settings.padding }} {% if section.settings.first-section and settings.fixed_navigation %}
   first-section
 {% endif %}">
   <div class="container">
     <h2>{{ section.settings.headline }}</h2>
     <div class="product-grid {{ product_card_size }}">
+        {%- if collection -%}
+          {%- paginate activeCollection.products by section.settings.products_per_page -%}
+
         {%- for product in activeCollection.products -%}
           {%- case section.settings.product_card_type -%}
             {%- when 'minimal' -%}
               {%- render 'esq-product-card-minimal', size: product_card_size, product: product, direct_checkout: section.settings.direct_checkout -%}
             {%- when 'detailed' -%}
               {%- render 'esq-product-card-detailed', size: product_card_size, product: product, direct_checkout: section.settings.direct_checkout -%}
-            {%- endcase -%}
+          {%- endcase -%}
         {%- endfor -%}
+
+          {%- if paginate.pages > 1 -%}
+              {%- render 'pagination', paginate: paginate -%}
+            {%- endif -%}
+          {%- endpaginate -%}
+        {%- else -%}
+        {%- for product in activeCollection.products -%}
+          {%- case section.settings.product_card_type -%}
+            {%- when 'minimal' -%}
+              {%- render 'esq-product-card-minimal', size: product_card_size, product: product, direct_checkout: section.settings.direct_checkout -%}
+            {%- when 'detailed' -%}
+              {%- render 'esq-product-card-detailed', size: product_card_size, product: product, direct_checkout: section.settings.direct_checkout -%}
+          {%- endcase -%}
+        {%- endfor -%}
+        {%- endif -%}
     </div>
   </div>
 </div>
+
 
 <script src="
 {{ 'section-esq-collection-grid.js' | asset_url }}" defer="defer"></script>
@@ -59,10 +79,28 @@
       "label": "Collectie"
     },
     {
+      "type": "number",
+      "id": "amount_of_products",
+      "label": "Amount of products"
+    },
+    {
+      "type": "number",
+      "id": "products_per_page",
+      "info": "Pagination will only be active on collection pages.",
+      "label": "Amount of products per page"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_collection",
+      "info": "When selected, will show all products. The above option will not work.",
+      "label": "Full collection"
+    },
+    {
       "type": "select",
       "id": "product_card_type",
       "label": "Type productkaarten",
       "default": "minimal",
+      "info": "Detailed works best for products with the same options (e.g. size and color), when products have a different amount of options, we recommend using the Minimal card style.",
       "options": [
         {
           "value": "minimal",

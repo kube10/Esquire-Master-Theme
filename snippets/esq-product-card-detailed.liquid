@@ -3,8 +3,35 @@
     <img class="product-card-detailed__image" loading="lazy" src="{{ product.featured_media | image_url }}" alt="{{ product.title }}" width="300" height="300">
   </a>
   <div class="product-card-detailed__content">
-      <a href="{{ product.url }}" class="p-large product-card-detailed__title m-0">{{ product.title }}</a>
-      {% render 'esq-price', product: product %}
-      {%- render "esq-product-form", product: product, direct_checkout: direct_checkout -%}
+    <div class="product-card-detailed__content-header">
+        <a href="{{ product.url }}" class="p-large product-card-detailed__title m-0">{{ product.title }}</a>
+        {%- if product.has_only_default_variant -%}
+          {%- render "esq-price", product: product -%}
+        {%- endif -%}
+    </div>
+    <esq-product-form class="product-card-detailed__form">
+      {%- unless product.has_only_default_variant -%}
+        {%- render "esq-variant-selector", product: product -%}
+        {%- render "esq-price", product: product -%}
+      {%- endunless -%}
+      <div class="esq-product-form__actions {% if direct_checkout %}direct-checkout{% endif %}">
+        {%- if direct_checkout -%}
+          <button type="button" name="button" class="addToCartButton button button-secondary border inverted">
+            <span>ADD TO CART</span>
+            {%- render 'icon-cart' -%}
+          </button>
+
+          <button type="button" name="button" class="directCheckoutButton button button-primary">BUY NOW</button>
+        {%- else  -%}
+          <button type="button" name="button" class="addToCartButton button button-primary full-width">
+            <span>ADD TO CART</span>
+            {%- render 'icon-cart' -%}
+          </button>
+        {%- endif -%}
+      </div>
+    </esq-product-form>
+      <!-- {% render 'esq-price', product: product %}
+      {%- render "esq-product-form", product: product, direct_checkout: direct_checkout -%} -->
   </div>
+
 </div>
