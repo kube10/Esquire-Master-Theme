@@ -50,7 +50,7 @@ class EsqVariantSelector extends HTMLElement {
   constructor() {
     super();
     this.variantField = this.querySelector("#variantField");
-    this.optionBadges = this.querySelectorAll(".option-badge");
+    this.optionBadges = this.querySelectorAll(".esq-option-badge");
     this.productHandle = this.dataset.producthandle;
 
     if (this.optionBadges.length > 0) {
@@ -60,7 +60,9 @@ class EsqVariantSelector extends HTMLElement {
         .then((res) => res.json())
         .then((data) => {
           this.variants = data.variants;
-          const firstSelected = this.querySelector(".option-badge.selected");
+          const firstSelected = this.querySelector(
+            ".esq-option-badge.selected"
+          );
           console.log(firstSelected);
           this.variants.forEach((variant, i) => {
             if (variant.options.includes(firstSelected.dataset.value)) {
@@ -68,7 +70,7 @@ class EsqVariantSelector extends HTMLElement {
                 variant.options.forEach((option, i) => {
                   if (i != firstSelected.dataset.key) {
                     const optionToDisable = this.querySelector(
-                      ".option-badge[data-value=" + option + "]"
+                      ".esq-option-badge[data-value=" + option + "]"
                     );
                     optionToDisable.classList.add("disabled");
                   }

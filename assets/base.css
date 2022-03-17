@@ -435,7 +435,7 @@ h6,
 }
 
 /* BADGES */
-.option-badge {
+.esq-option-badge {
   font-size: 0.75rem;
   text-transform: uppercase;
   border: 1px solid var(--color-text-heading);
@@ -444,12 +444,12 @@ h6,
   cursor: pointer;
 }
 
-.option-badge.selected {
+.esq-option-badge.selected {
   border: 1px solid var(--color-accent);
   color: var(--color-accent);
 }
 
-.option-badge.disabled {
+.esq-option-badge.disabled {
   border: 1px solid var(--color-text-body);
   color: var(--color-text-body);
   cursor: not-allowed;

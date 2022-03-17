@@ -12,7 +12,7 @@
               {%- else -%}
                 {%- assign selected = false -%}
             {%- endif -%}
-            <div data-key="{{ optionIndex }}" data-value="{{ value }}" class="option-badge {% if selected == true %}
+            <div data-key="{{ optionIndex }}" data-value="{{ value }}" class="esq-option-badge {% if selected == true %}
               selected
             {% endif %}">{{ value }}</div>
           {%- endfor -%}
