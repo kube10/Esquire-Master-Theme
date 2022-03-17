@@ -13,13 +13,11 @@
     <div class="esq-slideshow-classic__bottom-images">
       {%- for image in product.images -%}
         {%- if forloop.index != 1 -%}
-          <div class="esq-slideshow-classic__thumbnail-wrap">
-            <img class="esq-slideshow-classic__thumbnail" src="{{ image | image_url | strip }}" alt="">
+          <div class="esq-slideshow-classic__thumbnail-wrap" style="background-image: url({{ image | image_url }})" data-src="{{ image | image_url | strip }}">
           </div>
         {%- endif -%}
         {%- if forloop.last -%}
-          <div class="esq-slideshow-classic__thumbnail-wrap">
-            <img class="esq-slideshow-classic__thumbnail" src="{{ product.featured_media | image_url | strip }}" alt="{{ product.title }}">
+          <div class="esq-slideshow-classic__thumbnail-wrap" style="background-image: url({{ product.featured_media | image_url }})" data-src="{{ product.featured_media | image_url | strip }}">
           </div>
         {%- endif -%}
       {%- endfor -%}

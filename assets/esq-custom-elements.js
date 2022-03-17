@@ -238,7 +238,7 @@ class EsqSlideshowClassic extends HTMLElement {
     super();
 
     this.thumbnails = this.querySelectorAll(
-      ".esq-slideshow-classic__thumbnail"
+      ".esq-slideshow-classic__thumbnail-wrap"
     );
 
     this.currentImage = this.querySelector("#currentImage");
@@ -251,53 +251,59 @@ class EsqSlideshowClassic extends HTMLElement {
       let activeThumbnailIndex;
 
       this.thumbnails.forEach((thumbnail, i) => {
-        if (
-          thumbnail.getAttribute("src") ===
-          this.currentImage.getAttribute("src")
-        ) {
+        if (thumbnail.dataset.src === this.currentImage.getAttribute("src")) {
           activeThumbnailIndex = i;
         }
       });
 
       if (activeThumbnailIndex === this.thumbnails.length - 1) {
-        this.setImageActive(this.thumbnails[0].getAttribute("src"));
+        this.setImageActive(this.thumbnails[0].dataset.src);
       } else {
         this.setImageActive(
-          this.thumbnails[activeThumbnailIndex + 1].getAttribute("src")
+          this.thumbnails[activeThumbnailIndex + 1].dataset.src
         );
       }
     };
 
     this.thumbnails.forEach((thumbnail, i) => {
       thumbnail.onclick = (e) => {
-        this.setImageActive(e.target.getAttribute("src"));
+        this.setImageActive(e.target.dataset.src);
       };
     });
 
     this.scrollBox = this.querySelector(".esq-slideshow-classic__bottom");
 
     let clientXStart;
+    // this.scrollBox.ondrag = (e) => {
+    //   console.log(e);
+    //   // console.log(e.clientX);
+    //   if (e.layerX != 0) {
+    //     this.scrollBox.scroll({
+    //       left: e.layerX,
+    //     });
+    //   }
+    // };
 
-    this.scrollBox.addEventListener("dragstart", (e) => {
-      console.log(e.clientX);
-      clientXStart = e.clientX;
-    });
-
-    this.scrollBox.addEventListener("dragend", (e) => {
-      if (e.clientX > clientXStart + 150) {
-        console.log("To the right");
-        this.scrollBox.scroll({
-          left: 500,
-          behavior: "smooth",
-        });
-      } else if (e.clientX < clientXStart - 150) {
-        console.log("To the left");
-        this.scrollBox.scroll({
-          left: 0,
-          behavior: "smooth",
-        });
-      }
-    });
+    // this.scrollBox.addEventListener("dragstart", (e) => {
+    //   console.log(e.clientX);
+    //   clientXStart = e.clientX;
+    // });
+    //
+    // this.scrollBox.addEventListener("dragend", (e) => {
+    //   if (e.clientX > clientXStart + 150) {
+    //     console.log("To the right");
+    //     this.scrollBox.scroll({
+    //       left: 500,
+    //       behavior: "smooth",
+    //     });
+    //   } else if (e.clientX < clientXStart - 150) {
+    //     console.log("To the left");
+    //     this.scrollBox.scroll({
+    //       left: 0,
+    //       behavior: "smooth",
+    //     });
+    //   }
+    // });
   }
 
   setImageActive(src) {

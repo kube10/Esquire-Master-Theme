@@ -78,11 +78,13 @@
   margin-top: 2rem;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .esq-main-product__grid {
     grid-template-columns: 50% auto;
   }
+}
 
+@media screen and (min-width: 1024px) {
   .esq-main-product__content {
     padding: 2rem;
   }
