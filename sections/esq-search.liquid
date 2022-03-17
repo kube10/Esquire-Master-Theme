@@ -15,7 +15,7 @@ first-section
       <div class="search__results-filters-wrap">
         <h1 class="h2">Products</h1>
         <div class="search__results-filters">
-          <div class="option-badge filter-badge">
+          <div class="esq-option-badge filter-badge">
             <div class="filter-badge__heading">
               <span>SORT RESULTS BY</span>
               {%- render 'icon-caret' -%}
@@ -26,7 +26,7 @@ first-section
               <div data-value="price-ascending" onclick="sortResults(this)" class="filter-term sort-by-input">Price Ascending</div>
             </div>
           </div>
-          <div class="option-badge filter-badge">
+          <div class="esq-option-badge filter-badge">
             <div class="filter-badge__heading">
               <span>FILTER ON COLLECTION</span>
               {%- render 'icon-caret' -%}
@@ -64,7 +64,7 @@ first-section
           {%- assign options_array = options_list | strip | split: '::' | uniq -%}
 
           {%- for item in options_array -%}
-            <div class="option-badge filter-badge">
+            <div class="esq-option-badge filter-badge">
               <div class="filter-badge__heading">
                 <span>FILTER ON {{ item }}</span>
                 {%- render 'icon-caret' -%}
@@ -89,7 +89,7 @@ first-section
               </div>
             </div>
           {%- endfor -%}
-          <div class="option-badge filter-badge">
+          <div class="esq-option-badge filter-badge">
             <div class="filter-badge__heading">
               <span>FILTER ON PRICE RANGE</span>
               {%- render 'icon-caret' -%}
