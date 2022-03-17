@@ -224,13 +224,13 @@ async function variantIsAvailable(productHandle, variant_id) {
 }
 
 function getScreenSize(width) {
-  if (width > 1536) {
+  if (width >= 1536) {
     return "desktop-l";
-  } else if (width > 1366) {
+  } else if (width >= 1366) {
     return "desktop";
-  } else if (width > 1024) {
+  } else if (width >= 1024) {
     return "desktop-s";
-  } else if (width > 768) {
+  } else if (width >= 768) {
     return "tablet";
   } else {
     return "phone";

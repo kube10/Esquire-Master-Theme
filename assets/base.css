@@ -311,8 +311,8 @@ h6,
 }
 
 .button.small > svg {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
 }
 
 .button.small > svg:last-child {
@@ -371,6 +371,10 @@ h6,
 .button-secondary {
   --button-text-color: var(--color-btn-secondary-text);
   --button-background-color: var(--color-btn-secondary);
+}
+
+.button-secondary.small {
+  text-transform: none;
 }
 
 .button-primary:hover {
@@ -461,9 +465,29 @@ h6,
   color: var(--color-text-heading);
 }
 
+.price.large {
+  font-size: 1.25rem;
+}
+
+.price.small {
+  font-size: 0.75rem;
+}
+
+.price.small > .price-old {
+  font-size: 0.75rem;
+}
+
 @media screen and (min-width: 1366px) {
   .price {
     font-size: 1.25rem;
+  }
+
+  .price.small {
+    font-size: 1rem;
+  }
+
+  .price.large {
+    font-size: 1.5rem;
   }
 }
 
@@ -473,7 +497,7 @@ h6,
 }
 
 .price-old {
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-weight: 400;
   color: var(--color-text-body);
   text-decoration: line-through;
@@ -481,14 +505,6 @@ h6,
 
 .price-new {
   color: var(--color-accent);
-}
-
-.price.small {
-  font-size: 1rem;
-}
-
-.price.small > .price-old {
-  font-size: 0.75rem;
 }
 
 /* UTILTIY */

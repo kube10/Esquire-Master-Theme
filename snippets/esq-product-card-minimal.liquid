@@ -1,11 +1,15 @@
   <div data-url="{{ product.url }}" class="esq-product-card-minimal {{ size }}">
     <div class="esq-product-card__image-wrap esq-product-card-minimal__image-wrap">
+      {%- if product.compare_at_price > product.price -%}
+        {%- assign discountPercentage = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+        <div class="esq-sale-badge">Sale - {{ discountPercentage }}% off</div>
+      {%- endif -%}
       <img class="esq-product-card-minimal__image" loading="lazy" src="{{ product.featured_media | image_url }}" alt="{{ product.title }}" width="300" height="300">
       <div class="esq-product-card-minimal__overlay {{ size }}">
         <div class="esq-product-card-minimal__overlay-text-content">
           <h6 class="esq-product-card-minimal__overlay-title">{{ product.title }}</h6>
-          <p class="p-small color-heading esq-product-card-minimal__overlay-description">{{ product.description }}</p>
-          {% render 'esq-price', orientation: "vertical", size: "regular", product: product %}
+          <p class="p-small color-heading esq-product-card-minimal__overlay-description {% if product.has_only_default_variant %}no-variants{% endif %}">{{ product.description }}</p>
+          {% render 'esq-price', orientation: "vertical", size: size, product: product %}
         </div>
         {%- unless product.has_only_default_variant -%}
           <div class="esq-product-card-minimal__overlay-line"></div>
@@ -17,14 +21,14 @@
           <div class="esq-product-card-minimal__overlay-form--actions {% if direct_checkout %}direct-checkout{% endif %}">
             {%- if direct_checkout -%}
               <button type="button" name="button" class="addToCartButton button button-secondary border inverted small">
-                <span>ADD TO CART</span>
+                <span>Add to cart</span>
                 {%- render 'icon-cart' -%}
               </button>
 
               <button type="button" name="button" class="directCheckoutButton button button-primary small">BUY NOW</button>
             {%- else  -%}
               <button type="button" name="button" class="addToCartButton button button-primary small">
-                <span>ADD TO CART</span>
+                <span>Add to cart</span>
                 {%- render 'icon-cart' -%}
               </button>
             {%- endif -%}
@@ -34,6 +38,6 @@
     </div>
     <div class="esq-product-card-minimal__content">
       <a href="{{ product.url }}" class="h6 esq-product-card-minimal__title m-0">{{ product.title }}</a>
-      {% render 'esq-price', product: product %}
+      {% render 'esq-price', product: product, orientation: "horizontal", size: size %}
     </div>
   </div>
