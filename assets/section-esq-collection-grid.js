@@ -3,7 +3,9 @@ window.onresize = setLinkOnCard;
 
 function setLinkOnCard() {
   const width = window.innerWidth;
-  const productCards = document.querySelectorAll(".esq-product-card-minimal");
+  const productCards = document.querySelectorAll(
+    ".esq-product-card__image-wrap"
+  );
   if (getScreenSize(width) === "phone" || getScreenSize(width) === "tablet") {
     productCards.forEach((card, i) => {
       card.onclick = () => {
@@ -14,6 +16,7 @@ function setLinkOnCard() {
   } else {
     productCards.forEach((card, i) => {
       card.onclick = () => {
+        console.log("card click");
         return false;
       };
     });

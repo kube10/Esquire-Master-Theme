@@ -1,5 +1,5 @@
-  <div data-url="{{ product.url }}" class="esq-product-card-minimal {{ size }}">
-    <div class="esq-product-card__image-wrap esq-product-card-minimal__image-wrap">
+  <div class="esq-product-card-minimal {{ size }}">
+    <div class="esq-product-card__image-wrap esq-product-card-minimal__image-wrap" data-url="{{ product.url }}" >
       {%- if product.compare_at_price > product.price -%}
         {%- assign discountPercentage = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
         <div class="esq-sale-badge">Sale - {{ discountPercentage }}% off</div>

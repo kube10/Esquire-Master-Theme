@@ -1,0 +1,152 @@
+{{ "section-esq-main-product.css" | asset_url | stylesheet_tag }}
+
+<div class="{{section.settings.padding}} {% if section.settings.first-section and settings.fixed-navigation %}
+first-section
+{% endif %}">
+  <div class="container">
+    <div class="esq-main-product__grid">
+      <div class="esq-main-product__media">
+        {%- render "esq-slideshow-classic" -%}
+      </div>
+      <div class="esq-main-product__grid-right">
+        <div class="esq-main-product__content">
+          {%- if product.tags.size > 0 -%}
+            <div class="esq-main-product__tags">
+              {%- for tag in product.tags -%}
+                <span class="esq-main-product__tag p-small">{{ tag }}</span>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+          <h1 class="h5 esq-main-product__title">{{ product.title }}</h1>
+          <p>{{ product.description }}</p>
+
+          {%- for block in section.blocks -%}
+            {%- if block.type == "usp-tag" -%}
+              {% assign uspTags = true %}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if uspTags -%}
+            <div class="esq-main-product__usp-tag--wrap">
+              {%- for block in section.blocks -%}
+                {%- if block.type == "usp-tag" -%}
+                  <div class="esq-main-product__usp-tag">
+                    {%- if block.settings.icon_svg -%}
+                      {{ block.settings.icon_svg }}
+                    {%- else -%}
+                      <img src="
+                      {{ block.settings.icon_img | image_url }}" alt="">
+                    {%- endif -%}
+                    <span>{{ block.settings.tag }}</span>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          <div class="esq-main-product__line"></div>
+          <esq-product-form class="esq-main-product__form">
+            <div class="esq-main-product__form-options">
+              {%- render "esq-variant-selector" -%}
+              {%- render 'esq-price', orientation: "vertical", size: "large" -%}
+            </div>
+            <div class="esq-main-product__form-actions {% unless section.settings.direct_checkout %}
+              justify-end
+            {% endunless %}">
+              {%- if section.settings.direct_checkout -%}
+                <button type="button" name="button" class="addToCartButton button button-secondary border inverted small">
+                  <span>Add to cart</span>
+                  {%- render 'icon-cart' -%}
+                </button>
+
+                <button type="button" name="button" class="directCheckoutButton button button-primary small">BUY NOW</button>
+              {%- else  -%}
+                <button type="button" name="button" class="addToCartButton button button-primary full-width small">
+                  <span>Add to cart</span>
+                  {%- render 'icon-cart' -%}
+                </button>
+              {%- endif -%}
+            </div>
+          </esq-product-form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{%- schema -%}
+{
+  "name": "ESQ Main Product Section",
+  "tag": "section",
+  "class": "esq-main-product-section",
+  "presets": [
+    {
+      "name": "ESQ Main Product Section"
+    }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "direct_checkout",
+      "label": "Display direct checkout button?",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "first-section",
+      "label": "First section on page?",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "padding",
+      "default": "section-p",
+      "label": "Padding",
+      "options": [
+        {
+          "label": "None",
+          "value": "section"
+        },
+        {
+          "label": "Top & Bottom",
+          "value": "section-p"
+        },
+        {
+          "label": "Top",
+          "value": "section-pt"
+        },
+        {
+          "label": "Bottom",
+          "value": "section-pb"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "usp-tag",
+      "name": "USP Tag",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_img",
+          "label": "Icon"
+        },
+        {
+          "type": "textarea",
+          "id": "icon_svg",
+          "label": "Icon SVG",
+          "info": "When this setting is used, the above icon will be ignored."
+        }
+      ]
+    }
+  ]
+}
+{%- endschema -%}

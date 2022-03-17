@@ -1,0 +1,28 @@
+{{ "component-esq-slideshow-classic.css" | asset_url | stylesheet_tag }}
+
+<esq-slideshow-classic class="esq-slideshow-classic">
+  <div class="esq-slideshow-classic__current-image--wrap">
+    <img id="currentImage" src="{{ product.featured_media | image_url | strip}}" alt="{{ product.title }}">
+    <div class="esq-slideshow-classic__next-slide">
+      <svg width="16" height="16" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9.00214 2.06152L22.9978 16.0573L9.00214 30.053" stroke="#1E1E1E" stroke-width="4"/>
+      </svg>
+    </div>
+  </div>
+  <div class="esq-slideshow-classic__bottom">
+    <div class="esq-slideshow-classic__bottom-images">
+      {%- for image in product.images -%}
+        {%- if forloop.index != 1 -%}
+          <div class="esq-slideshow-classic__thumbnail-wrap">
+            <img class="esq-slideshow-classic__thumbnail" src="{{ image | image_url | strip }}" alt="">
+          </div>
+        {%- endif -%}
+        {%- if forloop.last -%}
+          <div class="esq-slideshow-classic__thumbnail-wrap">
+            <img class="esq-slideshow-classic__thumbnail" src="{{ product.featured_media | image_url | strip }}" alt="{{ product.title }}">
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</esq-slideshow-classic>

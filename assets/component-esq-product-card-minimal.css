@@ -131,7 +131,7 @@
   justify-content: space-between;
 }
 
-.esq-product-card-minimal__overlay.small
+.esq-product-card-minimal__overlay
   .esq-product-card-minimal__overlay-form--actions {
   justify-content: center;
 }

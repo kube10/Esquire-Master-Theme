@@ -232,3 +232,83 @@ class EsqCartItem extends HTMLElement {
 }
 
 customElements.define("esq-cart-item", EsqCartItem);
+
+class EsqSlideshowClassic extends HTMLElement {
+  constructor() {
+    super();
+
+    this.thumbnails = this.querySelectorAll(
+      ".esq-slideshow-classic__thumbnail"
+    );
+
+    this.currentImage = this.querySelector("#currentImage");
+
+    this.nextSlideBtn = this.querySelector(
+      ".esq-slideshow-classic__next-slide"
+    );
+
+    this.nextSlideBtn.onclick = (e) => {
+      let activeThumbnailIndex;
+
+      this.thumbnails.forEach((thumbnail, i) => {
+        if (
+          thumbnail.getAttribute("src") ===
+          this.currentImage.getAttribute("src")
+        ) {
+          activeThumbnailIndex = i;
+        }
+      });
+
+      if (activeThumbnailIndex === this.thumbnails.length - 1) {
+        this.setImageActive(this.thumbnails[0].getAttribute("src"));
+      } else {
+        this.setImageActive(
+          this.thumbnails[activeThumbnailIndex + 1].getAttribute("src")
+        );
+      }
+    };
+
+    this.thumbnails.forEach((thumbnail, i) => {
+      thumbnail.onclick = (e) => {
+        this.setImageActive(e.target.getAttribute("src"));
+      };
+    });
+
+    this.scrollBox = this.querySelector(".esq-slideshow-classic__bottom");
+
+    let clientXStart;
+
+    this.scrollBox.addEventListener("dragstart", (e) => {
+      console.log(e.clientX);
+      clientXStart = e.clientX;
+    });
+
+    this.scrollBox.addEventListener("dragend", (e) => {
+      if (e.clientX > clientXStart + 150) {
+        console.log("To the right");
+        this.scrollBox.scroll({
+          left: 500,
+          behavior: "smooth",
+        });
+      } else if (e.clientX < clientXStart - 150) {
+        console.log("To the left");
+        this.scrollBox.scroll({
+          left: 0,
+          behavior: "smooth",
+        });
+      }
+    });
+  }
+
+  setImageActive(src) {
+    this.currentImage.classList.add("changing-slides");
+    setTimeout(function () {
+      this.currentImage.setAttribute("src", src);
+    }, 250);
+    setTimeout(function () {
+      this.currentImage.classList.remove("changing-slides");
+    }, 550);
+  }
+}
+
+customElements.define("esq-slideshow-classic", EsqSlideshowClassic);

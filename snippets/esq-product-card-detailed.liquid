@@ -17,14 +17,14 @@
       <div class="esq-product-form__actions {% if direct_checkout %}direct-checkout{% endif %}">
         {%- if direct_checkout -%}
           <button type="button" name="button" class="addToCartButton button button-secondary border inverted small">
-            <span>ADD TO CART</span>
+            <span>Add to cart</span>
             {%- render 'icon-cart' -%}
           </button>
 
           <button type="button" name="button" class="directCheckoutButton button button-primary small">BUY NOW</button>
         {%- else  -%}
           <button type="button" name="button" class="addToCartButton button button-primary full-width small">
-            <span>ADD TO CART</span>
+            <span>Add to cart</span>
             {%- render 'icon-cart' -%}
           </button>
         {%- endif -%}
