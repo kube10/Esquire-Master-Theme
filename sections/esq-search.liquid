@@ -2,7 +2,7 @@
 
 {%- assign search_query = "?q=" | append: search.terms | append: '&options%5Bprefix%5D=last&sort_by=' -%}
 
-<div id="search-section" class="{{section.settings.padding}} {% if section.settings.first-section and settings.fixed-navigation %}
+<div id="search-section" class="{{section.settings.padding}} {% if section.settings.first_section and settings.fixed_navigation %}
 first-section
 {% endif %}">
   <div class="container">
@@ -156,7 +156,7 @@ first-section
   "settings": [
     {
       "type": "checkbox",
-      "id": "first-section",
+      "id": "first_section",
       "label": "First section on page?",
       "default": false
     },

@@ -23,7 +23,8 @@
         "7d5415a8-cda4-46ae-a86a-89b4a600a5ce"
       ],
       "settings": {
-        "first-section": false,
+        "direct_checkout": true,
+        "first-section": true,
         "padding": "section-p"
       }
     }

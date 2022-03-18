@@ -1,15 +1,22 @@
 .esq-product-lightbox__current-image--wrap {
   position: relative;
   max-width: 100%;
+  transition: opacity 0.3s ease;
 }
 
 .esq-product-lightbox__current-image--wrap:after {
   content: "";
   display: block;
   padding-bottom: 100%;
+  transition: padding-bottom 0.5s ease;
 }
 
-.esq-product-lightbox__current-image--wrap > img {
+.esq-product-lightbox__current-image--wrap.wide-screen:after {
+  padding-bottom: 58%;
+}
+
+.esq-product-lightbox__current-image--wrap > img,
+.esq-product-lightbox__current-image--wrap > div > .esq-lightbox__video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -17,11 +24,10 @@
 }
 
 #currentImage {
-  transition: opacity 0.3s ease;
   cursor: zoom-in;
 }
 
-#currentImage.changing-slides {
+.esq-product-lightbox__current-image--wrap.changing-slides {
   opacity: 0;
 }
 
@@ -33,10 +39,17 @@
   right: 1rem;
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.75);
-  padding: 1rem;
-  padding-bottom: 13px;
+  width: 48px;
+  height: 48px;
   border-radius: 2rem;
   transition: background-color 0.2s ease;
+}
+
+.esq-product-lightbox__next-slide > svg {
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  transform: translate(-50%, -50%);
 }
 
 .esq-product-lightbox__next-slide:hover {
@@ -75,17 +88,22 @@
 .esq-product-lightbox__bottom-scroll--right {
   position: absolute;
   z-index: 2;
-  top: calc(50% - 0.25rem);
+  top: 45%;
   transform: translateY(-50%);
   cursor: pointer;
   background-color: #fff;
   width: 2rem;
   height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border-radius: 2rem;
   z-index: 10;
+}
+
+.esq-product-lightbox__bottom-scroll--left > svg,
+.esq-product-lightbox__bottom-scroll--right > svg {
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  transform: translate(-50%, -50%);
 }
 
 .esq-product-lightbox__bottom-scroll--left {
@@ -119,6 +137,7 @@
   height: 100px;
   overflow: hidden;
   cursor: zoom-in;
+  position: relative;
 }
 
 .esq-product-lightbox__thumbnail {
@@ -132,6 +151,15 @@
 
 .esq-product-lightbox__thumbnail:hover {
   transform: scale(1.1);
+}
+
+.esq-product-lightbox__thumbnail-video--play {
+  pointer-events: none;
+  position: absolute;
+  left: 51%;
+  top: 54%;
+  transform: translate(-50%, -50%);
+  opacity: 85%;
 }
 
 .esq-product-lightbox__full-width {

@@ -231,6 +231,10 @@ class EsqProductLightBox extends HTMLElement {
   constructor() {
     super();
 
+    this.mediaWrapper = this.querySelector(
+      ".esq-product-lightbox__current-image--wrap"
+    );
+
     this.thumbnails = this.querySelectorAll(".esq-product-lightbox__thumbnail");
 
     this.currentImage = this.querySelector("#currentImage");
@@ -244,27 +248,35 @@ class EsqProductLightBox extends HTMLElement {
         let activeThumbnailIndex;
 
         this.thumbnails.forEach((thumbnail, i) => {
-          if (thumbnail.dataset.src === this.currentImage.getAttribute("src")) {
-            activeThumbnailIndex = i;
+          if (!this.mediaWrapper.querySelector("video")) {
+            if (
+              thumbnail.dataset.src === this.currentImage.getAttribute("src")
+            ) {
+              activeThumbnailIndex = i;
+            }
+          } else {
+            const videoSource = this.mediaWrapper.querySelector(
+              "video > source"
+            );
+
+            if (thumbnail.dataset.src === videoSource.getAttribute("src")) {
+              activeThumbnailIndex = i;
+            }
           }
         });
 
         if (activeThumbnailIndex === this.thumbnails.length - 1) {
-          this.setImageActive(this.thumbnails[0].dataset.src);
-
+          this.setMediaItem(this.thumbnails[0]);
           this.scrollToThumbnail(0);
         } else {
-          this.setImageActive(
-            this.thumbnails[activeThumbnailIndex + 1].dataset.src
-          );
-
+          this.setMediaItem(this.thumbnails[activeThumbnailIndex + 1]);
           this.scrollToThumbnail(activeThumbnailIndex + 1);
         }
       };
 
       this.thumbnails.forEach((thumbnail, i) => {
         thumbnail.onclick = (e) => {
-          this.setImageActive(e.target.dataset.src);
+          this.setMediaItem(e.target);
           this.scrollToThumbnail(i);
         };
       });
@@ -344,6 +356,7 @@ class EsqProductLightBox extends HTMLElement {
   }
 
   scrollToThumbnail(index) {
+    index = index + 1;
     const imageWrapWidth = this.scrollBox.querySelector(
       ".esq-product-lightbox__bottom-images"
     ).offsetWidth;
@@ -361,14 +374,68 @@ class EsqProductLightBox extends HTMLElement {
     }
   }
 
-  setImageActive(src) {
-    this.currentImage.classList.add("changing-slides");
-    setTimeout(function () {
-      this.currentImage.setAttribute("src", src);
-    }, 250);
-    setTimeout(function () {
-      this.currentImage.classList.remove("changing-slides");
-    }, 550);
+  setMediaItem(thumbnail) {
+    const mediaWrapper = this.mediaWrapper;
+    const imageWrap = document.querySelector("#currentImage");
+
+    const src = thumbnail.dataset.src;
+
+    mediaWrapper.classList.add("changing-slides");
+
+    if (thumbnail.classList.contains("video")) {
+      //VIDEO
+      const format = thumbnail.dataset.format;
+
+      const ratio = thumbnail.dataset.width / thumbnail.dataset.height;
+
+      const html = `<video width="100%" height="auto" class="esq-lightbox__video" controls><source src="${src}" type="video/${format}"/></video>`;
+
+      if (mediaWrapper.querySelector(".esq-product-lightbox__video-wrap")) {
+        mediaWrapper
+          .querySelector(".esq-product-lightbox__video-wrap")
+          .remove();
+      }
+
+      const htmlWrap = document.createElement("div");
+
+      htmlWrap.classList.add("esq-product-lightbox__video-wrap");
+
+      htmlWrap.innerHTML = html;
+
+      mediaWrapper.classList.add("changing-slides");
+
+      setTimeout(function () {
+        imageWrap.classList.add("hidden");
+        mediaWrapper.appendChild(htmlWrap);
+        if (ratio === 16 / 9) {
+          mediaWrapper.classList.add("wide-screen");
+        } else if (ratio === 1) {
+          mediaWrapper.classList.remove("wide-screen");
+        }
+      }, 250);
+
+      setTimeout(function () {
+        mediaWrapper.classList.remove("changing-slides");
+      }, 550);
+    } else {
+      //IMAGE
+      mediaWrapper.classList.add("changing-slides");
+
+      setTimeout(function () {
+        if (mediaWrapper.querySelector("video")) {
+          mediaWrapper
+            .querySelector(".esq-product-lightbox__video-wrap")
+            .remove();
+          mediaWrapper.classList.remove("wide-screen");
+          const imageWrap = document.querySelector("#currentImage");
+          imageWrap.classList.remove("hidden");
+        }
+        imageWrap.setAttribute("src", src);
+      }, 250);
+      setTimeout(function () {
+        mediaWrapper.classList.remove("changing-slides");
+      }, 550);
+    }
   }
 }
 

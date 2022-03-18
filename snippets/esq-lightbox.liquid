@@ -3,7 +3,7 @@
 <esq-product-lightbox class="esq-product-lightbox">
   <div class="esq-product-lightbox__current-image--wrap">
     <img id="currentImage" src="{{ product.featured_media | image_url | strip}}" alt="{{ product.title }}">
-    {%- if product.images.size > 1 -%}
+    {%- if product.media.size > 1 -%}
       <div class="esq-product-lightbox__next-slide">
         <svg width="16" height="16" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M9.00214 2.06152L22.9978 16.0573L9.00214 30.053" stroke="#1E1E1E" stroke-width="4"/>
@@ -11,7 +11,7 @@
       </div>
     {%- endif -%}
   </div>
-  {%- if product.images.size > 1 -%}
+  {%- if product.media.size > 1 -%}
     <div class="esq-product-lightbox__bottom">
       <div class="esq-product-lightbox__bottom-scroll--left hide hide-mobile-flex">
         <svg width="12" height="12" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,12 +20,26 @@
       </div>
       <div class="esq-product-lightbox__bottom-scroll">
         <div class="esq-product-lightbox__bottom-images">
-          {%- for image in product.images -%}
+          {%- for media in product.media -%}
             {%- if forloop.index != 1 -%}
-              <div class="esq-product-lightbox__thumbnail-wrap">
-                <div class="esq-product-lightbox__thumbnail" style="background-image: url({{ image | image_url }})" data-src="{{ image | image_url | strip }}">
+              {%- if media.media_type == "image" -%}
+                <div class="esq-product-lightbox__thumbnail-wrap">
+                  <div class="esq-product-lightbox__thumbnail" style="background-image: url({{ media | image_url }})" data-src="{{ media | image_url | strip }}">
+                  </div>
                 </div>
-              </div>
+              {%- elsif media.media_type == "video" -%}
+                {%- for source in media.sources -%}
+                  {%- if source.format == "mp4" -%}
+                    <div class="esq-product-lightbox__thumbnail-wrap">
+                      <div class="esq-product-lightbox__thumbnail video" style="background-image: url({{ media.preview_image | image_url }})" data-src="{{ source.url | strip }}" data-format="{{ source.format }}" data-height="{{ source.height }}" data-width="{{ source.width }}">
+                      </div>
+                      <div class="esq-product-lightbox__thumbnail-video--play">
+                        {%- render 'icon-play' -%}
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
             {%- endif -%}
             {%- if forloop.last -%}
               <div class="esq-product-lightbox__thumbnail-wrap">

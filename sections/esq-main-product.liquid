@@ -1,6 +1,6 @@
 {{ "section-esq-main-product.css" | asset_url | stylesheet_tag }}
 
-<div class="{{section.settings.padding}} {% if section.settings.first-section and settings.fixed-navigation %}
+<div class="{{section.settings.padding}} {% if section.settings.first_section and settings.fixed_navigation %}
 first-section
 {% endif %}">
   <div class="container">
@@ -94,7 +94,7 @@ first-section
     },
     {
       "type": "checkbox",
-      "id": "first-section",
+      "id": "first_section",
       "label": "First section on page?",
       "default": false
     },
