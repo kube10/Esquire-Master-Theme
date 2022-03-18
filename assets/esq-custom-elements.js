@@ -89,6 +89,9 @@ class EsqVariantSelector extends HTMLElement {
           this.selectedOptions.push(optionBadge.dataset.value);
         }
         optionBadge.onclick = () => {
+          if (optionBadge.classList.contains("disabled")) {
+            return false;
+          }
           const key = optionBadge.dataset.key;
           const value = optionBadge.dataset.value;
 
