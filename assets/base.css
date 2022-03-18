@@ -17,7 +17,8 @@ html {
 }
 
 html.esq-mini-cart-open,
-html.esq-mobile-menu-open {
+html.esq-mobile-menu-open,
+html.esq-product-lightbox-modal-open {
   overflow: hidden;
   /* pointer-events: none; */
 }

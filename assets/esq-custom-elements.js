@@ -63,7 +63,6 @@ class EsqVariantSelector extends HTMLElement {
           const firstSelected = this.querySelector(
             ".esq-option-badge.selected"
           );
-          console.log(firstSelected);
           this.variants.forEach((variant, i) => {
             if (variant.options.includes(firstSelected.dataset.value)) {
               if (!variant.available) {
@@ -88,11 +87,6 @@ class EsqVariantSelector extends HTMLElement {
       this.optionBadges.forEach((optionBadge, i) => {
         if (optionBadge.classList.contains("selected")) {
           this.selectedOptions.push(optionBadge.dataset.value);
-          console.log(this.selectedOptions);
-          console.log(this.variants);
-          if (this.optionAvailable(this.selectedOptions, this.variants)) {
-            console.log("Selected options available");
-          }
         }
         optionBadge.onclick = () => {
           const key = optionBadge.dataset.key;
@@ -233,77 +227,138 @@ class EsqCartItem extends HTMLElement {
 
 customElements.define("esq-cart-item", EsqCartItem);
 
-class EsqSlideshowClassic extends HTMLElement {
+class EsqProductLightBox extends HTMLElement {
   constructor() {
     super();
 
-    this.thumbnails = this.querySelectorAll(
-      ".esq-slideshow-classic__thumbnail-wrap"
-    );
+    this.thumbnails = this.querySelectorAll(".esq-product-lightbox__thumbnail");
 
     this.currentImage = this.querySelector("#currentImage");
 
-    this.nextSlideBtn = this.querySelector(
-      ".esq-slideshow-classic__next-slide"
-    );
+    this.nextSlideBtn = this.querySelector(".esq-product-lightbox__next-slide");
 
-    this.nextSlideBtn.onclick = (e) => {
-      let activeThumbnailIndex;
+    this.scrollBox = this.querySelector(".esq-product-lightbox__bottom-scroll");
+
+    if (this.nextSlideBtn) {
+      this.nextSlideBtn.onclick = (e) => {
+        let activeThumbnailIndex;
+
+        this.thumbnails.forEach((thumbnail, i) => {
+          if (thumbnail.dataset.src === this.currentImage.getAttribute("src")) {
+            activeThumbnailIndex = i;
+          }
+        });
+
+        if (activeThumbnailIndex === this.thumbnails.length - 1) {
+          this.setImageActive(this.thumbnails[0].dataset.src);
+
+          this.scrollToThumbnail(0);
+        } else {
+          this.setImageActive(
+            this.thumbnails[activeThumbnailIndex + 1].dataset.src
+          );
+
+          this.scrollToThumbnail(activeThumbnailIndex + 1);
+        }
+      };
 
       this.thumbnails.forEach((thumbnail, i) => {
-        if (thumbnail.dataset.src === this.currentImage.getAttribute("src")) {
-          activeThumbnailIndex = i;
-        }
+        thumbnail.onclick = (e) => {
+          this.setImageActive(e.target.dataset.src);
+          this.scrollToThumbnail(i);
+        };
       });
 
-      if (activeThumbnailIndex === this.thumbnails.length - 1) {
-        this.setImageActive(this.thumbnails[0].dataset.src);
-      } else {
-        this.setImageActive(
-          this.thumbnails[activeThumbnailIndex + 1].dataset.src
-        );
-      }
+      this.scrollLeftBtn = this.querySelector(
+        ".esq-product-lightbox__bottom-scroll--left"
+      );
+
+      this.scrollRightBtn = this.querySelector(
+        ".esq-product-lightbox__bottom-scroll--right"
+      );
+
+      const containerWidth = this.scrollBox.offsetWidth;
+
+      this.scrollRightBtn.onclick = (e) => {
+        const currentScroll = this.scrollBox.scrollLeft;
+        this.scrollBox.scroll({
+          left: currentScroll + containerWidth,
+          behavior: "smooth",
+        });
+      };
+
+      this.scrollLeftBtn.onclick = (e) => {
+        const currentScroll = this.scrollBox.scrollLeft;
+        this.scrollBox.scroll({
+          left: currentScroll - containerWidth,
+          behavior: "smooth",
+        });
+      };
+
+      this.scrollBox.onscroll = (e) => {
+        if (this.scrollBox.scrollLeft === 0) {
+          this.scrollLeftBtn.classList.add("hide");
+        } else {
+          this.scrollLeftBtn.classList.remove("hide");
+        }
+
+        const imagesWidth = this.scrollBox.querySelector(
+          ".esq-product-lightbox__bottom-images"
+        ).offsetWidth;
+
+        if (
+          this.scrollBox.scrollLeft + this.scrollBox.offsetWidth >=
+          this.scrollBox.scrollWidth
+        ) {
+          this.scrollRightBtn.classList.add("hide");
+        } else {
+          this.scrollRightBtn.classList.remove("hide");
+        }
+      };
+    }
+
+    this.fullWidthImage = this.querySelector("#fullWidthImage");
+    this.fullWidthModal = this.querySelector(
+      ".esq-product-lightbox__full-width"
+    );
+
+    this.currentImage.onclick = (e) => {
+      const src = e.target.getAttribute("src");
+      this.fullWidthImage.setAttribute("src", src);
+      this.fullWidthModal.classList.add("show");
+      document
+        .querySelector("html")
+        .classList.add("esq-product-lightbox-modal-open");
     };
 
-    this.thumbnails.forEach((thumbnail, i) => {
-      thumbnail.onclick = (e) => {
-        this.setImageActive(e.target.dataset.src);
-      };
-    });
+    this.closeFullWidthModalBtn = this.querySelector(
+      ".esq-product-lightbox__close-full-width"
+    );
 
-    this.scrollBox = this.querySelector(".esq-slideshow-classic__bottom");
+    this.closeFullWidthModalBtn.onclick = (e) => {
+      this.fullWidthModal.classList.remove("show");
+      document
+        .querySelector("html")
+        .classList.remove("esq-product-lightbox-modal-open");
+    };
+  }
 
-    let clientXStart;
-    // this.scrollBox.ondrag = (e) => {
-    //   console.log(e);
-    //   // console.log(e.clientX);
-    //   if (e.layerX != 0) {
-    //     this.scrollBox.scroll({
-    //       left: e.layerX,
-    //     });
-    //   }
-    // };
+  scrollToThumbnail(index) {
+    const imageWrapWidth = this.scrollBox.querySelector(
+      ".esq-product-lightbox__bottom-images"
+    ).offsetWidth;
 
-    // this.scrollBox.addEventListener("dragstart", (e) => {
-    //   console.log(e.clientX);
-    //   clientXStart = e.clientX;
-    // });
-    //
-    // this.scrollBox.addEventListener("dragend", (e) => {
-    //   if (e.clientX > clientXStart + 150) {
-    //     console.log("To the right");
-    //     this.scrollBox.scroll({
-    //       left: 500,
-    //       behavior: "smooth",
-    //     });
-    //   } else if (e.clientX < clientXStart - 150) {
-    //     console.log("To the left");
-    //     this.scrollBox.scroll({
-    //       left: 0,
-    //       behavior: "smooth",
-    //     });
-    //   }
-    // });
+    if (index != this.thumbnails.length) {
+      this.scrollBox.scroll({
+        left: (imageWrapWidth / this.thumbnails.length) * index,
+        behavior: "smooth",
+      });
+    } else {
+      this.scrollBox.scroll({
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   }
 
   setImageActive(src) {
@@ -317,4 +372,4 @@ class EsqSlideshowClassic extends HTMLElement {
   }
 }
 
-customElements.define("esq-slideshow-classic", EsqSlideshowClassic);
+customElements.define("esq-product-lightbox", EsqProductLightBox);

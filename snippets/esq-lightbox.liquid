@@ -1,0 +1,52 @@
+{{ "component-esq-product-lightbox.css" | asset_url | stylesheet_tag }}
+
+<esq-product-lightbox class="esq-product-lightbox">
+  <div class="esq-product-lightbox__current-image--wrap">
+    <img id="currentImage" src="{{ product.featured_media | image_url | strip}}" alt="{{ product.title }}">
+    {%- if product.images.size > 1 -%}
+      <div class="esq-product-lightbox__next-slide">
+        <svg width="16" height="16" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9.00214 2.06152L22.9978 16.0573L9.00214 30.053" stroke="#1E1E1E" stroke-width="4"/>
+        </svg>
+      </div>
+    {%- endif -%}
+  </div>
+  {%- if product.images.size > 1 -%}
+    <div class="esq-product-lightbox__bottom">
+      <div class="esq-product-lightbox__bottom-scroll--left hide hide-mobile-flex">
+        <svg width="12" height="12" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9.00214 2.06152L22.9978 16.0573L9.00214 30.053" stroke="#1E1E1E" stroke-width="4"/>
+        </svg>
+      </div>
+      <div class="esq-product-lightbox__bottom-scroll">
+        <div class="esq-product-lightbox__bottom-images">
+          {%- for image in product.images -%}
+            {%- if forloop.index != 1 -%}
+              <div class="esq-product-lightbox__thumbnail-wrap">
+                <div class="esq-product-lightbox__thumbnail" style="background-image: url({{ image | image_url }})" data-src="{{ image | image_url | strip }}">
+                </div>
+              </div>
+            {%- endif -%}
+            {%- if forloop.last -%}
+              <div class="esq-product-lightbox__thumbnail-wrap">
+                <div class="esq-product-lightbox__thumbnail" style="background-image: url({{ product.featured_media | image_url }})" data-src="{{ product.featured_media | image_url | strip }}">
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="esq-product-lightbox__bottom-scroll--right hide-mobile-flex">
+        <svg width="12" height="12" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9.00214 2.06152L22.9978 16.0573L9.00214 30.053" stroke="#1E1E1E" stroke-width="4"/>
+        </svg>
+      </div>
+    </div>
+  {%- endif -%}
+  <div class="esq-product-lightbox__full-width">
+    <div class="container">
+      <div class="esq-product-lightbox__close-full-width">CLOSE</div>
+      <img src="" id="fullWidthImage" class="esq-product-lightbox__full-width--image" alt="{{ product.title }}--zoom">
+    </div>
+  </div>
+</esq-product-lightbox>
