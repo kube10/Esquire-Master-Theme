@@ -114,7 +114,7 @@ function renderCartItems(cartData) {
           if (option.name != "Title") {
             const optionHtml = `
                   <span class="p-small">${option.name}</span>
-                  <div class="option-badge">${option.value}</div>`;
+                  <div class="esq-option-badge">${option.value}</div>`;
             cartItem.querySelector(
               ".cart__item-options"
             ).innerHTML += optionHtml;

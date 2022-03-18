@@ -98,8 +98,14 @@ class EsqVariantSelector extends HTMLElement {
             if (badge.dataset.key === key) {
               badge.classList.remove("selected");
             } else {
-              const optionToCheck = this.selectedOptions;
+              let optionToCheck = [];
+
+              this.selectedOptions.forEach((option, i) => {
+                optionToCheck.push(option);
+              });
+
               optionToCheck[badge.dataset.key] = badge.dataset.value;
+
               if (this.optionAvailable(optionToCheck, this.variants)) {
                 badge.classList.remove("disabled");
               } else {
@@ -117,10 +123,23 @@ class EsqVariantSelector extends HTMLElement {
               JSON.stringify(this.selectedOptions)
             ) {
               this.variantField.value = variant.id;
+              this.setActiveMedia(variant);
             }
           });
         };
       });
+    }
+  }
+
+  setActiveMedia(variant) {
+    const mediaContainer = document.querySelector(".esq-main-product__media");
+    if (mediaContainer) {
+      if (variant.featured_image) {
+        const src = variant.featured_media.preview_image.src;
+        mediaContainer
+          .querySelector(".esq-media-component")
+          .activateMediaByVariantSrc(src);
+      }
     }
   }
 
@@ -353,6 +372,17 @@ class EsqProductLightBox extends HTMLElement {
         .querySelector("html")
         .classList.remove("esq-product-lightbox-modal-open");
     };
+  }
+
+  activateMediaByVariantSrc(src) {
+    this.thumbnails.forEach((thumbnail, i) => {
+      if (`https:${thumbnail.dataset.src}` === src) {
+        if (this.currentImage.getAttribute("src") != thumbnail.dataset.src) {
+          this.setMediaItem(thumbnail);
+          this.scrollToThumbnail(i);
+        }
+      }
+    });
   }
 
   scrollToThumbnail(index) {

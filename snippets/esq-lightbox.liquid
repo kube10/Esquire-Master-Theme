@@ -1,6 +1,6 @@
 {{ "component-esq-product-lightbox.css" | asset_url | stylesheet_tag }}
 
-<esq-product-lightbox class="esq-product-lightbox">
+<esq-product-lightbox class="esq-media-component esq-product-lightbox">
   <div class="esq-product-lightbox__current-image--wrap">
     <img id="currentImage" src="{{ product.featured_media | image_url | strip}}" alt="{{ product.title }}">
     {%- if product.media.size > 1 -%}
