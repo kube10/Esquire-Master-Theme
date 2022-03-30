@@ -1,0 +1,110 @@
+.esq-media-scroll-box__inner {
+  display: grid;
+  grid-template-columns: auto;
+  grid-column-gap: 0.5rem;
+  height: calc(100vh - 4.2rem - (var(--padding-amount-desktop) * 2));
+}
+
+.esq-media-scroll-box__media {
+  overflow-y: scroll;
+  padding-right: 0.5rem;
+  position: relative;
+}
+
+.esq-media-scroll-box__thumbnails {
+  overflow-y: scroll;
+  display: none;
+  position: relative;
+}
+
+.esq-media-scroll-box__thumbnails-inner {
+  display: flex;
+  flex-direction: column;
+  grid-row-gap: 1rem;
+}
+
+.esq-media-scroll-box__thumbnails::-webkit-scrollbar {
+  width: 0rem;
+  height: 0rem;
+}
+
+.esq-media-scroll-box__media::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+.esq-media-scroll-box__media::-webkit-scrollbar-thumb {
+  /* Foreground */
+  background: var(--color-text-heading);
+  border-radius: 1rem;
+}
+.esq-media-scroll-box__media::-webkit-scrollbar-track {
+  /* Background */
+  background: #c4c4c4;
+  border-radius: 1rem;
+}
+
+.esq-media-scroll-box__thumbnail-wrap {
+  overflow: hidden;
+  height: 150px;
+  width: 120px;
+}
+
+.esq-media-scroll-box__thumbnail {
+  object-fit: cover;
+  height: 150px;
+  width: 120px;
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+
+.esq-media-scroll-box__thumbnail:hover {
+  transform-origin: center center;
+  transform: scale(1.1);
+}
+
+.esq-media-scroll-box__thumbnails--down-btn {
+  position: sticky;
+  bottom: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2rem;
+  left: 50%;
+  transform: translateX(-50%) rotateZ(90deg);
+  background-color: var(--color-background-light);
+  cursor: pointer;
+  -webkit-box-shadow: 0px 5px 6px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 5px 6px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.esq-media-scroll-box__thumbnails--down-btn.scroll-up {
+  transform: translateX(-50%) rotateZ(270deg);
+}
+
+.esq-media-scroll-box__image-wrap {
+  width: 100%;
+}
+
+.esq-media-scroll-box__image-wrap > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media screen and (min-width: 1080px) {
+  .esq-media-scroll-box__inner {
+    grid-template-columns: auto 120px;
+    grid-column-gap: 1rem;
+  }
+
+  .esq-media-scroll-box__media {
+    padding-right: 1rem;
+  }
+
+  .esq-media-scroll-box__thumbnails {
+    display: block;
+  }
+}

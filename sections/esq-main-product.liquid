@@ -6,7 +6,14 @@ first-section
   <div class="container">
     <div class="esq-main-product__grid">
       <div class="esq-main-product__media">
-        {%- render "esq-lightbox" -%}
+        {%- case section.settings.media_viewer -%}
+          {%- when 'lightbox' -%}
+            {%- render "esq-lightbox" -%}
+          {%- when 'scroll-box' -%}
+            {%- render "esq-media-scroll-box" -%}
+          {%- else -%}
+          This is not a foo
+        {%- endcase -%}
       </div>
       <div class="esq-main-product__grid-right">
         <div class="esq-main-product__content">
@@ -119,6 +126,26 @@ first-section
         {
           "label": "Bottom",
           "value": "section-pb"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "media_viewer",
+      "default": "scroll-box",
+      "label": "Media Viewer",
+      "options": [
+        {
+          "label": "Lightbox",
+          "value": "lightbox"
+        },
+        {
+          "label": "Classic Slideshow",
+          "value": "slideshow"
+        },
+        {
+          "label": "Scroll Box",
+          "value": "scroll-box"
         }
       ]
     }

@@ -473,3 +473,69 @@ class EsqProductLightBox extends HTMLElement {
 }
 
 customElements.define("esq-product-lightbox", EsqProductLightBox);
+
+class EsqMediaScrollBox extends HTMLElement {
+  constructor() {
+    super();
+
+    this.thumbnailsScrollBox = this.querySelector(
+      ".esq-media-scroll-box__thumbnails"
+    );
+
+    this.thumbnailsInner = this.thumbnailsScrollBox.querySelector(
+      ".esq-media-scroll-box__thumbnails-inner"
+    );
+
+    this.thumbnails = this.querySelectorAll(".esq-media-scroll-box__thumbnail");
+
+    this.scrollBoxMedia = this.querySelector(".esq-media-scroll-box__media");
+
+    this.scrollBoxImages = this.querySelectorAll(
+      ".esq-media-scroll-box__image-wrap"
+    );
+
+    this.thumbnailsDownBtn = this.querySelector(
+      ".esq-media-scroll-box__thumbnails--down-btn"
+    );
+
+    if (
+      this.thumbnailsInner.offsetHeight > this.thumbnailsScrollBox.offsetHeight
+    ) {
+      this.thumbnailsDownBtn.classList.remove("hidden");
+    }
+
+    this.thumbnails.forEach((thumbnail, i) => {
+      thumbnail.onclick = () => {
+        this.scrollBoxMedia.scroll({
+          top: this.scrollBoxImages[i].offsetTop,
+          behavior: "smooth",
+        });
+      };
+    });
+
+    this.thumbnailsDownBtn.onclick = () => {
+      let scrollDistance = this.thumbnailsScrollBox.offsetHeight;
+      if (this.thumbnailsDownBtn.classList.contains("scroll-up")) {
+        scrollDistance = scrollDistance * -1;
+      }
+      this.thumbnailsScrollBox.scrollBy({
+        top: scrollDistance,
+        behavior: "smooth",
+      });
+    };
+
+    this.thumbnailsScrollBox.onscroll = () => {
+      if (
+        this.thumbnailsScrollBox.scrollTop >=
+        this.thumbnailsInner.offsetHeight -
+          this.thumbnailsScrollBox.offsetHeight
+      ) {
+        this.thumbnailsDownBtn.classList.add("scroll-up");
+      } else if (this.thumbnailsScrollBox.scrollTop === 0) {
+        this.thumbnailsDownBtn.classList.remove("scroll-up");
+      }
+    };
+  }
+}
+
+customElements.define("esq-media-scroll-box", EsqMediaScrollBox);

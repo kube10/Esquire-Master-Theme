@@ -1,0 +1,31 @@
+{{ 'component-esq-media-scroll-box.css' | asset_url | stylesheet_tag }}
+
+<esq-media-scroll-box class="esq-media-component esq-media-scroll-box">
+  <div class="esq-media-scroll-box__inner">
+    <div class="esq-media-scroll-box__media">
+      {%- for media in product.media -%}
+        {%- if media.media_type == "image" -%}
+          <div class="esq-media-scroll-box__image-wrap">
+            <img src="{{ media | image_url }}" alt="">
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="esq-media-scroll-box__thumbnails">
+      <div class="esq-media-scroll-box__thumbnails-inner">
+        {%- for media in product.media -%}
+          {%- if media.media_type == "image" -%}
+            <div class="esq-media-scroll-box__thumbnail-wrap">
+              <img class="esq-media-scroll-box__thumbnail" src="{{ media | image_url }}" alt="">
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      <div class="esq-media-scroll-box__thumbnails--down-btn hidden">
+        <svg width="12" height="12" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9.00214 2.06152L22.9978 16.0573L9.00214 30.053" stroke="#1E1E1E" stroke-width="4"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</esq-media-scroll-box>
